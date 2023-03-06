@@ -14,7 +14,7 @@ export const navVariants = {
 		transition: {
 			type: 'spring',
 			stiffness: 80,
-			delay: 1,
+			delay: 0.2,
 		},
 	},
 };
@@ -43,8 +43,8 @@ export const slideIn = (direction, type, delay, duration) => ({
 });
 
 export const navSidebarVariants = {
-  open: { x: 0 },
-  closed: { x: "100%" },
+	open: { x: 0 },
+	closed: { x: '100%' },
 };
 
 export const staggerContainer = (staggerChildren, delayChildren) => ({
@@ -113,22 +113,6 @@ export const fadeIn = (direction, type, delay, duration) => ({
 			delay,
 			duration,
 			ease: 'easeOut',
-		},
-	},
-});
-
-export const planetVariants = (direction) => ({
-	hidden: {
-		x: direction === 'left' ? '-100%' : '100%',
-		rotate: 120,
-	},
-	show: {
-		x: 0,
-		rotate: 0,
-		transition: {
-			type: 'spring',
-			duration: 1.8,
-			delay: 0.5,
 		},
 	},
 });
