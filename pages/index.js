@@ -1,10 +1,10 @@
 import Head from 'next/head';
-import styles from '../styles';
 import Layout from '@/components/Layout';
 import Introduction from '@/components/Introduction';
 import AboutMe from '@/components/AboutMe';
 import Projects from '@/components/Projects';
 import Contact from '@/components/ContactMe';
+import styles from '@/styles';
 
 export default function Home() {
 	return (
@@ -14,14 +14,14 @@ export default function Home() {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main className={`${styles.xPaddings} bg-background-color`}>
-				<Layout>
+			<Layout>
+				<main className={`${styles.xPaddings} bg-background-color`}>
 					<Introduction />
 					<AboutMe />
 					<Projects />
 					<Contact />
-				</Layout>
-			</main>
+				</main>
+			</Layout>
 		</>
 	);
 }

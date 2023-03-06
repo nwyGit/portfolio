@@ -19,6 +19,17 @@ export const navVariants = {
 	},
 };
 
+export const navSidebarVariants = {
+	hidden: {
+		opacity: 0,
+		x: '100%',
+	},
+	show: {
+		opacity: 1,
+		x: 0,
+	},
+};
+
 export const buttonVariants = {
 	rest: { scale: 1 },
 	hover: { scale: 1.1 },
@@ -41,11 +52,6 @@ export const slideIn = (direction, type, delay, duration) => ({
 		},
 	},
 });
-
-export const navSidebarVariants = {
-	open: { x: 0 },
-	closed: { x: '100%' },
-};
 
 export const staggerContainer = (staggerChildren, delayChildren) => ({
 	hidden: {},

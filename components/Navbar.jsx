@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, useScroll } from 'framer-motion';
 import styles from '../styles';
 import {
 	navVariants,
@@ -32,6 +32,21 @@ const navLinks = navItems.map((item) => {
 const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 
+	useEffect(() => {
+		if (showMenu) {
+			// Disable scrolling
+			document.body.classList.add('overflow-hidden');
+		} else {
+			// Enable scrolling
+			document.body.classList.remove('overflow-hidden');
+		}
+
+		return () => {
+			// Clean up function to re-enable scrolling
+			document.body.classList.add('overflow-hidden');
+		};
+	}, [showMenu]);
+
 	return (
 		<>
 			{/* Large screen bar */}
@@ -40,12 +55,10 @@ const Navbar = () => {
 				initial='hidden'
 				whileInView='show'
 				viewport={{ once: true, amount: 0.25 }}
-				className={`sm:py-8 py-6 sticky top-0`}
+				className={`${styles.xPaddings} hidden md:block drop-shadow-md bg-[#023047] sm:py-4 py-6 sticky top-0 w-full z-20`}
 			>
 				{!showMenu && (
-					<ul
-						className={`${styles.flexEnd} gap-16 items-center md:flex hidden`}
-					>
+					<ul className={`${styles.flexEnd} gap-16 items-center`}>
 						{navLinks}
 						{Resume}
 					</ul>
@@ -53,28 +66,26 @@ const Navbar = () => {
 			</motion.nav>
 
 			{/* Mobile screen bar */}
-			<div className={`${styles.flexEnd} md:hidden pr-6`}>
+			<div className={`${styles.flexEnd} bg-[#023047] md:hidden pr-6 pt-12`}>
 				<button onClick={() => setShowMenu(!showMenu)}>
 					<Image src='/menu.svg' alt='Menu' width={30} height={30} />
 				</button>
 				{/* Background blur overlay */}
 				{showMenu && (
 					<div
-						className={`${styles.blurOverlay} z-10`}
+						className={`${styles.blurOverlay} overscroll-x-none z-10`}
 						onClick={() => setShowMenu(!showMenu)}
 					></div>
 				)}
 				{/* nav sidebar */}
-				<motion.nav
+				<motion.aside
 					variants={navSidebarVariants}
-					initial='closed'
-					animate={showMenu ? 'open' : 'closed'}
-					className={`${styles.popUpNav} ${
-						showMenu ? '' : 'overflow-hidden'
-					} z-20`}
+					initial='hidden'
+					animate={showMenu ? 'show' : 'hidden'}
+					className={`${styles.popUpNav} ${showMenu ? '' : 'hidden'} z-20`}
 				>
 					{/* close button */}
-					<div className={`${styles.flexEnd} p-4 pr-10`}>
+					<div className={`${styles.flexEnd} pt-4 pr-12`}>
 						<button onClick={() => setShowMenu(!showMenu)}>
 							<Image
 								src='/close.svg'
@@ -86,7 +97,9 @@ const Navbar = () => {
 						</button>
 					</div>
 					{/* nav sidebar items */}
-					<ul className={`${styles.flexCenter} flex-col space-y-4 pt-6 gap-16`}>
+					<ul
+						className={`${styles.flexCenter} flex-col space-y-4 gap-16 min-h-[80%]`}
+					>
 						{navItems.map((item) => {
 							return (
 								<li key={item} className='hover:text-secondary-contrast-text'>
@@ -98,7 +111,7 @@ const Navbar = () => {
 						})}
 						{Resume}
 					</ul>
-				</motion.nav>
+				</motion.aside>
 			</div>
 		</>
 	);

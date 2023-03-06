@@ -22,7 +22,9 @@ const footerItems = [
 
 const Footer = () => {
 	return (
-		<footer className={`${styles.paddings} 2xl:px-72`}>
+		<footer
+			className={`${styles.paddings} ${styles.xPaddings} 2xl:px-72 bg-background-color`}
+		>
 			<ul className={`${styles.flexCenter} gap-8 py-6`}>
 				{footerItems.map((item) => (
 					<li key={item.name} className='hover:text-secondary'>

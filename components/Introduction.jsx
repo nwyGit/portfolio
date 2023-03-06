@@ -7,7 +7,7 @@ const Introduction = () => {
 	return (
 		<section className={`${styles.section} ${styles.paddings}`}>
 			<motion.div
-				variants={fadeIn('right', 'tween', 0.6, 1)}
+				variants={fadeIn('left', 'tween', 0.6, 1)}
 				initial='hidden'
 				whileInView='show'
 				viewport={{ once: true, amount: 0.25 }}

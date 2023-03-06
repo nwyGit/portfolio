@@ -28,7 +28,7 @@ const Contact = () => {
 					onSubmit={sendEmail}
 					className={`${styles.flexCenter} flex-col space-y-4`}
 				>
-					<span className={`text-5xl font-semibold pt-2`}>Get In Touch</span>
+					<span className={`md:text-5xl text-4xl font-semibold pt-2`}>Get In Touch</span>
 					<p className={`text-secondary ${styles.textBox} text-center py-6`}>
 						I appreciate you taking the time to check out my website. The
 						prospect of speaking with you and learning about any potential new
