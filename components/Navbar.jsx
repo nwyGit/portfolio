@@ -8,9 +8,31 @@ import {
 } from '@/utils/motion';
 import Image from 'next/image';
 
+// navItems attributes
 const navItems = ['About', 'Projects', 'Contact'];
-const Resume = (
-	<li key='resume'>
+
+const navComponent = (index, element) => {
+	return (
+		<motion.li
+			variants={navVariants(index)}
+			initial='hidden'
+			whileInView='show'
+			viewport={{ once: true, amount: 0.25 }}
+			key={index}
+			className='hover:text-secondary-contrast-text'
+		>
+			{element}
+		</motion.li>
+	);
+};
+
+const navLinks = navItems.map((item, index) => {
+	const element = <a href={`#${item}`}>{item}</a>;
+	return navComponent(index, element);
+});
+
+const resume = () => {
+	const element = (
 		<motion.button
 			variants={buttonVariants}
 			whileHover='hover'
@@ -19,16 +41,11 @@ const Resume = (
 		>
 			<a href='/resume.pdf'>Resume</a>
 		</motion.button>
-	</li>
-);
-const navLinks = navItems.map((item) => {
-	return (
-		<li key={item} className='hover:text-secondary-contrast-text'>
-			<a href={`#${item}`}>{item}</a>
-		</li>
 	);
-});
+	return navComponent(navItems.length, element);
+};
 
+// NavBar component
 const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 
@@ -50,20 +67,14 @@ const Navbar = () => {
 	return (
 		<>
 			{/* Large screen bar */}
-			<motion.nav
-				variants={navVariants}
-				initial='hidden'
-				whileInView='show'
-				viewport={{ once: true, amount: 0.25 }}
-				className={`${styles.xPaddings} hidden md:block drop-shadow-md bg-[#023047] sm:py-4 py-6 sticky top-0 w-full z-20`}
-			>
+			<nav className={`${styles.navBar}`}>
 				{!showMenu && (
 					<ul className={`${styles.flexEnd} gap-16 items-center`}>
 						{navLinks}
-						{Resume}
+						{resume()}
 					</ul>
 				)}
-			</motion.nav>
+			</nav>
 
 			{/* Mobile screen bar */}
 			<div className={`${styles.flexEnd} bg-[#023047] md:hidden pr-6 pt-12`}>
@@ -73,7 +84,7 @@ const Navbar = () => {
 				{/* Background blur overlay */}
 				{showMenu && (
 					<div
-						className={`${styles.blurOverlay} overscroll-x-none z-10`}
+						className={`${styles.blurOverlay} z-10`}
 						onClick={() => setShowMenu(!showMenu)}
 					></div>
 				)}
@@ -100,16 +111,15 @@ const Navbar = () => {
 					<ul
 						className={`${styles.flexCenter} flex-col space-y-4 gap-16 min-h-[80%]`}
 					>
-						{navItems.map((item) => {
-							return (
-								<li key={item} className='hover:text-secondary-contrast-text'>
-									<a href={`#${item}`} onClick={() => setShowMenu(!showMenu)}>
-										{item}
-									</a>
-								</li>
+						{navItems.map((item, index) => {
+							const element = (
+								<a href={`#${item}`} onClick={() => setShowMenu(!showMenu)}>
+									{item}
+								</a>
 							);
+							return navComponent(index, element);
 						})}
-						{Resume}
+						{resume()}
 					</ul>
 				</motion.aside>
 			</div>

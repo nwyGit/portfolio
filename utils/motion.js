@@ -1,4 +1,4 @@
-export const navVariants = {
+export const navVariants = (index) => ({
 	hidden: {
 		opacity: 0,
 		y: -50,
@@ -14,10 +14,10 @@ export const navVariants = {
 		transition: {
 			type: 'spring',
 			stiffness: 80,
-			delay: 0.2,
+			delay: 0.2 * (1 + index),
 		},
 	},
-};
+});
 
 export const navSidebarVariants = {
 	hidden: {

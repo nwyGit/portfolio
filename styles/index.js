@@ -13,11 +13,12 @@ const styles = {
 	flexEnd: 'flex justify-end',
 	navPadding: 'pt-[98px]',
 
+	navBar:'sm:px-12 md:px-18 lg:px-32 px-6 md:block drop-shadow-md bg-[#023047] sm:py-4 py-6 sticky top-0 w-full z-20 hidden',
 	popUpNav: 'bg-[#02415A] fixed right-0 min-w-[66.6%] h-full top-0',
 	blurOverlay: 'backdrop-blur-sm fixed top-0 left-0 w-full h-full',
 	introHeading: 'font-medium sm:text-4xl md:text-5xl lg:text-7xl text-3xl',
 	section: 'md:pt-36 2xl:px-72 2xl:pb-20 pb-2',
-	textBox: 'md:w-2/3 lg:w-9/12 w-full',
+	textBox: 'md:w-2/3 lg:w-1/2 w-full',
 	formIcon: 'absolute inset-y-0 flex items-center pl-4',
 	formInput: 'rounded-2xl p-4 pl-14 w-full text-background-color',
 	formInputPos: 'relative lg:w-1/2 w-full',

@@ -9,32 +9,32 @@ import { motion } from 'framer-motion';
 import { fadeIn, buttonVariants } from '@/utils/motion';
 import styles from '@/styles';
 
-const sendEmail = () => {};
-
 const Contact = () => {
 	return (
 		<section id='Contact' className={`${styles.section}  ${styles.paddings}`}>
 			<motion.div
-				variants={fadeIn('up', 'tween', 0.6, 0.6)}
+				variants={fadeIn('up', 'tween', 0.6, 1)}
 				initial='hidden'
 				whileInView='show'
 				viewport={{ once: true, amount: 0.2 }}
 				className='sm:space-y-2'
 			>
-				<span className={`${styles.flexCenter} text-xl`}>
+				<span className={`${styles.flexCenter} text-secondary-contrast-text text-xl`}>
 					What&apos;s Next?
 				</span>
 				<form
-					onSubmit={sendEmail}
+					action='https://formsubmit.co/66a07d84c10938629ee19b58c7904c69'
+					method='POST'
 					className={`${styles.flexCenter} flex-col space-y-4`}
 				>
-					<span className={`md:text-5xl text-4xl font-semibold pt-2`}>Get In Touch</span>
+					<span className={`md:text-5xl text-4xl font-semibold pt-2`}>
+						Get In Touch
+					</span>
 					<p className={`text-secondary ${styles.textBox} text-center py-6`}>
-						I appreciate you taking the time to check out my website. The
-						prospect of speaking with you and learning about any potential new
-						prospects excites me. Send me a note if you want to say hi or if you
-						have any queries. I&apos;m always available to respond to emails,
-						and I&apos;ll try my best to do so quickly.
+						Thank you for visiting my website! I would love to connect with you
+						and discuss any potential opportunities. Feel free to reach out with
+						any questions or just to say hello. I&apos;m always happy to respond to
+						emails promptly.
 					</p>
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
@@ -43,6 +43,7 @@ const Contact = () => {
 						<input
 							type='text'
 							id='name'
+							name='Name'
 							placeholder='Full Name'
 							required
 							className={`${styles.formInput}`}
@@ -55,6 +56,7 @@ const Contact = () => {
 						<input
 							type='email'
 							id='email'
+							name='Email'
 							placeholder='Eg. example@email.com'
 							required
 							className={`${styles.formInput}`}
@@ -67,6 +69,7 @@ const Contact = () => {
 						<input
 							type='phone'
 							id='phone'
+							name='Phone'
 							placeholder='Eg. +1 123 456 7890'
 							required
 							className={`${styles.formInput}`}
@@ -78,12 +81,17 @@ const Contact = () => {
 						</span>
 						<textarea
 							id='message'
-							name='message'
+							name='Message'
 							rows='5'
 							placeholder='Your message...'
 							className={`${styles.formInput}`}
 						></textarea>
 					</div>
+					<input
+						type='hidden'
+						name='_subject'
+						value='New inquiry from your website!'
+					></input>
 					<motion.button
 						variants={buttonVariants}
 						whileHover='hover'
