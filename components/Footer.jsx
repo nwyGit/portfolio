@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from '../styles';
+import Link from 'next/link';
 
 const footerItems = [
 	{
@@ -14,9 +15,19 @@ const footerItems = [
 		url: 'https://www.instagram.com/lolo_nwy',
 	},
 	{
+		name: 'twitter',
+		imagePath: '/twitter.svg',
+		url: '/',
+	},
+	{
 		name: 'linkedin',
 		imagePath: '/linkedin.svg',
 		url: 'https://www.linkedin.com/in/raymond-wyng',
+	},
+	{
+		name: 'facebook',
+		imagePath: '/facebook.svg',
+		url: '/',
 	},
 ];
 
@@ -28,14 +39,14 @@ const Footer = () => {
 			<ul className={`${styles.flexCenter} gap-8 py-6`}>
 				{footerItems.map((item) => (
 					<li key={item.name} className='hover:text-secondary'>
-						<a href={item.url}>
+						<Link href={item.url}>
 							<Image
 								src={item.imagePath}
 								alt={item.name}
 								width={25}
 								height={25}
 							/>
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>

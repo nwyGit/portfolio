@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Layout from '@/components/Layout';
 import Introduction from '@/components/Introduction';
 import AboutMe from '@/components/AboutMe';
 import Projects from '@/components/Projects';
@@ -12,16 +11,14 @@ export default function Home() {
 			<Head>
 				<title>Raymond Ng</title>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
-				<link rel='icon' href='/favicon.ico' />
+				<link rel='icon' href='/logo_s.svg' />
 			</Head>
-			<Layout>
-				<main className={`${styles.xPaddings} bg-background-color`}>
-					<Introduction />
-					<AboutMe />
-					<Projects />
-					<Contact />
-				</main>
-			</Layout>
+			<main className={`${styles.xPaddings} bg-background-color`}>
+				<Introduction />
+				<AboutMe />
+				<Projects />
+				<Contact />
+			</main>
 		</>
 	);
 }

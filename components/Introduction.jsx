@@ -32,6 +32,7 @@ const introComponent = (index, element) => {
 			whileInView='show'
 			viewport={{ once: true, amount: 0.25 }}
 			className='sm:space-y-2'
+			key={index + 1}
 		>
 			{element}
 		</motion.div>
@@ -40,7 +41,9 @@ const introComponent = (index, element) => {
 
 const Introduction = () => {
 	return (
-		<section className={`${styles.section} ${styles.paddings}`}>
+		<section
+			className={`${styles.section} ${styles.paddings} min-h-screen grid content-center`}
+		>
 			{items.map((item, index) => {
 				return introComponent(index, item);
 			})}
