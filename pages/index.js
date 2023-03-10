@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Introduction from '@/components/Introduction';
+import Introduction from '@/components/Hero';
 import AboutMe from '@/components/AboutMe';
 import Projects from '@/components/Projects';
 import Contact from '@/components/ContactMe';

@@ -25,7 +25,7 @@ const Bubbles = () => {
 		};
 	}, []);
 
-	const arrayLength =
+	const bubbleNumber =
 		windowWidth >= 1024
 			? 30
 			: windowWidth >= 768
@@ -38,7 +38,7 @@ const Bubbles = () => {
 		<div className={`${styles.bubbleContainer}`}>
 			<div className='relative flex justify-evenly bubbles'>
 				{showBubbles &&
-					Array.from({ length: arrayLength }, (_, i) => (
+					Array.from({ length: bubbleNumber }, (_, i) => (
 						<span
 							key={i}
 							style={{

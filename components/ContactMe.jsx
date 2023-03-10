@@ -5,11 +5,38 @@ import {
 	HiOutlinePhone,
 	HiOutlineUser,
 } from 'react-icons/hi';
+import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { fadeIn, buttonVariants } from '@/utils/motion';
 import styles from '@/styles';
 
 const Contact = () => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: { name: '', email: '', phone: '', message: '' },
+	});
+
+	function submitForm(formData) {
+		fetch('https://formsubmit.co/ajax/nwyraymond@gmail.com', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify(formData),
+		})
+			.then(() => {
+				alert('Form submitted successfully!');
+			})
+			.catch((error) => {
+				console.log(error);
+				alert('Form submission failed.');
+			});
+	}
+
 	return (
 		<section id='Contact' className={`${styles.section}  ${styles.paddings}`}>
 			<motion.div
@@ -19,12 +46,13 @@ const Contact = () => {
 				viewport={{ once: true, amount: 0.2 }}
 				className='sm:space-y-2'
 			>
-				<span className={`${styles.flexCenter} text-secondary-contrast-text text-xl`}>
+				<span
+					className={`${styles.flexCenter} text-secondary-contrast-text text-xl`}
+				>
 					What&apos;s Next?
 				</span>
 				<form
-					action='https://formsubmit.co/66a07d84c10938629ee19b58c7904c69'
-					method='POST'
+					onSubmit={handleSubmit(submitForm)}
 					className={`${styles.flexCenter} flex-col space-y-4`}
 				>
 					<span className={`md:text-5xl text-4xl font-semibold pt-2`}>
@@ -33,34 +61,41 @@ const Contact = () => {
 					<p className={`text-secondary ${styles.textBox} text-center py-6`}>
 						Thank you for visiting my website! I would love to connect with you
 						and discuss any potential opportunities. Feel free to reach out with
-						any questions or just to say hello. I&apos;m always happy to respond to
-						emails promptly.
+						any questions or just to say hello. I&apos;m always happy to respond
+						to emails promptly.
 					</p>
+					{errors.name?.type === 'required' && (
+						<span className='text-primary-contrast-text'>Name is required</span>
+					)}
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
 							<HiOutlineUser className='h-5 w-5 text-gray-500' />
 						</span>
 						<input
 							type='text'
-							id='name'
-							name='Name'
 							placeholder='Full Name'
+							{...register('name', { required: true })}
 							required
-							className={`${styles.formInput}`}
-						></input>
+							className={`${styles.formInput} ${errors.name && 'inputError'}`}
+						/>
 					</div>
+					{errors.email?.type === 'required' && (
+						<span className='text-primary-contrast-text'>
+							Email is required
+						</span>
+					)}
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
 							<HiOutlineMail className='h-5 w-5 text-gray-500' />
 						</span>
+
 						<input
 							type='email'
-							id='email'
-							name='Email'
+							{...register('email', { required: true })}
 							placeholder='Eg. example@email.com'
 							required
-							className={`${styles.formInput}`}
-						></input>
+							className={`${styles.formInput} ${errors.email && 'inputError'}}`}
+						/>
 					</div>
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
@@ -68,35 +103,41 @@ const Contact = () => {
 						</span>
 						<input
 							type='phone'
-							id='phone'
-							name='Phone'
+							{...register('phone')}
 							placeholder='Eg. +1 123 456 7890'
 							required
 							className={`${styles.formInput}`}
 						></input>
 					</div>
+					{errors.message?.type === 'required' && (
+						<span className='text-primary-contrast-text'>
+							Please leave your message
+						</span>
+					)}
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
 							<HiOutlineChatAlt className='h-5 w-5 text-gray-500' />
 						</span>
 						<textarea
-							id='message'
-							name='Message'
+							{...register('message', { required: true })}
 							rows='5'
 							placeholder='Your message...'
-							className={`${styles.formInput}`}
-						></textarea>
+							className={`${styles.formInput} ${
+								errors.message && 'inputError'
+							}`}
+						/>
 					</div>
 					<input
 						type='hidden'
 						name='_subject'
 						value='New inquiry from your website!'
-					></input>
+					/>
 					<motion.button
 						variants={buttonVariants}
 						whileHover='hover'
 						whileTap='pressed'
 						type='submit'
+						disabled={Object.keys(errors).length > 0}
 						className={`${styles.button} px-6 py-2`}
 					>
 						Say Hello
