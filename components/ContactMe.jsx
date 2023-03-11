@@ -58,7 +58,7 @@ const Contact = () => {
 					<span className={`md:text-5xl text-4xl font-semibold pt-2`}>
 						Get In Touch
 					</span>
-					<p className={`text-secondary ${styles.textBox} text-center py-6`}>
+					<p className={`text-secondary ${styles.contentBox} text-center py-6`}>
 						Thank you for visiting my website! I would love to connect with you
 						and discuss any potential opportunities. Feel free to reach out with
 						any questions or just to say hello. I&apos;m always happy to respond
@@ -92,7 +92,7 @@ const Contact = () => {
 						<input
 							type='email'
 							{...register('email', { required: true })}
-							placeholder='Eg. example@email.com'
+							placeholder='example@email.com'
 							required
 							className={`${styles.formInput} ${errors.email && 'inputError'}}`}
 						/>
@@ -104,7 +104,7 @@ const Contact = () => {
 						<input
 							type='phone'
 							{...register('phone')}
-							placeholder='Eg. +1 123 456 7890'
+							placeholder='+1 333-666-8888'
 							required
 							className={`${styles.formInput}`}
 						></input>

@@ -13,9 +13,12 @@ const Projects = () => {
 				viewport={{ once: true, amount: 0.1 }}
 				className='sm:space-y-2'
 			>
-				<span className='text-3xl'>| Projects</span>
+				<div className={`${styles.sectionHeader}`}>
+					<span className='text-3xl mr-6'>| Projects</span>
+					<hr className='flex-1 border-primary opacity-50' />
+				</div>
 				<br />
-				<p className='text-secondary pt-4 sm:w-1/2'>
+				<p className={`${styles.text} ${styles.contentBox}`}>
 					Proven ability to deliver results through effective problem solving
 					and communication. Applying for a position as a Software Engineer to
 					utilize my skills and expertise in software engineering.
