@@ -13,12 +13,15 @@ const items = [
 	</h1>,
 	<h1
 		key='hero3'
-		className={`text-secondary-contrast-text ${styles.introHeading}`}
+		className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
 	>
 		I build things for the web.
 	</h1>,
-	<p key='hero4' className={`text-secondary ${styles.text} ${styles.contentBox} pt-4`}>
-		I&apos;m a software engineer with experience in design. My primary focus is
+	<p
+		key='hero4'
+		className={`text-secondary ${styles.text} ${styles.contentBox} pt-4`}
+	>
+		I&apos;m a software developer with experience in design. My primary focus is
 		web development, and besides I&apos;m also engaged in data analytics and
 		machine learning to broaden my skill set and take on new challenges.
 	</p>,

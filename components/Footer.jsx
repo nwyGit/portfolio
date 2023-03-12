@@ -36,7 +36,7 @@ const Footer = () => {
 		<footer
 			className={`${styles.paddings} ${styles.xPaddings} 2xl:px-72 bg-background-color`}
 		>
-			<ul className={`${styles.flexCenter} gap-8 py-6`}>
+			<ul className={`${styles.flexCenter} gap-8 py-6 relative z-5`}>
 				{footerItems.map((item) => (
 					<li key={item.name} className='hover:text-secondary'>
 						<Link href={item.url}>

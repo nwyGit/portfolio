@@ -20,7 +20,7 @@ const Contact = () => {
 	});
 
 	function submitForm(formData) {
-		fetch('https://formsubmit.co/ajax/nwyraymond@gmail.com', {
+		fetch('https://formsubmit.co/ajax/66a07d84c10938629ee19b58c7904c69', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

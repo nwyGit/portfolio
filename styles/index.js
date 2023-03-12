@@ -23,20 +23,21 @@ const styles = {
 	blurOverlay: 'backdrop-blur-sm fixed top-0 left-0 w-full h-full',
 
 	introHeading: 'font-medium md:text-6xl lg:text-8xl text-4xl',
+	introHeading2: 'font-medium md:text-5xl lg:text-7xl text-3xl',
 	sectionHeader: 'flex justify-center items-center md:w-2/5 w-4/5',
 	section: '2xl:px-72 relative z-5',
 	divider: 'inline-block w-1/3 border-b-2 border-gray-300',
 
 	text: 'text-secondary pt-4 selection:bg-[#00537C] selection:text-secondary-contrast-text',
 	highlightText: 'text-secondary-contrast-text',
-	contentBox: 'md:w-[60%] w-full',
+	contentBox: 'lg:w-[60%] w-full',
 	skillsBox: 'grid grid-cols-4 pt-4',
 	skillsItem: 'md:block grid place-items-center md:text-base text-xs',
 	skillsIcon: 'inline-block w-8 h-8 md:mr-2 md:my-2 my-1 mt-3',
 
 	formIcon: 'absolute inset-y-0 flex items-center pl-4',
 	formInput: 'rounded-2xl p-4 pl-14 w-full text-background-color',
-	formInputPos: 'relative lg:w-[60%] w-[70%]',
+	formInputPos: 'relative md:w-[70%] lg:w-[50%] w-full',
 	button:
 		'border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full',
 };
