@@ -40,6 +40,9 @@ const styles = {
 	formInputPos: 'relative md:w-[70%] lg:w-[50%] w-full',
 	button:
 		'border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full',
+
+	FourOhFourHeading: 'font-medium lg:text-8xl text-6xl',
+	FourOhFourHeading2: 'font-medium lg:text-4xl text-3xl',
 };
 
 export default styles;
