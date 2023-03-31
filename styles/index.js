@@ -16,20 +16,20 @@ const styles = {
 	bubbleContainer: 'fixed inset-0 w-full h-screen',
 
 	lgNavBar:
-		'bg-[#023047] sm:px-12 sm:py-4 md:px-18 lg:px-32 p-6 md:block hidden drop-shadow-md fixed top-0 w-full z-20',
+		'bg-[#002538] sm:px-12 sm:py-4 md:px-18 lg:px-32 p-6 md:block hidden drop-shadow-md fixed top-0 w-full z-20',
 	smNavBar:
-		'flex justify-end justify-between bg-[#023047] md:hidden sm:px-20 px-10 py-4 fixed top-0 w-full drop-shadow-md z-20',
+		'flex justify-end justify-between bg-[#002538] md:hidden sm:px-20 px-10 py-4 fixed top-0 w-full drop-shadow-md z-20',
 	popUpNav: 'bg-[#02415A] fixed right-0 min-w-[66.6%] h-full top-0',
 	blurOverlay: 'backdrop-blur-sm fixed top-0 left-0 w-full h-full',
 
 	introHeading: 'font-medium md:text-6xl lg:text-8xl text-4xl',
 	introHeading2: 'font-medium md:text-5xl lg:text-7xl text-3xl',
 	sectionHeader: 'flex justify-center items-center md:w-2/5 w-4/5',
-	section: '2xl:px-72 relative z-5',
+	section: 'lg:px-30 2xl:px-72 relative',
 	divider: 'inline-block w-1/3 border-b-2 border-gray-300',
 
 	text: 'text-secondary pt-4 selection:bg-[#00537C] selection:text-secondary-contrast-text',
-	highlightText: 'text-secondary-contrast-text',
+	highlightText: 'text-secondary-contrast-text relative',
 	contentBox: 'lg:w-[60%] w-full',
 	skillsBox: 'grid grid-cols-4 pt-4',
 	skillsItem: 'md:block grid place-items-center md:text-base text-xs',
@@ -40,6 +40,10 @@ const styles = {
 	formInputPos: 'relative md:w-[70%] lg:w-[50%] w-full',
 	button:
 		'border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full',
+
+	FrameworkBox: 'grid grid-cols-3 md:flex md:gap-10 my-4',
+
+	FooterBox: 'sm:p-4 px-4 py-8 2xl:px-72 bg-[#002538]',
 
 	FourOhFourHeading: 'font-medium lg:text-8xl text-6xl',
 	FourOhFourHeading2: 'font-medium lg:text-4xl text-3xl',

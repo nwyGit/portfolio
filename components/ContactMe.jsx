@@ -104,7 +104,7 @@ const Contact = () => {
 						<input
 							type='phone'
 							{...register('phone')}
-							placeholder='+1 333-666-8888'
+							placeholder='+1-333-666-8888'
 							required
 							className={`${styles.formInput}`}
 						></input>

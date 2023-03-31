@@ -8,33 +8,43 @@ const footerItems = [
 		name: 'github',
 		imagePath: '/github.svg',
 		url: 'https://github.com/nwyGit',
+		width: 27,
+		height: 27,
 	},
 	{
 		name: 'instagram',
 		imagePath: '/instagram.svg',
 		url: 'https://www.instagram.com/lolo_nwy',
+		width: 25,
+		height: 25,
 	},
 	{
 		name: 'twitter',
 		imagePath: '/twitter.svg',
 		url: '/',
+		width: 25,
+		height: 25,
 	},
 	{
 		name: 'linkedin',
 		imagePath: '/linkedin.svg',
 		url: 'https://www.linkedin.com/in/raymond-wyng',
+		width: 25,
+		height: 25,
 	},
 	{
 		name: 'facebook',
 		imagePath: '/facebook.svg',
 		url: '/',
+		width: 23,
+		height: 23,
 	},
 ];
 
 const Footer = () => {
 	return (
 		<footer
-			className={`${styles.paddings} ${styles.xPaddings} 2xl:px-72 bg-background-color`}
+			className={`${styles.xPaddings} ${styles.FooterBox}`}
 		>
 			<ul className={`${styles.flexCenter} gap-8 py-6 relative z-5`}>
 				{footerItems.map((item) => (
@@ -43,8 +53,8 @@ const Footer = () => {
 							<Image
 								src={item.imagePath}
 								alt={item.name}
-								width={25}
-								height={25}
+								width={item.width}
+								height={item.height}
 							/>
 						</Link>
 					</li>

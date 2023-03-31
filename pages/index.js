@@ -13,7 +13,7 @@ export default function Home() {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/logo_s.svg' />
 			</Head>
-			<main className={`${styles.xPaddings} bg-background-color`}>
+			<main className={`${styles.xPaddings} bg-[#002538]`}>
 				<Introduction />
 				<AboutMe />
 				<Projects />
