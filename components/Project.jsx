@@ -40,7 +40,7 @@ const Project = ({ data }) => {
 						<ul className={`${styles.FrameworkBox}`}>
 							{data.framework.map((e) => (
 								<>
-									<li>{e}</li>
+									<li key={e}>{e}</li>
 								</>
 							))}
 						</ul>
@@ -69,7 +69,7 @@ const Project = ({ data }) => {
 						alt={data.title + ' capture screen'}
 						width={1024}
 						height={768}
-						className='h-full object-fill'
+						className='h-full object-cover'
 					/>
 					<div className='absolute top-0 w-full h-full lg:right-0 bg-[#023047]/90 lg:bg-[#023047]/70 hover:bg-[#023047]/0' />
 				</div>

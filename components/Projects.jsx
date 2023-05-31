@@ -51,7 +51,7 @@ const projectsData = [
 		),
 		framework: ['NextJS', 'Strapi', 'PostgreSQL'],
 		githubURL: '',
-		websiteURL: 'https://boogabot.com/',
+		websiteURL: 'https://booga-frontend-next-js.vercel.app/',
 		imageURL: { mobile: '/Boogabot_m.png', desktop: '/Boogabot.png' },
 	},
 	{
