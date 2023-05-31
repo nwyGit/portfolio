@@ -11,7 +11,7 @@ export default function Home() {
 			<Head>
 				<title>Raymond Ng</title>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
-				<link rel='icon' href='/logo_s.svg' />
+				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<main className={`${styles.xPaddings} bg-[#002538]`}>
 				<Introduction />

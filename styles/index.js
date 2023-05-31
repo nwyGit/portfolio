@@ -41,7 +41,7 @@ const styles = {
 	button:
 		'border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full',
 
-	FrameworkBox: 'grid grid-cols-3 md:flex md:gap-10 my-4',
+	FrameworkBox: 'grid grid-cols-2 md:grid-cols-3 md:flex md:gap-10 my-4',
 
 	FooterBox: 'sm:p-4 px-4 py-8 2xl:px-72 bg-[#002538]',
 
