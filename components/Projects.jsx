@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
 import styles from "@/styles";
 import ProjectSet from "./ProjectSet";
-import { SDprojects } from "../data/projects";
+import { SDprojects, DAprojects } from "../data/projects";
 
 const Projects = () => {
 	return (
@@ -20,6 +20,7 @@ const Projects = () => {
 				</div>
 			</motion.div>
 			<ProjectSet title="Software Development" data={SDprojects} />
+			<ProjectSet title="Data Analytics" data={DAprojects} />
 		</section>
 	);
 };

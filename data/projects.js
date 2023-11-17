@@ -36,7 +36,7 @@ export const SDprojects = [
 		],
 		githubURL: "https://github.com/nwyGit/portfolio/tree/main/homie-comb",
 		websiteURL: "https://homiecomb.vercel.app/",
-		imageURL: { mobile: "/HomieComb.png", desktop: "/HomieComb.png" },
+		imageURL: { mobile: "/HomieComb_m.png", desktop: "/HomieComb.png" },
 	},
 	{
 		title: "Booga.com.hk",
@@ -114,5 +114,73 @@ export const SDprojects = [
 			"https://github.com/nwyGit/Metropolitan-Museum-of-Artwork-Collection-client",
 		websiteURL: "https://metropolitan-museum-of-artwork-collection.vercel.app/",
 		imageURL: { mobile: "/MMAC.png", desktop: "/MMAC.png" },
+	},
+];
+
+export const DAprojects = [
+	{
+		title: "Toronto House Price Analysis",
+		body: (
+			<>
+				A project focuses on{" "}
+				<span className={`${styles.highlightText}`}>
+					decoding the nuanced trends within the Toronto housing market
+				</span>{" "}
+				through meticulous analysis of data sourced from Zillow.com. Employing
+				advanced web scraping techniques, a dynamic dataset is curated to
+				facilitate a profound exploration of price distributions, correlations
+				with property features, and the identification of premium areas. The
+				analytical backbone of the initiative relies on Python, with{" "}
+				<span className={`${styles.highlightText}`}>Pandas and Matplotlib</span>{" "}
+				enabling robust statistical insights and visualizations.{" "}
+				<span className={`${styles.highlightText}`}>Jupyter Notebooks</span>{" "}
+				enhance transparency and collaboration, while{" "}
+				<span className={`${styles.highlightText}`}>Seaborn</span> refines data
+				representation. This cohesive integration of cutting-edge technologies
+				and strategic data analysis positions the project as a potent tool for
+				stakeholders seeking comprehensive insights into the dynamic landscape
+				of Toronto&apos;s housing market.
+			</>
+		),
+		framework: [
+			"Pandas",
+			"Matplotlib",
+			"Jupyter Notebooks",
+			"Seaborn",
+			"Tableau",
+		],
+		githubURL:
+			"https://github.com/nwyGit/Python-DVD-Rental-Analysis/tree/be8c63de0dbe9a30398a7f89e7447af59cc68c40",
+		websiteURL: "",
+		imageURL: {
+			mobile: "/Toronto House Price Analysis.png",
+			desktop: "/Toronto House Price Analysis.png",
+		},
+	},
+	{
+		title: "DVD Rental Analysis",
+		body: (
+			<>
+				This project revolves around harnessing the power of{" "}
+				<span className={`${styles.highlightText}`}>Pandas</span> in Python to
+				conduct a comprehensive analysis of data extracted from the DVD Rental
+				database. The aim is to execute a series of data manipulations,
+				transformations, and visualizations, ultimately{" "}
+				<span className={`${styles.highlightText}`}>
+					addressing specific inquiries tied to the dataset
+				</span>
+				. Through the utilization of Pandas, the project is empowered to
+				efficiently navigate and derive insights from the intricacies of the DVD
+				Rental data.
+			</>
+		),
+		framework: ["Pandas", "Matplotlib", "Textblob", "Jupyter Notebooks", "SQL"],
+		githubURL:
+			"https://github.com/nwyGit/Python-Toronto-Housing-Analysis/tree/ae629b877817e77ccc0d212c4080c0d8fa02ce82",
+		websiteURL: "",
+		imageURL: {
+			mobile: "/DVD Rental Analysis.png",
+			desktop: "/DVD Rental Analysis.png",
+		},
 	},
 ];

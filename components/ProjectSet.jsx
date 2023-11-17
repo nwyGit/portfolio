@@ -14,7 +14,7 @@ const ProjectSet = ({ title, data }) => {
 				viewport={{ once: true, amount: 0.1 }}
 				className="sm:space-y-2 relative"
 			>
-				<div className={`${styles.sectionHeader} mt-4`}>
+				<div className={`${styles.sectionHeader} mt-12`}>
 					<span className="text-2xl mr-6">{title}</span>
 					<hr className="flex-1 border-primary opacity-50" />
 				</div>
