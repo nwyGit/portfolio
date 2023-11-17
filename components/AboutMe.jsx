@@ -6,6 +6,8 @@ import {
 	FaPython,
 	FaReact,
 	FaNodeJs,
+	FaJava,
+	FaAws,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
@@ -80,6 +82,10 @@ const AboutMe = () => {
 						<span>Node JS</span>
 					</div>
 					<div className={`${styles.skillsItem}`}>
+						<FaJava className={`${styles.skillsIcon}`} />
+						<span>Java</span>
+					</div>
+					<div className={`${styles.skillsItem}`}>
 						<FaPython className={`${styles.skillsIcon}`} />
 						<span>Python</span>
 					</div>
@@ -93,9 +99,11 @@ const AboutMe = () => {
 						/>
 						<span>C++</span>
 					</div>
+					<div className={`${styles.skillsItem}`}>
+						<FaAws className={`${styles.skillsIcon}`} />
+						<span>AWS</span>
+					</div>
 				</div>
-
-				<span></span>
 			</motion.div>
 		</section>
 	);
