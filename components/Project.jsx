@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { fadeIn } from '@/utils/motion';
-import styles from '@/styles';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useMediaQuery } from 'react-responsive';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/utils/motion";
+import styles from "@/styles";
+import Link from "next/link";
+import Image from "next/image";
+import { useMediaQuery } from "react-responsive";
 
 const Project = ({ data }) => {
 	const [mobileScreen, setMobileScreen] = useState(false);
@@ -20,11 +20,11 @@ const Project = ({ data }) => {
 
 	return (
 		<motion.div
-			variants={fadeIn('right', 'tween', 0.6, 1)}
-			initial='hidden'
-			whileInView='show'
+			variants={fadeIn("right", "tween", 0.6, 1)}
+			initial="hidden"
+			whileInView="show"
 			viewport={{ once: true, amount: 0.1 }}
-			className='relative mt-8'
+			className="relative mt-8"
 		>
 			<div
 				className={`relative ${styles.contentBox} text-justify p-6 lg:p-0 z-10`}
@@ -40,17 +40,17 @@ const Project = ({ data }) => {
 						return <li key={e}>{e}</li>;
 					})}
 				</ul>
-				<div className='flex gap-4 items-center'>
+				<div className="flex gap-4 items-center">
 					{data.githubURL.length > 0 && (
 						<Link href={data.githubURL}>
-							<Image src='/github.svg' alt='github' width={27} height={27} />
+							<Image src="/github.svg" alt="github" width={27} height={27} />
 						</Link>
 					)}
 					{data.websiteURL.length > 0 && (
 						<Link href={data.websiteURL}>
 							<Image
-								src='/externalLink.svg'
-								alt='external link'
+								src="/externalLink.svg"
+								alt="external link"
 								width={23}
 								height={23}
 							/>
@@ -58,15 +58,15 @@ const Project = ({ data }) => {
 					)}
 				</div>
 			</div>
-			<div className='absolute top-2 lg:right-0 w-full h-full lg:w-[45%] lg:h-[75%]'>
+			<div className="absolute top-2 lg:right-0 w-full h-full lg:w-[45%] lg:h-[75%]">
 				<Image
 					src={mobileScreen ? data.imageURL.mobile : data.imageURL.desktop}
-					alt={data.title + ' capture screen'}
+					alt={data.title + " capture screen"}
 					width={1024}
 					height={768}
-					className='h-full object-cover'
+					className="h-full object-cover"
 				/>
-				<div className='absolute top-0 w-full h-full lg:right-0 bg-[#023047]/90 lg:bg-[#023047]/70 hover:bg-[#023047]/0' />
+				<div className="absolute top-0 w-full h-full lg:right-0 bg-[#023047]/90 lg:bg-[#023047]/70 hover:bg-[#023047]/0" />
 			</div>
 		</motion.div>
 	);

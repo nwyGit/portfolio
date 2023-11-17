@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styles from '@/styles';
+import React, { useState, useEffect } from "react";
+import styles from "@/styles";
 
 const min = 10;
 const max = 30;
@@ -14,14 +14,14 @@ const Bubbles = () => {
 		}
 
 		setWindowWidth(window.innerWidth);
-		window.addEventListener('resize', handleResize);
+		window.addEventListener("resize", handleResize);
 
 		setTimeout(() => {
 			setShowBubbles(true);
 		}, 2500);
 
 		return () => {
-			window.removeEventListener('resize', handleResize);
+			window.removeEventListener("resize", handleResize);
 		};
 	}, []);
 
@@ -36,13 +36,13 @@ const Bubbles = () => {
 
 	return (
 		<div className={`${styles.bubbleContainer}`}>
-			<div className='relative flex justify-evenly bubbles'>
+			<div className="relative flex justify-evenly bubbles">
 				{showBubbles &&
 					Array.from({ length: bubbleNumber }, (_, i) => (
 						<span
 							key={i}
 							style={{
-								'--i': `${(Math.floor(Math.sin(i + 1) * 100000) % min) + max}`,
+								"--i": `${(Math.floor(Math.sin(i + 1) * 100000) % min) + max}`,
 							}}
 						></span>
 					))}

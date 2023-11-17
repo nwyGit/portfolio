@@ -1,24 +1,24 @@
-import React from 'react';
-import styles from '@/styles';
-import { motion } from 'framer-motion';
-import { fadeIn } from '@/utils/motion';
+import React from "react";
+import styles from "@/styles";
+import { motion } from "framer-motion";
+import { fadeIn } from "@/utils/motion";
 
 const items = [
-	<span key='hero1'>Hey there, I&apos;m</span>,
+	<span key="hero1">Hey there, I&apos;m</span>,
 	<h1
-		key='hero2'
+		key="hero2"
 		className={`text-primary-contrast-text ${styles.introHeading} pt-2`}
 	>
 		Raymond Ng.
 	</h1>,
 	<h1
-		key='hero3'
+		key="hero3"
 		className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
 	>
 		I build things for the web.
 	</h1>,
 	<p
-		key='hero4'
+		key="hero4"
 		className={`text-secondary ${styles.text} ${styles.contentBox} pt-4`}
 	>
 		I&apos;m a software developer with experience in design. My primary focus is
@@ -30,11 +30,11 @@ const items = [
 const introComponent = (index, element) => {
 	return (
 		<motion.div
-			variants={fadeIn('up', 'tween', 1.2 + index * 0.2, 0.6)}
-			initial='hidden'
-			whileInView='show'
+			variants={fadeIn("up", "tween", 1.2 + index * 0.2, 0.6)}
+			initial="hidden"
+			whileInView="show"
 			viewport={{ once: true, amount: 0.25 }}
-			className='sm:space-y-2'
+			className="sm:space-y-2"
 			key={index + 1}
 		>
 			{element}

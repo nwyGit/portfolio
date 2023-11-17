@@ -1,41 +1,41 @@
-import React from 'react';
-import Image from 'next/image';
-import styles from '../styles';
-import Link from 'next/link';
+import React from "react";
+import Image from "next/image";
+import styles from "../styles";
+import Link from "next/link";
 
 const footerItems = [
 	{
-		name: 'github',
-		imagePath: '/github.svg',
-		url: 'https://github.com/nwyGit',
+		name: "github",
+		imagePath: "/github.svg",
+		url: "https://github.com/nwyGit",
 		width: 27,
 		height: 27,
 	},
 	{
-		name: 'instagram',
-		imagePath: '/instagram.svg',
-		url: 'https://www.instagram.com/lolo_nwy',
+		name: "instagram",
+		imagePath: "/instagram.svg",
+		url: "https://www.instagram.com/lolo_nwy",
 		width: 25,
 		height: 25,
 	},
 	{
-		name: 'twitter',
-		imagePath: '/twitter.svg',
-		url: '/',
+		name: "twitter",
+		imagePath: "/twitter.svg",
+		url: "/",
 		width: 25,
 		height: 25,
 	},
 	{
-		name: 'linkedin',
-		imagePath: '/linkedin.svg',
-		url: 'https://www.linkedin.com/in/raymond-wyng',
+		name: "linkedin",
+		imagePath: "/linkedin.svg",
+		url: "https://www.linkedin.com/in/raymond-wyng",
 		width: 25,
 		height: 25,
 	},
 	{
-		name: 'facebook',
-		imagePath: '/facebook.svg',
-		url: '/',
+		name: "facebook",
+		imagePath: "/facebook.svg",
+		url: "/",
 		width: 23,
 		height: 23,
 	},
@@ -43,12 +43,10 @@ const footerItems = [
 
 const Footer = () => {
 	return (
-		<footer
-			className={`${styles.xPaddings} ${styles.FooterBox}`}
-		>
+		<footer className={`${styles.xPaddings} ${styles.FooterBox}`}>
 			<ul className={`${styles.flexCenter} gap-8 py-6 relative z-5`}>
 				{footerItems.map((item) => (
-					<li key={item.name} className='hover:text-secondary'>
+					<li key={item.name} className="hover:text-secondary">
 						<Link href={item.url}>
 							<Image
 								src={item.imagePath}
