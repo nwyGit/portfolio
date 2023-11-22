@@ -29,9 +29,7 @@ const Project = ({ data }) => {
 			<div
 				className={`relative ${styles.contentBox} text-justify p-6 lg:p-0 z-10`}
 			>
-				<span className={`${styles.highlightText} text-2xl mr-6 `}>
-					{data.title}
-				</span>
+				<span className="text-2xl font-semibold mr-6">{data.title}</span>
 				<p className={`${styles.text} lg:bg-[#023047] lg:mt-2 lg:p-6`}>
 					{data.body}
 				</p>

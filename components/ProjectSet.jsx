@@ -14,9 +14,10 @@ const ProjectSet = ({ title, data }) => {
 				viewport={{ once: true, amount: 0.1 }}
 				className="sm:space-y-2 relative"
 			>
-				<div className={`${styles.sectionHeader} mt-12`}>
-					<span className="text-2xl mr-6">{title}</span>
-					<hr className="flex-1 border-primary opacity-50" />
+				<div className={`${styles.sectionHeader} mt-10`}>
+					<hr className="border-secondary-contrast-text opacity-50" />
+					<span className="ml-[8%] text-secondary-contrast-text text-2xl">{title}</span>
+					<hr className="border-secondary-contrast-text opacity-50" />
 				</div>
 			</motion.div>
 			{data.map((project, i) => (

@@ -16,7 +16,7 @@ const Projects = () => {
 				className="sm:space-y-2 relative"
 			>
 				<div>
-					<span className="text-3xl mr-6">| Projects</span>
+					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">| Projects</span>
 				</div>
 			</motion.div>
 			<ProjectSet title="Software Development" data={SDprojects} />

@@ -25,7 +25,7 @@ const AboutMe = () => {
 				className="sm:space-y-2"
 			>
 				<div>
-					<span className="text-3xl mr-6">| About Me</span>
+					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">| About Me</span>
 				</div>
 				<p className={`${styles.text} ${styles.contentBox}`}>
 					Hello there! My name is Raymond, and I love web design and

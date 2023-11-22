@@ -24,7 +24,7 @@ const styles = {
 
 	introHeading: "font-medium md:text-6xl lg:text-8xl text-4xl",
 	introHeading2: "font-medium md:text-5xl lg:text-7xl text-3xl",
-	sectionHeader: "flex justify-center items-center md:w-2/5 w-4/5",
+	sectionHeader: "justify-center items-center w-full",
 	section: "lg:px-30 2xl:px-72 relative",
 	divider: "inline-block w-1/3 border-b-2 border-gray-300",
 
