@@ -6,6 +6,7 @@ const query = groq`
 		title,
 		summary,
 		dateCompleted,
+		order,
 		githubLink,
 		demoLink,
 		"desktopImageURL": desktopImage.asset->url,
