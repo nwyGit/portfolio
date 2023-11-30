@@ -3,10 +3,10 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Bubbles from "./Bubbles";
 
-const Layout = ({ children }) => {
+const Layout = ({ resumeURL, children }) => {
 	return (
 		<>
-			<Navbar />
+			<Navbar resumeURL={resumeURL}/>
 			{children}
 			<Footer />
 		</>

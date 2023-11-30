@@ -1,22 +1,15 @@
 import React from "react";
-import {
-	FaHtml5,
-	FaCss3Alt,
-	FaJsSquare,
-	FaPython,
-	FaReact,
-	FaNodeJs,
-	FaJava,
-	FaAws,
-} from "react-icons/fa";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
-import Image from "next/image";
 import styles from "@/styles";
+import Skill from "./Skill";
+import { urlFor } from "@/utils/sanity";
+import Image from "next/image";
+import Overlay from "./Overlay";
 
-const AboutMe = () => {
+const AboutMe = ({ about, skills }) => {
 	return (
-		<section id="About" className={`${styles.section}  ${styles.paddings}`}>
+		<section id="About" className={`${styles.section} ${styles.paddings}`}>
 			<motion.div
 				variants={fadeIn("right", "tween", 0.6, 1)}
 				initial="hidden"
@@ -25,84 +18,42 @@ const AboutMe = () => {
 				className="sm:space-y-2"
 			>
 				<div>
-					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">| About Me</span>
+					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">
+						| About Me
+					</span>
 				</div>
-				<p className={`${styles.text} ${styles.contentBox}`}>
-					Hello there! My name is Raymond, and I love web design and
-					development. I&apos;m also interested in artificial intelligence, big
-					data, and data analysis. My prior ambition is to develop{" "}
-					<span className={`${styles.highlightText}`}>practical</span> and{" "}
-					<span className={`${styles.highlightText}`}>
-						aesthetically pleasing
-					</span>{" "}
-					online apps that benefit consumers.
-				</p>
-				<p className={`${styles.text} ${styles.contentBox}`}>
-					I&apos;ve been actively pursuing opportunities to improve my abilities
-					and knowledge. To keep up with the most recent developments, I have
-					finished online courses and am studying computer programming diploma.
-					I believe the{" "}
-					<span className={`${styles.highlightText}`}>problem-solving</span> and{" "}
-					<span className={`${styles.highlightText}`}>creative thinking</span>{" "}
-					abilities I developed from previous experiences will be advantageous
-					in my career as a web developer.
-				</p>
-				<p className={`${styles.text} ${styles.contentBox}`}>
+				<div className="block md:flex">
+					<div className="flex md:order-last md:w-[40%] justify-center items-center">
+						<div className="relative">
+							<Image
+								src={about?.selfieURL}
+								alt="selfie"
+								width={300}
+								height="0"
+								className="h-[250px] w-auto mt-2"
+							/>
+							<Overlay opacity={"selfie"} />
+						</div>
+					</div>
+					<div className={`${styles.contentBox}`}>
+						<p className={`${styles.text}`}>{about?.paragraph1}</p>
+						<p className={`${styles.text}`}>{about?.paragraph2}</p>
+					</div>
+				</div>
+				<p className={`${styles.text}`}>
 					My experience includes working with the following technologies:
 				</p>
-				<div className={`${styles.skillsBox} ${styles.contentBox}`}>
-					<div className={`${styles.skillsItem}`}>
-						<FaHtml5 className={`${styles.skillsIcon}`} />
-						<span>HTML5</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaCss3Alt className={`${styles.skillsIcon}`} />
-						<span>CSS3</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaJsSquare className={`${styles.skillsIcon}`} />
-						<span>Javascript</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<Image
-							className={`${styles.skillsIcon}`}
-							src="/tailwind-css.svg"
-							alt="tailwind-css"
-							width={25}
-							height={25}
-						/>
-						<span>Tailwind</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaReact className={`${styles.skillsIcon}`} />
-						<span>React</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaNodeJs className={`${styles.skillsIcon}`} />
-						<span>Node JS</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaJava className={`${styles.skillsIcon}`} />
-						<span>Java</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaPython className={`${styles.skillsIcon}`} />
-						<span>Python</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<Image
-							className={`${styles.skillsIcon}`}
-							src="/c-plus-plus.svg"
-							alt="c-plus-plus"
-							width={25}
-							height={25}
-						/>
-						<span>C++</span>
-					</div>
-					<div className={`${styles.skillsItem}`}>
-						<FaAws className={`${styles.skillsIcon}`} />
-						<span>AWS</span>
-					</div>
+				<div className={`${styles.skillsBox}`}>
+					{/* Skill Icons */}
+					{skills
+						?.sort((a, b) => a.order - b.order)
+						.map((skill) => (
+							<Skill
+								key={skill?._id}
+								url={urlFor(skill?.image).url()}
+								name={skill?.title}
+							/>
+						))}
 				</div>
 			</motion.div>
 		</section>

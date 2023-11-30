@@ -5,6 +5,9 @@ import styles from "@/styles";
 import Link from "next/link";
 import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
+import Overlay from "./Overlay";
+import SkillIcon from "./SkillIcon";
+import { urlFor } from "@/utils/sanity";
 
 const Project = ({ data }) => {
 	const [mobileScreen, setMobileScreen] = useState(false);
@@ -18,6 +21,16 @@ const Project = ({ data }) => {
 		}
 	}, [isMobile]);
 
+	const {
+		title,
+		summary,
+		technologies,
+		githubLink,
+		demoLink,
+		desktopImageURL,
+		mobileImageURL,
+	} = data;
+
 	return (
 		<motion.div
 			variants={fadeIn("right", "tween", 0.6, 1)}
@@ -27,25 +40,35 @@ const Project = ({ data }) => {
 			className="relative mt-8"
 		>
 			<div
-				className={`relative ${styles.contentBox} text-justify p-6 lg:p-0 z-10`}
+				className={`relative lg:w-[60%] w-full text-justify p-6 lg:p-0 z-10`}
 			>
-				<span className="text-2xl font-semibold mr-6">{data.title}</span>
-				<p className={`${styles.text} lg:bg-[#023047] lg:mt-2 lg:p-6`}>
-					{data.body}
-				</p>
-				<ul className={`${styles.FrameworkBox}`}>
-					{data.framework.map((e, idx) => {
-						return <li key={e}>{e}</li>;
-					})}
-				</ul>
-				<div className="flex gap-4 items-center">
-					{data.githubURL.length > 0 && (
-						<Link href={data.githubURL}>
+				<span className="text-2xl font-semibold mr-6">{title}</span>
+				<div className={`${styles.text} lg:bg-[#023047] lg:mt-2 lg:p-6`}>
+					<p>{summary}</p>
+					<ul className={`${styles.FrameworkBox}`}>
+						{technologies
+							?.sort((a, b) => a.order - b.order)
+							.map((tech, idx) => {
+								return (
+									<li key={idx} className="bg-white p-1 rounded-full">
+										<SkillIcon
+											name={tech.title}
+											url={urlFor(tech.image).url()}
+										/>
+									</li>
+								);
+							})}
+					</ul>
+				</div>
+
+				<div className="flex gap-4 items-center mt-2">
+					{githubLink && (
+						<Link href={githubLink}>
 							<Image src="/github.svg" alt="github" width={27} height={27} />
 						</Link>
 					)}
-					{data.websiteURL.length > 0 && (
-						<Link href={data.websiteURL}>
+					{demoLink && (
+						<Link href={demoLink}>
 							<Image
 								src="/externalLink.svg"
 								alt="external link"
@@ -56,15 +79,16 @@ const Project = ({ data }) => {
 					)}
 				</div>
 			</div>
+			
 			<div className="absolute top-2 lg:right-0 w-full h-full lg:w-[45%] lg:h-[75%]">
 				<Image
-					src={mobileScreen ? data.imageURL.mobile : data.imageURL.desktop}
-					alt={data.title + " capture screen"}
+					src={mobileScreen ? mobileImageURL : desktopImageURL}
+					alt={title + " capture screen"}
 					width={1024}
 					height={768}
 					className="h-full object-cover"
 				/>
-				<div className="absolute top-0 w-full h-full lg:right-0 bg-[#023047]/90 lg:bg-[#023047]/70 hover:bg-[#023047]/0" />
+				<Overlay opacity={"project"} />
 			</div>
 		</motion.div>
 	);

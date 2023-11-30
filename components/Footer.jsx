@@ -12,32 +12,11 @@ const footerItems = [
 		height: 27,
 	},
 	{
-		name: "instagram",
-		imagePath: "/instagram.svg",
-		url: "https://www.instagram.com/lolo_nwy",
-		width: 25,
-		height: 25,
-	},
-	{
-		name: "twitter",
-		imagePath: "/twitter.svg",
-		url: "/",
-		width: 25,
-		height: 25,
-	},
-	{
 		name: "linkedin",
 		imagePath: "/linkedin.svg",
 		url: "https://www.linkedin.com/in/raymond-wyng",
 		width: 25,
 		height: 25,
-	},
-	{
-		name: "facebook",
-		imagePath: "/facebook.svg",
-		url: "/",
-		width: 23,
-		height: 23,
 	},
 ];
 

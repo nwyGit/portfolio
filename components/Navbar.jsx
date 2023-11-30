@@ -8,6 +8,7 @@ import {
 } from "@/utils/motion";
 import Image from "next/image";
 import Link from "next/link";
+import { fetchResume } from "@/utils/fetchData";
 
 // navItems attributes
 const navItems = ["About", "Projects", "Contact"];
@@ -32,7 +33,7 @@ const navLinks = navItems.map((item, index) => {
 	return navComponent(index, element);
 });
 
-const resume = () => {
+const Resume = (resumeURL) => {
 	const element = (
 		<motion.button
 			variants={buttonVariants}
@@ -40,14 +41,14 @@ const resume = () => {
 			whileTap="pressed"
 			className={`${styles.button} py-1 px-4`}
 		>
-			<a href="/resume.pdf">Resume</a>
+			<a href={resumeURL}>Resume</a>
 		</motion.button>
 	);
 	return navComponent(navItems.length, element);
 };
 
 // NavBar component
-const Navbar = () => {
+const Navbar = ({ resumeURL }) => {
 	const [showMenu, setShowMenu] = useState(false);
 
 	useEffect(() => {
@@ -80,12 +81,19 @@ const Navbar = () => {
 							className="fixed ml-10 hover:text-secondary-contrast-text"
 						>
 							<Link href="/">
-								<Image src="/logo.svg" alt="logo" width={40} height={40} />
+								<Image
+									src="/logo.svg"
+									alt="logo"
+									width="0"
+									height="0"
+									priority
+									className="h-[40px] w-auto"
+								/>
 							</Link>
 						</motion.div>
 						<ul className={`${styles.flexEnd} gap-16 items-center`}>
 							{navLinks}
-							{resume()}
+							{Resume(resumeURL)}
 						</ul>
 					</>
 				)}
@@ -94,10 +102,23 @@ const Navbar = () => {
 			{/* Mobile screen bar */}
 			<nav className={`${styles.smNavBar}`}>
 				<Link href="/">
-					<Image src="/logo.svg" alt="logo" width={40} height={40} />
+					<Image
+						src="/logo.svg"
+						alt="logo"
+						width="0"
+						height="0"
+						priority
+						className="h-[40px] w-auto"
+					/>
 				</Link>
 				<button onClick={() => setShowMenu(!showMenu)} className={``}>
-					<Image src="/menu.svg" alt="Menu" width={30} height={30} />
+					<Image
+						src="/menu.svg"
+						alt="Menu"
+						width="0"
+						height="0"
+						className="h-[30px] w-auto"
+					/>
 				</button>
 			</nav>
 			{/* Background blur overlay */}
@@ -138,7 +159,7 @@ const Navbar = () => {
 						);
 						return navComponent(index, element);
 					})}
-					{resume()}
+					{Resume(resumeURL)}
 				</ul>
 			</motion.aside>
 		</>
