@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
 
 	return {
 		props: { hero, about, skills, projects, resumeURL },
-		revalidate: 10,
+		revalidate: 60,
 	};
 };
 
