@@ -8,7 +8,6 @@ import {
 } from "@/utils/motion";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchResume } from "@/utils/fetchData";
 
 // navItems attributes
 const navItems = ["About", "Projects", "Contact"];
@@ -33,7 +32,7 @@ const navLinks = navItems.map((item, index) => {
 	return navComponent(index, element);
 });
 
-const Resume = (resumeURL) => {
+const Resume = ({ resumeURL }) => {
 	const element = (
 		<motion.button
 			variants={buttonVariants}
