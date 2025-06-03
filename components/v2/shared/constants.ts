@@ -6,15 +6,15 @@ export const SOCIAL_LINKS = {
 export const NAVIGATION_LINKS = [
 	{
 		name: "PROJECTS",
-		href: "/v2/projects",
+		href: "/projects",
 	},
 	{
 		name: "BLOGS",
-		href: "/v2/blogs",
+		href: "/blogs",
 	},
 	{
 		name: "ABOUT",
-		href: "/v2/about",
+		href: "/about",
 	},
 ];
 
