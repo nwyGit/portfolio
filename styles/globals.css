@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700&family=Ubuntu:wght@400;500;700&family=Open+Sans:wght@400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -56,5 +56,96 @@ html {
 	}
 	100% {
 		transform: translateY(-50vh) scale(0.3) rotate(360deg);
+	}
+}
+
+@layer components {
+	/* Navbar */
+	.navbar {
+		@apply fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200;
+	}
+	.navbar-container {
+		@apply w-full flex justify-between items-center px-8 md:px-16 xl:px-32 py-4 md:py-8;
+		margin: 0 auto;
+	}
+	.nav-link {
+		@apply text-black hover:text-gray-700 transition-colors duration-200 uppercase font-medium text-[16px] leading-[1.32em] tracking-normal px-0 py-0 border-0 rounded-none;
+	}
+	.nav-link-active {
+		@apply font-bold;
+	}
+	.resume-btn {
+		@apply flex items-center border-2 border-black text-black hover:bg-black hover:text-white transition-colors duration-200 font-bold text-[16px] leading-[1.32em] uppercase bg-white w-auto;
+		border-radius: 30px;
+		padding: 12px 30px 12px 25px;
+		gap: 10px;
+	}
+
+	/* About Section */
+	.about-hero {
+		@apply w-full flex flex-col md:flex-row justify-between items-center gap-4 md:gap-8 px-8 md:px-16 xl:px-32 pb-8;
+	}
+	.about-hero-title {
+		@apply font-ubuntu font-bold text-[40px] md:text-[60px] leading-[1.15] text-black mb-2;
+	}
+	.about-resume-btn {
+		@apply inline-flex items-center gap-2 border-2 border-black px-8 py-3 rounded-full font-bold text-white bg-black hover:bg-white hover:text-black transition-colors text-lg uppercase;
+	}
+	.about-img-container {
+		@apply rounded-[10px] overflow-hidden shadow-lg w-[400px] md:w-[800px] h-[267px] md:h-[533px];
+	}
+	.about-section {
+		@apply w-full bg-[#F5F5F5] flex flex-col md:flex-row justify-between gap-[110px] px-8 md:px-16 xl:px-32 py-[100px];
+	}
+	.about-section-title {
+		@apply font-ubuntu font-medium text-[20px] text-black;
+	}
+	.about-section-text {
+		@apply font-open-sans text-[16px] text-black;
+	}
+	.about-skill {
+		@apply bg-black/5 text-black font-red-hat-display text-[15px] px-4 py-2 rounded-md border border-black/5;
+	}
+	.about-client-logo {
+		@apply w-[140px] h-[140px] rounded-full bg-white flex items-center justify-center shadow-md;
+	}
+
+	/* Footer V2 */
+	.footer {
+		@apply w-full border-t border-[rgba(0,0,0,0.15)] bg-white;
+	}
+	.footer-container {
+		@apply w-full flex flex-col md:flex-row justify-between items-center px-8 md:px-16 xl:px-32 py-8;
+		margin: 0 auto;
+		gap: 36px;
+	}
+	.footer-left {
+		@apply flex flex-row items-center gap-[30px];
+	}
+	.footer-icons {
+		@apply flex flex-row items-center gap-[15px];
+	}
+	.footer-right {
+		@apply flex flex-row items-center gap-4;
+	}
+	.footer-name {
+		@apply font-bold text-[24px] leading-[1em];
+		font-family: Ubuntu, sans-serif;
+		color: #000;
+	}
+	.footer-line {
+		@apply h-[1px];
+		width: 36px;
+		background: #000;
+	}
+	.footer-follow {
+		@apply text-[15px] leading-[1.87em] font-normal;
+		font-family: "Red Hat Display", sans-serif;
+		color: #000;
+	}
+	.footer-copyright {
+		@apply text-[13px] leading-[1.85em] font-normal;
+		font-family: "Red Hat Display", sans-serif;
+		color: #000;
 	}
 }

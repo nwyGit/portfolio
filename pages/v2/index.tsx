@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Layout from "@/components/v2/Layout";
 import {
 	fetchAbout,
 	fetchHero,
@@ -6,8 +6,8 @@ import {
 	fetchResume,
 	fetchSkills,
 } from "@/utils/fetchData";
-import Layout from "@/components/v2/Layout";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 
 interface HomeProps {
 	hero: any;

@@ -24,7 +24,8 @@ export const fetchAbout = async () => {
 		*[_type == "about"][0] {
 			paragraph1,
 			paragraph2,
-			"selfieURL": selfie.asset->url
+			"selfieURL": selfie.asset->url,
+			"aboutMeImageURL": aboutMeImage.asset->url
 		}
 	`;
 

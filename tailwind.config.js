@@ -13,6 +13,9 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ["Red Hat Display", "sans-serif"],
+				"red-hat-display": ["Red Hat Display", "sans-serif"],
+				ubuntu: ["Ubuntu", "sans-serif"],
+				"open-sans": ["Open Sans", "sans-serif"],
 			},
 			colors: {
 				"background-color": "#023047",

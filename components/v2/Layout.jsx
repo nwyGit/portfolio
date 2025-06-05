@@ -5,7 +5,7 @@ import Footer from "./layout/Footer";
 const Layout = ({ resumeURL, children }) => {
 	return (
 		<>
-			<Navbar resumeURL={resumeURL}/>
+			<Navbar resumeURL={resumeURL} />
 			{children}
 			<Footer />
 		</>

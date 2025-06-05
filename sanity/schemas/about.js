@@ -18,5 +18,10 @@ export const about = {
 			title: "Selfie",
 			type: "image",
 		},
+		{
+			name: "aboutMeImage",
+			title: "About Me Image",
+			type: "image",
+		},
 	],
 };
