@@ -10,23 +10,22 @@ export interface Project {
 
 export interface Skill {
 	_id: string;
-	name: string;
-	icon: string;
-	level: number;
+	title: string;
+	order: number;
 }
 
 export interface About {
-	_id: string;
-	title: string;
-	description: string;
-	image: string;
+	paragraph1: string;
+	paragraph2: string;
+	selfieURL: string;
+	aboutMeImageURL: string;
 }
 
 export interface Hero {
-	_id: string;
-	title: string;
-	subtitle: string;
-	image: string;
+	greeting: string;
+	name: string;
+	slogan: string;
+	description: string;
 }
 
 export interface LayoutProps {

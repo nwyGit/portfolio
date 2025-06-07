@@ -1,12 +1,15 @@
 import Image from "next/image";
 import { HiOutlineDownload } from "react-icons/hi";
+import { About, Skill } from "@/components/v2/shared/types";
 
 interface AboutSectionProps {
-	about: any;
-	skills: any;
+	about: About;
+	skills: Skill[];
 }
 
 export default function AboutSection({ about, skills }: AboutSectionProps) {
+	const { paragraph1, paragraph2, aboutMeImageURL } = about;
+
 	return (
 		<div className="bg-white w-full flex flex-col items-stretch pt-[130px]">
 			{/* Hero/About Section */}
@@ -30,7 +33,7 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 						{/* Mobile: original behavior */}
 						<div className="block md:hidden">
 							<Image
-								src={about?.aboutMeImageURL}
+								src={aboutMeImageURL}
 								alt="About Raymond Ng"
 								width={800}
 								height={600}
@@ -41,7 +44,7 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 						{/* Desktop: aspect ratio and fill */}
 						<div className="hidden md:block md:aspect-[4/3] w-full h-full relative">
 							<Image
-								src={about?.aboutMeImageURL}
+								src={aboutMeImageURL}
 								alt="About Raymond Ng"
 								fill
 								className="object-cover object-top rounded-lg"
@@ -68,10 +71,10 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 					</h2>
 					<div className="flex flex-col gap-5">
 						<p className="about-section-text text-base md:text-lg lg:text-xl">
-							{about?.paragraph1}
+							{paragraph1}
 						</p>
 						<p className="about-section-text text-base md:text-lg lg:text-xl">
-							{about?.paragraph2}
+							{paragraph2}
 						</p>
 					</div>
 				</div>

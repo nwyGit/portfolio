@@ -4,9 +4,13 @@ import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
-import { NAVIGATION_LINKS } from "../shared/constants";
+import { NAVIGATION_LINKS } from "@/components/v2/shared/constants";
 
-const Navbar: FC = () => {
+interface NavbarProps {
+	resumeURL: string;
+}
+
+const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 
@@ -45,7 +49,7 @@ const Navbar: FC = () => {
 							{link.name}
 						</Link>
 					))}
-					<a href="/resume.pdf" download className="resume-btn">
+					<a href={resumeURL} download className="resume-btn">
 						<HiOutlineDownload size={24} />
 						<span>Resume</span>
 					</a>
@@ -83,7 +87,7 @@ const Navbar: FC = () => {
 						))}
 						<div className="w-full flex justify-center">
 							<a
-								href="/resume.pdf"
+								href={resumeURL}
 								download
 								className="resume-btn"
 								onClick={() => setIsOpen(false)}

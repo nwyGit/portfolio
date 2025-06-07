@@ -1,6 +1,7 @@
 export const SOCIAL_LINKS = {
 	github: "https://github.com/nwyGit",
 	linkedin: "https://www.linkedin.com/in/raymond-wyng",
+	email: "mailto:raymond.wyng@gmail.com",
 };
 
 export const NAVIGATION_LINKS = [

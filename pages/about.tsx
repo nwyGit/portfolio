@@ -1,44 +1,31 @@
-import Head from "next/head";
+import Layout from "@/components/v2/Layout";
+import AboutSection from "@/components/v2/sections/AboutSection";
 import {
 	fetchAbout,
-	fetchHero,
-	fetchProjects,
 	fetchResume,
-	fetchSkills,
+	fetchSkills
 } from "@/utils/fetchData";
-import Layout from "@/components/v2/Layout";
 import { GetStaticProps } from "next";
-import LandingSection from "@/components/v2/sections/AboutSection";
-import AboutSection from "@/components/v2/sections/AboutSection";
+import Head from "next/head";
 
-interface HomeProps {
-	hero: any;
+interface AboutProps {
 	about: any;
 	skills: any;
-	projects: any;
 	resumeURL: string;
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-	const hero = await fetchHero();
+export const getStaticProps: GetStaticProps<AboutProps> = async () => {
 	const about = await fetchAbout();
 	const skills = await fetchSkills();
-	const projects = await fetchProjects();
 	const resumeURL = await fetchResume();
 
 	return {
-		props: { hero, about, skills, projects, resumeURL },
+		props: { about, skills, resumeURL },
 		revalidate: 60,
 	};
 };
 
-export default function Home({
-	hero,
-	about,
-	skills,
-	projects,
-	resumeURL,
-}: HomeProps) {
+export default function About({ about, skills, resumeURL }: AboutProps) {
 	return (
 		<Layout resumeURL={resumeURL}>
 			<Head>
