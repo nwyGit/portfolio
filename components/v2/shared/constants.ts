@@ -6,7 +6,7 @@ export const SOCIAL_LINKS = {
 export const NAVIGATION_LINKS = [
 	{
 		name: "PROJECTS",
-		href: "/projects",
+		href: "/v2#projects",
 	},
 	{
 		name: "BLOGS",

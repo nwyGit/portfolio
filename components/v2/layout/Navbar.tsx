@@ -62,27 +62,36 @@ const Navbar: FC = () => {
 			</div>
 			{/* Mobile Navigation */}
 			{isOpen && (
-				<div className="md:hidden w-full bg-white border-t border-gray-200 py-[20px] px-[30px]">
-					<div className="flex flex-col items-start gap-6">
+				<div className="md:hidden w-full bg-white border-t border-gray-200 py-[20px] px-[30px] animate-slide-in">
+					<div className="flex flex-col items-start gap-2">
 						{NAVIGATION_LINKS.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className="nav-link"
+								className={`w-full px-2 py-3 text-lg font-semibold rounded transition-all duration-200
+									text-black
+									border-l-4 ${router.pathname === link.href ? "border-black bg-gradient-to-r from-neutral-100 to-white text-black" : "border-transparent"}
+									hover:bg-gradient-to-r hover:from-neutral-100 hover:to-white
+									hover:border-black
+									active:bg-gradient-to-r active:from-neutral-200 active:to-white
+									focus:outline-none focus:border-black
+								`}
 								onClick={() => setIsOpen(false)}
 							>
 								{link.name}
 							</Link>
 						))}
-						<a
-							href="/resume.pdf"
-							download
-							className="resume-btn"
-							onClick={() => setIsOpen(false)}
-						>
-							<HiOutlineDownload size={18} />
-							<span>Resume</span>
-						</a>
+						<div className="w-full flex justify-center">
+							<a
+								href="/resume.pdf"
+								download
+								className="resume-btn"
+								onClick={() => setIsOpen(false)}
+							>
+								<HiOutlineDownload size={18} />
+								<span>Resume</span>
+							</a>
+						</div>
 					</div>
 				</div>
 			)}
