@@ -5,8 +5,16 @@ interface LandingProps {
 	hero: Hero;
 }
 
-function LandingSubtitleTag({ children }: { children: React.ReactNode }) {
-	return <span className="landing-subtitle-tag">{children}</span>;
+function LandingSubtitleTag({
+	children,
+	className = "",
+}: {
+	children: React.ReactNode;
+	className?: string;
+}) {
+	return (
+		<span className={`landing-subtitle-tag ${className}`}>{children}</span>
+	);
 }
 
 export default function Landing({ hero }: LandingProps) {
@@ -24,10 +32,18 @@ export default function Landing({ hero }: LandingProps) {
 			<div className="landing-subtitle-group">
 				<span className="landing-subtitle">Your</span>
 				<LandingSubtitleTag>Trusted</LandingSubtitleTag>
-				<span className="landing-subtitle">partner</span>
-				<span className="landing-subtitle">For</span>
-				<span className="landing-subtitle">Website</span>
-				<LandingSubtitleTag>build.</LandingSubtitleTag>
+				<span className="landing-subtitle">Partner</span>
+				<span className="landing-subtitle hidden sm:inline">For</span>
+				<span className="landing-subtitle hidden sm:inline">Website</span>
+				<LandingSubtitleTag className="hidden sm:inline">
+					Build.
+				</LandingSubtitleTag>
+				{/* Mobile stacked version */}
+				<div className="flex flex-row sm:hidden w-full gap-[15px]">
+					<span className="landing-subtitle">For</span>
+					<span className="landing-subtitle">Website</span>
+					<LandingSubtitleTag>Build.</LandingSubtitleTag>
+				</div>
 			</div>
 			{/* Description */}
 			<p className="landing-desc">{description}</p>

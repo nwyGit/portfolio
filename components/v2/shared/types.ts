@@ -12,6 +12,7 @@ export interface Skill {
 	_id: string;
 	title: string;
 	order: number;
+	image: string;
 }
 
 export interface About {

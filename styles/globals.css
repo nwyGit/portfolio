@@ -152,7 +152,7 @@ html {
 		@apply flex flex-row items-center gap-4;
 	}
 	.footer-name {
-		@apply font-bold text-[24px] leading-[1em];
+		@apply font-bold text-[20px] sm:text-[24px] leading-[1em];
 		font-family: Ubuntu, sans-serif;
 		color: #000;
 	}
@@ -196,25 +196,25 @@ html {
 	   Landing Section Styles
 	   ===================== */
 	.landing-container {
-		@apply flex flex-col gap-[30px] w-full max-w-[1240px] px-[20px] pt-[130px];
+		@apply flex flex-col gap-[30px] w-full max-w-[1240px] px-[20px] pt-[130px] pb-[30px];
 	}
 	.landing-title-group {
 		@apply flex flex-col gap-[15px];
 	}
 	.landing-title {
-		@apply text-[70px] font-bold leading-[1.15] text-black font-ubuntu;
+		@apply font-bold leading-[1.15] text-black font-ubuntu text-[30px] sm:text-[46px] md:text-[60px] xl:text-[70px];
 	}
 	.landing-subtitle-group {
 		@apply flex flex-row flex-wrap items-center gap-[15px];
 	}
 	.landing-subtitle {
-		@apply text-[50px] font-medium text-black font-ubuntu;
+		@apply font-medium text-black font-ubuntu text-[28px] sm:text-[36px] md:text-[44px] xl:text-[50px];
 	}
 	.landing-subtitle-tag {
-		@apply inline-flex items-center px-[30px] py-[5px] rounded-full bg-black text-white text-[50px] font-normal font-ubuntu;
+		@apply inline-flex items-center rounded-full bg-black text-white font-normal font-ubuntu px-[20px] sm:px-[24px] md:px-[30px] py-[5px] text-[28px] sm:text-[36px] md:text-[44px] xl:text-[50px];
 	}
 	.landing-desc {
-		@apply max-w-[700px] text-[24px] leading-[1.36] text-black font-normal font-open-sans;
+		@apply max-w-[700px] font-normal font-open-sans text-black text-[16px] sm:text-[18px] md:text-[20px] xl:text-[24px] leading-[1.36];
 	}
 	.landing-section {
 		@apply relative flex flex-col items-center w-full min-h-[900px] overflow-hidden pt-[130px] font-ubuntu font-red-hat-display font-open-sans;
@@ -243,5 +243,52 @@ html {
 		opacity: 1;
 		border-radius: 50%;
 		z-index: -1;
+	}
+
+	/* =====================
+	   Skills Section Styles
+	   ===================== */
+	.skills-section-wrapper {
+		@apply px-[20px] py-[30px];
+	}
+	.skills-section {
+		@apply w-full max-w-[1240px] mx-auto bg-[#212020] rounded-[20px] p-[6vw] md:p-[35px] flex flex-col gap-[40px];
+		box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
+	}
+	.skills-section-header {
+		@apply flex flex-row justify-between gap-[50px] px-0 md:px-[20px] flex-wrap md:flex-nowrap;
+	}
+	.skills-section-title-group {
+		@apply flex flex-col gap-[15px] flex-1 min-w-[220px];
+	}
+	.skills-section-title {
+		@apply font-ubuntu font-medium text-white leading-[1.15] text-[32px] sm:text-[38px] md:text-[46px] xl:text-[50px];
+	}
+	.skills-section-desc-group {
+		@apply flex flex-col justify-center items-end gap-[20px] flex-1 min-w-[220px] px-0 md:px-4;
+	}
+	.skills-section-desc {
+		@apply font-red-hat-display font-normal text-white text-right text-[14px] sm:text-[15px] md:text-[16px] xl:text-[18px] leading-[1.32];
+	}
+	.skills-section-divider {
+		@apply w-full h-[1px] bg-white opacity-50;
+	}
+	.skills-section-grid {
+		@apply flex flex-row flex-wrap justify-center gap-[20px] w-full;
+	}
+	.skills-card {
+		@apply bg-[#3A3A3A] rounded-[10px] flex flex-col items-center justify-center gap-[15px] py-[15px] w-[110px];
+	}
+	.skills-card-icon-wrapper {
+		@apply flex items-center justify-center w-[50px] h-[50px] rounded-full bg-[#585757] bg-opacity-100;
+	}
+	.skills-card-title {
+		@apply font-red-hat-display text-white capitalize text-[14px] sm:text-[15px] md:text-[16px] xl:text-[17px];
+	}
+	.skills-card-icon--white {
+		filter: brightness(0) invert(1);
+	}
+	.skills-card-icon--gray {
+		filter: grayscale(1);
 	}
 }
