@@ -4,8 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-	@apply text-primary;
+html,
+body {
+	@apply bg-background-color text-primary font-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Ubuntu", "Red Hat Display", "Open Sans", sans-serif;
+	color: theme("colors.primary-contrast-text");
+	font-weight: 700;
+}
+
+p {
+	font-family: "Open Sans", "Red Hat Display", "Ubuntu", sans-serif;
+	color: theme("colors.primary");
+	font-size: 1rem;
+	line-height: 1.6;
 }
 
 /* =====================

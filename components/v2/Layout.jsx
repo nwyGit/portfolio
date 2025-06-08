@@ -15,11 +15,11 @@ const Layout = ({ children }) => {
 	}, []);
 
 	return (
-		<>
+		<div className="flex flex-col min-h-screen">
 			<Navbar resumeURL={resumeURL} />
-			{children}
+			<div className="flex-grow bg-white flex flex-col">{children}</div>
 			<Footer />
-		</>
+		</div>
 	);
 };
 
