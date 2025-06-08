@@ -3,16 +3,13 @@ import { FC } from "react";
 import BlogSection from "@/components/v2/sections/BlogSection";
 import Layout from "@/components/v2/Layout";
 import Head from "next/head";
-import { fetchResume } from "@/utils/fetchData";
 
 interface BlogsPageProps {
 	blogs: any[];
-	resumeURL: string;
 }
 
 export async function getStaticProps() {
 	// const blogs = await getBlogs();
-	const resumeURL = await fetchResume();
 	const blogs = [
 		{
 			id: "1",
@@ -43,15 +40,14 @@ export async function getStaticProps() {
 	return {
 		props: {
 			blogs,
-			resumeURL,
 		},
 		revalidate: 60, // Revalidate every minute
 	};
 }
 
-const BlogsPage: FC<BlogsPageProps> = ({ blogs, resumeURL }) => {
+const BlogsPage: FC<BlogsPageProps> = ({ blogs }) => {
 	return (
-		<Layout resumeURL={resumeURL}>
+		<Layout>
 			<Head>
 				<title>Raymond Ng</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />

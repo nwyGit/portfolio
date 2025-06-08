@@ -8,7 +8,6 @@ import {
 	fetchAbout,
 	fetchHero,
 	fetchProjects,
-	fetchResume,
 	fetchSkills,
 } from "@/utils/fetchData";
 import Layout from "@/components/v1/Layout";
@@ -18,17 +17,16 @@ export const getStaticProps = async () => {
 	const about = await fetchAbout();
 	const skills = await fetchSkills();
 	const projects = await fetchProjects();
-	const resumeURL = await fetchResume();
 
 	return {
-		props: { hero, about, skills, projects, resumeURL },
+		props: { hero, about, skills, projects },
 		revalidate: 60,
 	};
 };
 
-export default function Home({ hero, about, skills, projects, resumeURL }) {
+export default function Home({ hero, about, skills, projects }) {
 	return (
-		<Layout resumeURL={resumeURL}>
+		<Layout>
 			<Head>
 				<title>Raymond Ng</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
