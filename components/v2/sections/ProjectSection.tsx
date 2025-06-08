@@ -1,3 +1,3 @@
-import ProjectSection from "./Project/ProjectList";
+import ProjectSection from "./project/ProjectList";
 
 export default ProjectSection;

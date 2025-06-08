@@ -1,7 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { SiWechat } from "react-icons/si";
-import BlogCard from "./BlogCard";
 
 const ICONS = [
 	{
@@ -60,57 +59,18 @@ const handleShare = (shareUrl: string, platform: string) => {
 const Share: React.FC = () => {
 	const url = typeof window !== "undefined" ? window.location.href : "";
 	return (
-		<div
-			style={{ width: 320, display: "flex", flexDirection: "column", gap: 30 }}
-		>
+		<div className="blog-share-container">
 			{/* Share Row */}
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "space-between",
-					alignItems: "center",
-					gap: 30,
-					width: "100%",
-          paddingTop: 30,
-				}}
-			>
-				<span
-					style={{
-						fontFamily: "Ubuntu, sans-serif",
-						fontWeight: 500,
-						fontSize: 20,
-						lineHeight: 1.15,
-						textTransform: "uppercase",
-						color: "#000",
-						letterSpacing: 0,
-					}}
-				>
-					Share
-				</span>
-				<div style={{ display: "flex", flexDirection: "row", gap: 15 }}>
+			<div className="blog-share-row">
+				<span className="blog-share-label">Share</span>
+				<div className="blog-share-btns">
 					{ICONS.map(({ name, Icon, color, shareUrl, label }) => (
 						<button
 							key={name}
 							aria-label={label}
 							title={label}
 							tabIndex={0}
-							style={{
-								display: "inline-flex",
-								alignItems: "center",
-								justifyContent: "center",
-								width: 36,
-								height: 36,
-								borderRadius: "50%",
-								background: "#000",
-								border: "none",
-								cursor: "pointer",
-								transition: "background 0.2s, color 0.2s",
-								outline: "none",
-								color: "#fff",
-								fontSize: 20,
-								position: "relative",
-							}}
+							className="blog-share-btn"
 							onClick={() => handleShare(shareUrl(url), name)}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
@@ -140,39 +100,35 @@ const Share: React.FC = () => {
 				</div>
 			</div>
 			{/* Divider Line */}
-			<div
-				style={{
-					width: "100%",
-					height: 1,
-					background: "rgba(0,0,0,0.25)",
-				}}
-			/>
+			<div className="blog-share-divider" />
 			{/* More Articles Label */}
-			<div
-				style={{
-					fontFamily: "Ubuntu, sans-serif",
-					fontWeight: 500,
-					fontSize: 20,
-					lineHeight: 1.15,
-					color: "#000",
-				}}
-			>
-				More Articles
-			</div>
+			<div className="blog-share-more-label">More Articles</div>
 			{/* Article Cards */}
-			<div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+			<div className="blog-share-articles">
 				{MORE_ARTICLES.map((article, idx) => (
-					<BlogCard key={idx} {...article} />
+					<div className="blog-card" key={idx}>
+						{/* Image */}
+						<div className="blog-card-image-container">
+							<img
+								src="/assets/blog/image_blog_detail_1.png"
+								alt="Blog Card"
+								className="blog-card-image"
+								onError={(e) => {
+									(e.target as HTMLImageElement).src =
+										"https://via.placeholder.com/150x100?text=Blog+Image";
+								}}
+							/>
+						</div>
+						{/* Content */}
+						<div className="blog-card-content">
+							<span className="blog-card-date">{article.date}</span>
+							<span className="blog-card-title">{article.title}</span>
+						</div>
+					</div>
 				))}
 			</div>
 			{/* Divider Line */}
-			<div
-				style={{
-					width: "100%",
-					height: 1,
-					background: "rgba(0,0,0,0.25)",
-				}}
-			/>
+			<div className="blog-share-divider" />
 		</div>
 	);
 };

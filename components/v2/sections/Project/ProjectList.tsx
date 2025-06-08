@@ -1,7 +1,7 @@
 import CategoryFilter from "@/components/v2/shared/component/CategoryFilter";
 import { Project } from "@/components/v2/shared/type/types";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "@/components/v2/sections/project/ProjectCard";
 
 const categories = [
 	{ id: "all", label: "All" },

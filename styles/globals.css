@@ -402,4 +402,305 @@ p {
 			object-fit: contain !important;
 		}
 	}
+
+	/* =====================
+	   Blog Section Styles
+	   ===================== */
+	.blog-detail-section {
+		@apply flex flex-row pt-[130px] px-8 md:px-16 xl:px-32 w-full justify-center bg-white;
+	}
+	.blog-detail-main {
+		flex: 0 1 75%;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+	.blog-detail-title-date {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	.blog-detail-title {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 700;
+		font-size: 30px;
+		line-height: 1.15;
+		color: #000;
+		text-transform: uppercase;
+		word-break: break-word;
+	}
+	.blog-detail-date {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 300;
+		font-size: 18px;
+		line-height: 1.15;
+		color: #000;
+	}
+	.blog-detail-tags {
+		display: flex;
+		flex-direction: row;
+		gap: 20px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.blog-detail-tag {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px 10px;
+		background: rgba(0, 0, 0, 0.05);
+		border-radius: 5px;
+		font-family: "Red Hat Display", sans-serif;
+		font-weight: 400;
+		font-size: 15px;
+		color: #000;
+		line-height: 1.32;
+	}
+	.blog-detail-image-container {
+		width: 700px;
+		height: 466.67px;
+		background: #fff;
+		border-radius: 10px;
+		overflow: hidden;
+		flex-shrink: 0;
+	}
+	.blog-detail-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.blog-detail-content {
+		font-family: "Red Hat Text", sans-serif;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.32;
+		color: #000;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.blog-detail-share {
+		flex: 0 1 20%;
+		margin-left: 5%;
+		align-self: flex-start;
+	}
+
+	.blog-share-container {
+		width: 320px;
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+	}
+	.blog-share-row {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+		gap: 30px;
+		width: 100%;
+		padding-top: 30px;
+	}
+	.blog-share-label {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 1.15;
+		text-transform: uppercase;
+		color: #000;
+		letter-spacing: 0;
+	}
+	.blog-share-btns {
+		display: flex;
+		flex-direction: row;
+		gap: 15px;
+	}
+	.blog-share-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: #000;
+		border: none;
+		cursor: pointer;
+		transition:
+			background 0.2s,
+			color 0.2s;
+		outline: none;
+		color: #fff;
+		font-size: 20px;
+		position: relative;
+	}
+	.blog-share-divider {
+		width: 100%;
+		height: 1px;
+		background: rgba(0, 0, 0, 0.25);
+	}
+	.blog-share-more-label {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 1.15;
+		color: #000;
+	}
+	.blog-share-articles {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.blog-card {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 20px;
+		width: 100%;
+		background: #fff;
+		border-radius: 10px;
+		box-shadow: none;
+		padding: 0;
+	}
+	.blog-card-image-container {
+		width: 150px;
+		height: 100px;
+		border-radius: 10px;
+		overflow: hidden;
+		background: rgba(0, 0, 0, 0.05);
+		flex-shrink: 0;
+	}
+	.blog-card-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.blog-card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		flex: 1;
+	}
+	.blog-card-date {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 1.15;
+		color: #8b8b8b;
+		margin-bottom: 2px;
+	}
+	.blog-card-title {
+		font-family: "Red Hat Display", sans-serif;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 1.32;
+		color: #000;
+		word-break: break-word;
+	}
+
+	.blog-card-v3 {
+		display: flex;
+		flex-direction: row;
+		gap: 40px;
+		background: #fff;
+		border-radius: 10px;
+		padding: 0;
+		width: 100%;
+	}
+	.blog-card-v3-image-container {
+		width: 500px;
+		height: 333.33px;
+		border-radius: 10px;
+		overflow: hidden;
+		background: rgba(0, 0, 0, 0.05);
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.blog-card-v3-image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.blog-card-v3-content {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+		flex: 1;
+		justify-content: flex-start;
+	}
+	.blog-card-v3-title-date {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.blog-card-v3-title {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 700;
+		font-size: 30px;
+		line-height: 1.15;
+		color: #000;
+		text-transform: uppercase;
+		word-break: break-word;
+	}
+	.blog-card-v3-date {
+		font-family: Ubuntu, sans-serif;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.15;
+		color: #000;
+	}
+	.blog-card-v3-tags {
+		display: flex;
+		flex-direction: row;
+		gap: 10px;
+	}
+	.blog-card-v3-tag {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px 10px;
+		background: rgba(0, 0, 0, 0.05);
+		border-radius: 5px;
+		font-family: "Red Hat Display", sans-serif;
+		font-weight: 400;
+		font-size: 15px;
+		color: #000;
+		line-height: 1.32;
+	}
+	.blog-card-v3-desc {
+		font-family: "Red Hat Text", sans-serif;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1.32;
+		color: #000;
+	}
+	.blog-card-v3-btn {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+		background: #000;
+		color: #fff;
+		border-radius: 30px;
+		padding: 12px 30px 12px 25px;
+		font-family: "Red Hat Display", sans-serif;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 1.32;
+		text-transform: uppercase;
+		border: 1px solid #000;
+		transition:
+			background 0.2s,
+			color 0.2s;
+		cursor: pointer;
+		outline: none;
+	}
+	.blog-card-v3-btn:hover,
+	.blog-card-v3-btn:focus {
+		background: #fff;
+		color: #000;
+	}
+	.blog-card-v3-btn-icon {
+		margin-left: 5px;
+	}
 }

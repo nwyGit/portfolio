@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import BlogCard from "./Blog/BlogCard";
+import BlogCard from "./blog/Card";
 import CategoryFilter, {
 	Category,
 } from "@/components/v2/shared/component/CategoryFilter";

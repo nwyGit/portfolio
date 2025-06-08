@@ -1,6 +1,6 @@
-import BlobBackground from "@/components/v2/sections/Landing/BlobBackground";
-import Landing from "@/components/v2/sections/Landing/Landing";
-import Skills from "@/components/v2/sections/Landing/Skills";
+import BlobBackground from "@/components/v2/sections/landing/BlobBackground";
+import Landing from "@/components/v2/sections/landing/Landing";
+import Skills from "@/components/v2/sections/landing/Skills";
 import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import ProjectSection from "./ProjectSection";
 
