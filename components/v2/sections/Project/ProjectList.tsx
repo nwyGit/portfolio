@@ -35,36 +35,28 @@ export default function ProjectListSection({
 					.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
 
 	return (
-		<section
-			id="projects"
-			className="w-full flex flex-col items-center gap-[24px] sm:gap-[30px] md:gap-[40px] pt-12 pb-8 px-[20px]"
-			style={{ scrollMarginTop: "100px" }}
-		>
-			<h2 className="font-ubuntu font-bold text-[32px] sm:text-[38px] md:text-[46px] xl:text-[50px] leading-[1.15] text-black text-center mb-0 uppercase">
-				Projects
-			</h2>
-			<div className="flex flex-row justify-center gap-[24px] sm:gap-[40px] md:gap-[60px] w-full">
+		<section id="projects" className="project-section">
+			<h2 className="project-section-title">Projects</h2>
+			<div className="project-section-categories">
 				{categories.map((cat) => (
 					<button
 						key={cat.id}
 						onClick={() => setActive(cat.id)}
-						className={`flex flex-col items-center font-redhat text-[15px] sm:text-[16px] md:text-[18px] uppercase transition-colors duration-150
-							${active === cat.id ? "font-bold text-black" : "font-normal text-black/50"}
-							hover:text-black/80`}
-						style={{ outline: "none" }}
+						className={`project-section-category-btn${active === cat.id ? " project-section-category-btn--active" : ""}`}
 					>
 						<span>{cat.label}</span>
 						{active === cat.id && (
-							<span
-								className={`block w-full h-[2px] bg-black rounded-full mt-[5px] origin-center transform transition-transform duration-300 ${active === cat.id ? "scale-x-100" : "scale-x-0"}`}
-							/>
+							<span className="project-section-category-underline" />
+						)}
+						{active !== cat.id && (
+							<span className="project-section-category-underline project-section-category-underline--inactive" />
 						)}
 					</button>
 				))}
 			</div>
 			{/* Project Cards Grid */}
-			<div className="w-full flex justify-center">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-[20px] sm:gap-[30px] md:gap-[40px] max-w-[1280px] w-full mx-auto justify-items-center">
+			<div className="project-section-grid-wrapper">
+				<div className="project-section-grid">
 					{filteredProjects.map((project) => (
 						<ProjectCard key={project._id} project={project} />
 					))}

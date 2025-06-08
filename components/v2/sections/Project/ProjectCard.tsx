@@ -13,47 +13,40 @@ export default function ProjectCard({ project }: { project: Project }) {
 	} = project;
 
 	return (
-		<div className="relative flex flex-col w-full max-w-full sm:max-w-[400px] md:max-w-[600px] min-h-[540px] holographic-card shadow-sm">
+		<div className="project-card-v2">
 			{/* Project Image */}
-			<div className="w-full h-[220px] md:h-[400px] relative z-10">
+			<div className="project-card-v2-image">
 				<Image
 					src={desktopImageURL || ""}
 					alt={title}
 					fill
-					className="object-cover rounded-t-[10px]"
+					className="project-card-v2-img"
 					priority
 				/>
 			</div>
 			{/* Card Content */}
-			<div className="bg-white/70 backdrop-blur-md shadow-lg w-full flex flex-col justify-between flex-1 gap-[30px] p-5 pt-6 rounded-b-[10px] h-full z-10">
+			<div className="project-card-v2-content">
 				{/* Title & Description */}
 				<div className="flex flex-col gap-2">
-					<h3 className="font-ubuntu font-bold text-[28px] leading-[1.15] text-black uppercase">
-						{title}
-					</h3>
-					<p className="font-redhat font-normal text-[16px] leading-[1.32] text-black line-clamp-5">
-						{summary}
-					</p>
+					<h3 className="project-card-v2-title">{title}</h3>
+					<p className="project-card-v2-summary">{summary}</p>
 				</div>
 				{/* Tags */}
-				<div className="flex flex-row flex-wrap gap-[10px]">
+				<div className="project-card-v2-tags">
 					{technologies?.map((tech) => (
-						<span
-							key={tech._id}
-							className="bg-[rgba(0,0,0,0.05)] text-black font-redhat text-[15px] px-[10px] py-[5px] rounded-[5px]"
-						>
+						<span key={tech._id} className="project-card-v2-tag">
 							{tech.title}
 						</span>
 					))}
 				</div>
 				{/* Buttons */}
-				<div className="flex flex-col md:flex-row items-start gap-[15px] mt-auto">
+				<div className="project-card-v2-btns">
 					{demoLink && (
 						<a
 							href={demoLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center gap-[10px] bg-black text-white font-redhat font-bold text-[16px] uppercase px-[30px] py-[12px] rounded-[30px] border border-black hover:bg-white hover:text-black transition-colors duration-200"
+							className="project-card-v2-btn-demo"
 						>
 							View Project
 							<RxArrowTopRight size={24} />
@@ -64,7 +57,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 							href={githubLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center gap-[10px] bg-white text-black font-redhat font-bold text-[16px] uppercase px-[25px] py-[12px] rounded-[30px] border border-black hover:bg-black hover:text-white transition-colors duration-200"
+							className="project-card-v2-btn-github"
 						>
 							Github
 							<RxArrowTopRight size={24} />
