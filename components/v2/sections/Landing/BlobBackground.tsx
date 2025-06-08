@@ -59,13 +59,13 @@ const BlobBackground = forwardRef<HTMLDivElement, BlobBackgroundProps>(
 			if (!node) return;
 			const rect = node.getBoundingClientRect();
 			setBlobs((prev) =>
-				prev.map((blob, i) => ({
+				prev.map((blob) => ({
 					...blob,
 					x: Math.random() * (rect.width - blob.width),
 					y: Math.random() * (rect.height - blob.height),
 				}))
 			);
-			velocities.current = velocities.current.map((v) => ({
+			velocities.current = velocities.current.map(() => ({
 				vx: (Math.random() - 0.5) * STEP,
 				vy: (Math.random() - 0.5) * STEP,
 			}));

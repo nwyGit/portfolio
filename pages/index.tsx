@@ -1,6 +1,5 @@
 import Layout from "@/components/v2/Layout";
 import LandingSection from "@/components/v2/sections/LandingSection";
-import ProjectSection from "@/components/v2/sections/ProjectSection";
 import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import { fetchHero, fetchProjects, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";

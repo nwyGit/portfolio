@@ -2,6 +2,7 @@ import React from "react";
 import Share from "./Share";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import Link from "next/link";
 
 interface BlogDetailProps {
 	post: {
@@ -20,14 +21,14 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
 				<nav aria-label="breadcrumb">
 					<ol className="flex items-center text-sm gap-2">
 						<li className="flex items-center">
-							<a
+							<Link
 								href="/"
 								className="inline-flex items-center hover:text-black transition-colors"
 								style={{ color: "#8b8b8b" }}
 							>
 								<FaHome style={{ width: 16, height: 16, marginRight: 8 }} />
 								Home
-							</a>
+							</Link>
 						</li>
 						<li
 							aria-hidden="true"
@@ -37,13 +38,13 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
 							<MdOutlineKeyboardArrowRight />
 						</li>
 						<li className="flex items-center">
-							<a
+							<Link
 								href="/blogs"
 								style={{ color: "#8b8b8b" }}
 								className="hover:text-black transition-colors"
 							>
 								Blogs
-							</a>
+							</Link>
 						</li>
 						<li
 							aria-hidden="true"

@@ -1,31 +1,30 @@
-import React from "react";
 import styles from "@/styles";
-import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
+import { motion } from "framer-motion";
 
-const heroItems = [
-	<span key="intro">Hey there, I&apos;m</span>,
-	<h1
-		key="name"
-		className={`text-primary-contrast-text ${styles.introHeading} pt-2`}
-	>
-		Raymond Ng.
-	</h1>,
-	<h1
-		key="slogan"
-		className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
-	>
-		I build things for the web.
-	</h1>,
-	<p
-		key="description"
-		className={`text-secondary ${styles.text} ${styles.contentBox} pt-4`}
-	>
-		I&apos;m a software developer with experience in design. My primary focus is
-		web development, and besides I&apos;m also engaged in data analytics and
-		machine learning to broaden my skill set and take on new challenges.
-	</p>,
-];
+// const heroItems = [
+// 	<span key="intro">Hey there, I&apos;m</span>,
+// 	<h1
+// 		key="name"
+// 		className={`text-primary-contrast-text ${styles.introHeading} pt-2`}
+// 	>
+// 		Raymond Ng.
+// 	</h1>,
+// 	<h1
+// 		key="slogan"
+// 		className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
+// 	>
+// 		I build things for the web.
+// 	</h1>,
+// 	<p
+// 		key="description"
+// 		className={`text-secondary ${styles.text} ${styles.contentBox} pt-4`}
+// 	>
+// 		I&apos;m a software developer with experience in design. My primary focus is
+// 		web development, and besides I&apos;m also engaged in data analytics and
+// 		machine learning to broaden my skill set and take on new challenges.
+// 	</p>,
+// ];
 
 const introComponent = (index, element) => {
 	return (

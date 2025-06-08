@@ -18,7 +18,7 @@ export default function ProjectListSection({
 }: ProjectListSectionProps) {
 	const [active, setActive] = useState("all");
 	const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
-	const [highlighterStyle, setHighlighterStyle] = useState({
+	const [, setHighlighterStyle] = useState({
 		left: 0,
 		width: 0,
 	});

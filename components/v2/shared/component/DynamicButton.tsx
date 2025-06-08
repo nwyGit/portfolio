@@ -23,7 +23,6 @@ const DynamicButton: React.FC<DynamicButtonProps> = ({
 	download,
 	className = "",
 	style = {},
-	as,
 	target,
 	rel,
 	type = "button",
