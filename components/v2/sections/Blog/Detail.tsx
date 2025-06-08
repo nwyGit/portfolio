@@ -1,5 +1,5 @@
 import React from "react";
-import Share from "@/components/v2/sections/blog/Share";
+import Share from "./Share";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
