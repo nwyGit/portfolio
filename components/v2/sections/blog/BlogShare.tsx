@@ -56,7 +56,7 @@ const handleShare = (shareUrl: string, platform: string) => {
 	}
 };
 
-const Share: React.FC = () => {
+const BlogShare: React.FC = () => {
 	const url = typeof window !== "undefined" ? window.location.href : "";
 	return (
 		<div className="blog-share-container">
@@ -133,4 +133,4 @@ const Share: React.FC = () => {
 	);
 };
 
-export default Share;
+export default BlogShare;

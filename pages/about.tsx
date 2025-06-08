@@ -3,10 +3,10 @@ import AboutSection from "@/components/v2/sections/AboutSection";
 import { fetchAbout, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";
 import Head from "next/head";
-
+import { About, Skill } from "@/components/v2/shared/type/types";
 interface AboutProps {
-	about: any;
-	skills: any;
+	about: About;
+	skills: Skill[];
 }
 
 export const getStaticProps: GetStaticProps<AboutProps> = async () => {
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps<AboutProps> = async () => {
 	};
 };
 
-export default function About({ about, skills }: AboutProps) {
+export default function AboutPage({ about, skills }: AboutProps) {
 	return (
 		<Layout>
 			<Head>

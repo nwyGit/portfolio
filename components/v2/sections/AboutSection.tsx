@@ -85,8 +85,8 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 					</h2>
 					<div className="flex flex-wrap gap-3 justify-center xl:justify-start">
 						{skills
-							?.sort((a: any, b: any) => a.order - b.order)
-							.map((skill: any) => (
+							?.sort((a: Skill, b: Skill) => a.order - b.order)
+							.map((skill: Skill) => (
 								<span key={skill._id} className="about-skill">
 									{skill.title}
 								</span>
