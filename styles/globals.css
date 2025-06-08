@@ -255,7 +255,7 @@ html {
 	   Landing Section Styles
 	   ===================== */
 	.landing-container {
-		@apply flex flex-col gap-[30px] w-full max-w-[1240px] px-[20px] pt-[130px] pb-[30px];
+		@apply flex flex-col w-full max-w-[1240px] mx-auto gap-[30px] px-[20px] pt-[130px] pb-[30px];
 	}
 	.landing-title-group {
 		@apply flex flex-col gap-[15px];
@@ -277,31 +277,8 @@ html {
 	}
 	.landing-section {
 		@apply relative flex flex-col items-center w-full min-h-[900px] overflow-hidden pt-[130px] font-ubuntu font-red-hat-display font-open-sans;
-	}
-	.landing-bg-gradient-blue::before {
-		content: "";
-		@apply absolute;
-		left: 0;
-		top: 500px;
-		width: 1000px;
-		height: 650px;
-		background: #85a0e4;
-		filter: blur(200px);
-		opacity: 0.7;
-		border-radius: 10%;
-		z-index: -1;
-	}
-	.landing-bg-gradient-orange {
-		@apply absolute;
-		left: 1000px;
-		top: 50px;
-		width: 750px;
-		height: 750px;
-		background: linear-gradient(180deg, #f9e4cc 0%, #ffbd94 100%);
-		filter: blur(400px);
-		opacity: 1;
-		border-radius: 50%;
-		z-index: -1;
+		z-index: 0;
+		background: #fff;
 	}
 
 	/* =====================
@@ -311,7 +288,7 @@ html {
 		@apply px-[20px] py-[30px];
 	}
 	.skills-section {
-		@apply w-full max-w-[1240px] mx-auto bg-[#212020] rounded-[20px] p-[6vw] md:p-[35px] flex flex-col gap-[40px];
+		@apply flex flex-col w-full max-w-[1240px] mx-auto bg-[#212020] rounded-[20px] p-[6vw] md:p-[35px] gap-[40px];
 		box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
 	}
 	.skills-section-header {
