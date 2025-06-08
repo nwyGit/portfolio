@@ -1,11 +1,14 @@
 export interface Project {
 	_id: string;
 	title: string;
-	description: string;
-	image: string;
-	link: string;
-	github: string;
-	technologies: string[];
+	summary: string;
+	technologies: Skill[];
+	githubLink: string;
+	demoLink: string;
+	desktopImageURL: string;
+	mobileImageURL: string;
+	category?: Category;
+	order?: number;
 }
 
 export interface Skill {
@@ -27,9 +30,15 @@ export interface Hero {
 	name: string;
 	slogan: string;
 	description: string;
+	skillDescription: string;
 }
 
 export interface LayoutProps {
 	children: React.ReactNode;
 	resumeURL?: string;
+}
+
+export interface Category {
+	_id: string;
+	name: string;
 }

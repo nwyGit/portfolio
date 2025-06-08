@@ -12,7 +12,8 @@ export const fetchHero = async () => {
 			greeting,
 			name,
 			slogan,
-			description
+			description,
+			skillDescription
 		}
 	`;
 

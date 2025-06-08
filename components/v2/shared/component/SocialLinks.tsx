@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { SOCIAL_LINKS } from "./constants";
+import { SOCIAL_LINKS } from "../type/constants";
 
 const SocialLinks = () => (
 	<div className="footer-icons">

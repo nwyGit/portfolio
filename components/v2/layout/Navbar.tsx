@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
-import { NAVIGATION_LINKS } from "@/components/v2/shared/constants";
+import { NAVIGATION_LINKS } from "@/components/v2/shared/type/constants";
 
 interface NavbarProps {
 	resumeURL: string;
@@ -24,7 +24,7 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 			<div className="navbar-container">
 				{/* Logo */}
 				<Link
-					href="/v2"
+					href="/"
 					className="flex items-center min-w-[55px] min-h-[55px]"
 				>
 					<Image

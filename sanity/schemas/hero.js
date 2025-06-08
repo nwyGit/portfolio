@@ -23,5 +23,10 @@ export const hero = {
 			title: "Description",
 			type: "text",
 		},
+		{
+			name: "skillDescription",
+			title: "Skill Description",
+			type: "text",
+		},
 	],
 };

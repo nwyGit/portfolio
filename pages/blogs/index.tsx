@@ -1,6 +1,6 @@
 import { FC } from "react";
 // import { getBlogs } from "../lib/sanity/queries";
-import Blogs from "../components/v2/Blogs";
+import Blogs from "@/components/v2/Blogs";
 
 interface BlogsPageProps {
 	blogs: any[]; // TODO: Add proper type from Sanity schema

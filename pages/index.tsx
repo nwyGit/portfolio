@@ -1,6 +1,7 @@
 import Layout from "@/components/v2/Layout";
-import Landing from "@/components/v2/sections/LandingSection";
-import { Hero, Project, Skill } from "@/components/v2/shared/types";
+import LandingSection from "@/components/v2/sections/LandingSection";
+import ProjectSection from "@/components/v2/sections/ProjectSection";
+import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import {
 	fetchHero,
 	fetchProjects,
@@ -28,7 +29,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 	};
 };
 
-export default function Home({ hero, skills, resumeURL }: HomeProps) {
+export default function Home({ hero, skills, projects, resumeURL }: HomeProps) {
 	return (
 		<Layout resumeURL={resumeURL}>
 			<Head>
@@ -37,7 +38,7 @@ export default function Home({ hero, skills, resumeURL }: HomeProps) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Landing hero={hero} skills={skills} />
+				<LandingSection hero={hero} skills={skills} projects={projects} />
 			</main>
 		</Layout>
 	);

@@ -1,5 +1,5 @@
-import SocialLinks from "@/components/v2/shared/SocialLinks";
-import { Hero } from "@/components/v2/shared/types";
+import SocialLinks from "@/components/v2/shared/component/SocialLinks";
+import { Hero } from "@/components/v2/shared/type/types";
 
 interface LandingProps {
 	hero: Hero;
