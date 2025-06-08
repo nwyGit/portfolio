@@ -34,7 +34,7 @@ export default function Landing({ hero }: LandingProps) {
 				<LandingSubtitleTag>Trusted</LandingSubtitleTag>
 				<span className="landing-subtitle">Partner</span>
 				<span className="landing-subtitle hidden sm:inline">For</span>
-				<span className="landing-subtitle hidden sm:inline">Website</span>
+				<span className="landing-subtitle hidden sm:inline">Software</span>
 				<LandingSubtitleTag className="hidden sm:inline">
 					Build.
 				</LandingSubtitleTag>

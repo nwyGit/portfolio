@@ -1,6 +1,6 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
-import ProjectCard from "./ProjectCard";
 import { Project } from "@/components/v2/shared/type/types";
+import { useLayoutEffect, useRef, useState } from "react";
+import ProjectCard from "./ProjectCard";
 
 const categories = [
 	{ id: "all", label: "All" },

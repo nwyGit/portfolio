@@ -1,10 +1,10 @@
+import { NAVIGATION_LINKS } from "@/components/v2/shared/type/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
-import { NAVIGATION_LINKS } from "@/components/v2/shared/type/constants";
 
 interface NavbarProps {
 	resumeURL: string;

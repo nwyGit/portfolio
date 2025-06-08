@@ -1,6 +1,6 @@
+import { About, Skill } from "@/components/v2/shared/type/types";
 import Image from "next/image";
 import { HiOutlineDownload } from "react-icons/hi";
-import { About, Skill } from "@/components/v2/shared/type/types";
 
 interface AboutSectionProps {
 	about: About;
