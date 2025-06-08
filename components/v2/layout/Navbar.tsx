@@ -1,3 +1,4 @@
+import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { NAVIGATION_LINKS } from "@/components/v2/shared/type/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,7 +6,6 @@ import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
-import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 
 interface NavbarProps {
 	resumeURL: string;
