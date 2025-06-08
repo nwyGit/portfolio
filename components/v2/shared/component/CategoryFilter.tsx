@@ -53,7 +53,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 					key={cat.id}
 					onClick={() => setActive(cat.id)}
 					className={
-						btnClassName + (active === cat.id ? ` ${btnClassName}--active` : "")
+						active === cat.id
+							? "category-filter-btn category-filter-btn--active"
+							: "category-filter-btn"
 					}
 					ref={(el) => {
 						btnRefs.current[idx] = el;
