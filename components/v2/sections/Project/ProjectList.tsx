@@ -1,3 +1,4 @@
+import CategoryFilter from "@/components/v2/shared/component/CategoryFilter";
 import { Project } from "@/components/v2/shared/type/types";
 import { useLayoutEffect, useRef, useState } from "react";
 import ProjectCard from "./ProjectCard";
@@ -17,7 +18,6 @@ export default function ProjectListSection({
 }: ProjectListSectionProps) {
 	const [active, setActive] = useState("all");
 	const btnRefs = useRef<(HTMLButtonElement | null)[]>([]);
-	const highlighterRef = useRef<HTMLSpanElement>(null);
 	const [highlighterStyle, setHighlighterStyle] = useState({
 		left: 0,
 		width: 0,
@@ -57,23 +57,15 @@ export default function ProjectListSection({
 		<section id="projects" className="project-section">
 			<h2 className="project-section-title">Projects</h2>
 			<div className="project-section-categories">
-				<span
-					ref={highlighterRef}
-					className="project-section-category-highlighter"
-					style={{ left: highlighterStyle.left, width: highlighterStyle.width }}
+				<CategoryFilter
+					categories={categories}
+					active={active}
+					setActive={setActive}
+					className="project-section-categories"
+					btnClassName="category-filter-btn"
+					highlighterClassName="category-filter-highlighter"
+					withHighlighter
 				/>
-				{categories.map((cat, idx) => (
-					<button
-						key={cat.id}
-						onClick={() => setActive(cat.id)}
-						className={`project-section-category-btn${active === cat.id ? " project-section-category-btn--active" : ""}`}
-						ref={(el) => {
-							btnRefs.current[idx] = el;
-						}}
-					>
-						<span>{cat.label}</span>
-					</button>
-				))}
 			</div>
 			{/* Project Cards Grid */}
 			<div className="project-section-grid-wrapper">

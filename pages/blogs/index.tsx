@@ -1,17 +1,18 @@
 import { FC } from "react";
 // import { getBlogs } from "../lib/sanity/queries";
-import Blogs from "@/components/v2/Blogs";
+import BlogSection from "@/components/v2/sections/BlogSection";
+import Layout from "@/components/v2/Layout";
+import Head from "next/head";
+import { fetchResume } from "@/utils/fetchData";
 
 interface BlogsPageProps {
-	blogs: any[]; // TODO: Add proper type from Sanity schema
+	blogs: any[];
+	resumeURL: string;
 }
-
-const BlogsPage: FC<BlogsPageProps> = ({ blogs }) => {
-	return <Blogs blogs={blogs} />;
-};
 
 export async function getStaticProps() {
 	// const blogs = await getBlogs();
+	const resumeURL = await fetchResume();
 	const blogs = [
 		{
 			id: "1",
@@ -42,9 +43,25 @@ export async function getStaticProps() {
 	return {
 		props: {
 			blogs,
+			resumeURL,
 		},
 		revalidate: 60, // Revalidate every minute
 	};
 }
+
+const BlogsPage: FC<BlogsPageProps> = ({ blogs, resumeURL }) => {
+	return (
+		<Layout resumeURL={resumeURL}>
+			<Head>
+				<title>Raymond Ng</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+			<main>
+				<BlogSection blogs={blogs} />
+			</main>
+		</Layout>
+	);
+};
 
 export default BlogsPage;

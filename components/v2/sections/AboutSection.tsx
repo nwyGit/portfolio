@@ -1,6 +1,7 @@
 import { About, Skill } from "@/components/v2/shared/type/types";
 import Image from "next/image";
 import { HiOutlineDownload } from "react-icons/hi";
+import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 
 interface AboutSectionProps {
 	about: About;
@@ -19,14 +20,14 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 						Driving Success with <br />
 						Thoughtful System Design
 					</h1>
-					<a
+					<DynamicButton
+						text="Resume"
+						icon={<HiOutlineDownload size={24} />}
 						href="/resume.pdf"
 						download
-						className="about-resume-btn hidden xl:inline-flex"
-					>
-						<HiOutlineDownload size={24} />
-						Resume
-					</a>
+						className="btn-black hidden xl:inline-flex"
+						iconPosition="left"
+					/>
 				</div>
 				<div className="flex-1 flex flex-col items-center">
 					<div className="about-img-container mx-auto w-full max-w-[400px] sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] xl:max-w-[1200px] relative mb-0 xl:-mb-24 z-10">
@@ -52,14 +53,14 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 							/>
 						</div>
 					</div>
-					<a
+					<DynamicButton
+						text="Resume"
+						icon={<HiOutlineDownload size={24} />}
 						href="/resume.pdf"
 						download
 						className="about-resume-btn mt-4 xl:hidden"
-					>
-						<HiOutlineDownload size={24} />
-						Resume
-					</a>
+						iconPosition="left"
+					/>
 				</div>
 			</section>
 

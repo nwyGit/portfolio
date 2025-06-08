@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { FC, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
+import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 
 interface NavbarProps {
 	resumeURL: string;
@@ -23,10 +24,7 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 		>
 			<div className="navbar-container">
 				{/* Logo */}
-				<Link
-					href="/"
-					className="flex items-center min-w-[55px] min-h-[55px]"
-				>
+				<Link href="/" className="flex items-center min-w-[55px] min-h-[55px]">
 					<Image
 						src="/logo_v2.svg"
 						alt="Raymond Ng Logo"
@@ -49,10 +47,14 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 							{link.name}
 						</Link>
 					))}
-					<a href={resumeURL} download className="resume-btn">
-						<HiOutlineDownload size={24} />
-						<span>Resume</span>
-					</a>
+					<DynamicButton
+						text="Resume"
+						icon={<HiOutlineDownload size={24} />}
+						href={resumeURL}
+						download
+						className="resume-btn"
+						iconPosition="left"
+					/>
 				</div>
 				{/* Mobile Menu Button */}
 				<button
@@ -86,15 +88,15 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 							</Link>
 						))}
 						<div className="w-full flex justify-center">
-							<a
+							<DynamicButton
+								text="Resume"
+								icon={<HiOutlineDownload size={18} />}
 								href={resumeURL}
 								download
 								className="resume-btn"
 								onClick={() => setIsOpen(false)}
-							>
-								<HiOutlineDownload size={18} />
-								<span>Resume</span>
-							</a>
+								iconPosition="left"
+							/>
 						</div>
 					</div>
 				</div>

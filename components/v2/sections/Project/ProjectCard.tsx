@@ -1,6 +1,7 @@
 import { Project } from "@/components/v2/shared/type/types";
 import Image from "next/image";
 import { RxArrowTopRight } from "react-icons/rx";
+import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 
 export default function ProjectCard({ project }: { project: Project }) {
 	const {
@@ -42,26 +43,26 @@ export default function ProjectCard({ project }: { project: Project }) {
 				{/* Buttons */}
 				<div className="project-card-v2-btns">
 					{demoLink && (
-						<a
+						<DynamicButton
+							text="View Project"
+							icon={<RxArrowTopRight size={24} />}
 							href={demoLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="project-card-v2-btn-demo"
-						>
-							View Project
-							<RxArrowTopRight size={24} />
-						</a>
+							className="btn-black"
+							iconPosition="right"
+						/>
 					)}
 					{githubLink && (
-						<a
+						<DynamicButton
+							text="Github"
+							icon={<RxArrowTopRight size={24} />}
 							href={githubLink}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="project-card-v2-btn-github"
-						>
-							Github
-							<RxArrowTopRight size={24} />
-						</a>
+							className="btn-white"
+							iconPosition="right"
+						/>
 					)}
 				</div>
 			</div>

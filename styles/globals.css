@@ -109,9 +109,6 @@ html {
 	.about-hero-title {
 		@apply font-ubuntu font-bold text-[38px] sm:text-[46px] xl:text-[60px] leading-[1.15] text-black mb-2;
 	}
-	.about-resume-btn {
-		@apply inline-flex items-center gap-2 border-2 border-black px-8 py-3 rounded-full font-bold text-white bg-black hover:bg-white hover:text-black transition-colors text-lg uppercase;
-	}
 	.about-img-container {
 		@apply rounded-[10px] overflow-hidden shadow-lg w-[400px] md:w-[800px] h-[267px] md:h-[533px];
 	}
@@ -186,7 +183,7 @@ html {
 		@apply flex flex-row justify-center w-full gap-[24px] sm:gap-[40px] md:gap-[60px];
 		position: relative;
 	}
-	.project-section-category-highlighter {
+	.category-filter-highlighter {
 		position: absolute;
 		height: 2px;
 		background: #000;
@@ -197,11 +194,11 @@ html {
 			width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		z-index: 1;
 	}
-	.project-section-category-btn {
+	.category-filter-btn {
 		@apply flex flex-col items-center font-red-hat-display text-[15px] sm:text-[16px] md:text-[18px] uppercase transition-colors duration-150 font-normal text-black/50 hover:text-black/80;
 		outline: none;
 	}
-	.project-section-category-btn--active {
+	.category-filter-btn--active {
 		@apply font-bold text-black;
 	}
 	.project-section-category-underline {
@@ -244,10 +241,10 @@ html {
 	.project-card-v2-btns {
 		@apply flex flex-col md:flex-row items-start gap-[15px] mt-auto;
 	}
-	.project-card-v2-btn-demo {
+	.btn-black {
 		@apply flex items-center gap-[10px] bg-black text-white font-red-hat-display font-bold text-[16px] uppercase px-[30px] py-[12px] rounded-[30px] border border-black hover:bg-white hover:text-black transition-colors duration-200;
 	}
-	.project-card-v2-btn-github {
+	.btn-white {
 		@apply flex items-center gap-[10px] bg-white text-black font-red-hat-display font-bold text-[16px] uppercase px-[25px] py-[12px] rounded-[30px] border border-black hover:bg-black hover:text-white transition-colors duration-200;
 	}
 
