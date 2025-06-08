@@ -292,7 +292,7 @@ p {
 		@apply max-w-[700px] font-normal font-open-sans text-black text-[16px] sm:text-[18px] md:text-[20px] xl:text-[24px] leading-[1.36];
 	}
 	.landing-section {
-		@apply relative flex flex-col items-center w-full min-h-[900px] overflow-hidden pt-[130px] font-ubuntu font-red-hat-display font-open-sans;
+		@apply relative flex flex-col items-center w-full min-h-[900px] overflow-hidden md:pt-[130px] font-ubuntu font-red-hat-display font-open-sans;
 		z-index: 0;
 		background: #fff;
 	}
@@ -308,7 +308,7 @@ p {
 		box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1);
 	}
 	.skills-section-header {
-		@apply flex flex-row justify-between gap-[50px] px-0 md:px-[20px] flex-wrap md:flex-nowrap;
+		@apply flex flex-row justify-between gap-[20px] md:gap-[50px] px-0 md:px-[20px] flex-wrap md:flex-nowrap;
 	}
 	.skills-section-title-group {
 		@apply flex flex-col gap-[15px] flex-1 min-w-[220px];
@@ -377,5 +377,29 @@ p {
 	.holographic-card:hover::before {
 		opacity: 1;
 		transform: rotate(-45deg) translateY(100%);
+	}
+
+	@media (max-width: 640px) {
+		/* Make skills section title single-line */
+		.skills-section-title {
+			white-space: nowrap;
+			font-size: 20px;
+		}
+		/* Show 3 skills per row */
+		.skills-section-grid {
+			display: grid !important;
+			grid-template-columns: repeat(3, 1fr) !important;
+			gap: 10px !important;
+		}
+		.skills-card {
+			width: 100% !important;
+			max-width: unset !important;
+			padding: 10px 0 !important;
+		}
+		.skills-card-icon-wrapper img {
+			width: 24px !important;
+			height: 24px !important;
+			object-fit: contain !important;
+		}
 	}
 }

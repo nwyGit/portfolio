@@ -1,6 +1,6 @@
 import CategoryFilter from "@/components/v2/shared/component/CategoryFilter";
 import { Project } from "@/components/v2/shared/type/types";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 
 const categories = [
@@ -22,6 +22,15 @@ export default function ProjectListSection({
 		left: 0,
 		width: 0,
 	});
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const checkMobile = () =>
+			setIsMobile(window.matchMedia("(max-width: 640px)").matches);
+		checkMobile();
+		window.addEventListener("resize", checkMobile);
+		return () => window.removeEventListener("resize", checkMobile);
+	}, []);
 
 	useLayoutEffect(() => {
 		const idx = categories.findIndex((cat) => cat.id === active);
@@ -53,24 +62,42 @@ export default function ProjectListSection({
 					.filter((project) => project.category?.name === active)
 					.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
 
+	const visibleCategories = isMobile ? [] : categories;
+
+	// On mobile, always show all projects
+	const projectsToShow = isMobile
+		? [...projects].sort((a, b) => {
+				const aCat = a.category?.name;
+				const bCat = b.category?.name;
+				if (aCat !== bCat) {
+					if (aCat === "Software Development") return -1;
+					if (bCat === "Software Development") return 1;
+					return 0;
+				}
+				return (b.order ?? 0) - (a.order ?? 0);
+			})
+		: filteredProjects;
+
 	return (
 		<section id="projects" className="project-section">
 			<h2 className="project-section-title">Projects</h2>
-			<div className="project-section-categories">
-				<CategoryFilter
-					categories={categories}
-					active={active}
-					setActive={setActive}
-					className="project-section-categories"
-					btnClassName="category-filter-btn"
-					highlighterClassName="category-filter-highlighter"
-					withHighlighter
-				/>
-			</div>
+			{visibleCategories.length > 0 && (
+				<div className="project-section-categories">
+					<CategoryFilter
+						categories={visibleCategories}
+						active={active}
+						setActive={setActive}
+						className="project-section-categories"
+						btnClassName="category-filter-btn"
+						highlighterClassName="category-filter-highlighter"
+						withHighlighter
+					/>
+				</div>
+			)}
 			{/* Project Cards Grid */}
 			<div className="project-section-grid-wrapper">
 				<div className="project-section-grid">
-					{filteredProjects.map((project) => (
+					{projectsToShow.map((project) => (
 						<ProjectCard key={project._id} project={project} />
 					))}
 				</div>
