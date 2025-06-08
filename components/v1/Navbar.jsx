@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import styles from "../../styles";
+import { fetchResume } from "@/utils/fetchData";
 import {
-	navVariants,
 	buttonVariants,
 	navSidebarVariants,
+	navVariants,
 } from "@/utils/motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useEffect, useState } from "react";
+import styles from "../../styles";
 // navItems attributes
 const navItems = ["About", "Projects", "Contact"];
 
@@ -47,8 +47,17 @@ const Resume = ({ resumeURL }) => {
 };
 
 // NavBar component
-const Navbar = ({ resumeURL }) => {
+const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	const [resumeURL, setResumeURL] = useState("");
+
+	useEffect(() => {
+		async function getResume() {
+			const data = await fetchResume();
+			setResumeURL(data?.resumeURL || "");
+		}
+		getResume();
+	}, []);
 
 	useEffect(() => {
 		if (showMenu) {
@@ -68,7 +77,7 @@ const Navbar = ({ resumeURL }) => {
 	return (
 		<>
 			{/* Large screen bar */}
-			<nav className={`${styles.lgNavBar}`}>
+			<nav className={`${styles.lgNavBar} text-primary`}>
 				{!showMenu && (
 					<>
 						<motion.div

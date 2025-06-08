@@ -6,7 +6,7 @@
 
 html,
 body {
-	@apply bg-background-color text-primary font-sans;
+	@apply font-sans;
 }
 
 h1,

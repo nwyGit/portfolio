@@ -32,7 +32,7 @@ export default function Home({ hero, about, skills, projects }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main className={`${styles.xPaddings} bg-[#002538]`}>
+			<main className={`${styles.xPaddings} bg-[#002538] text-primary`}>
 				<Introduction hero={hero} />
 				<AboutMe about={about} skills={skills} />
 				<Projects projects={projects} />
