@@ -11,6 +11,7 @@ interface CategoryFilterProps {
 	setActive: (id: string) => void;
 	className?: string;
 	btnClassName?: string;
+	btnActiveClassName?: string;
 	highlighterClassName?: string;
 	withHighlighter?: boolean;
 }
@@ -21,6 +22,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 	setActive,
 	className = "",
 	btnClassName = "category-filter-btn",
+	btnActiveClassName = "category-filter-btn--active",
 	highlighterClassName = "category-filter-highlighter",
 	withHighlighter = false,
 }) => {
@@ -54,7 +56,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 					onClick={() => setActive(cat.id)}
 					className={
 						active === cat.id
-							? `${btnClassName} ${btnClassName}--active`
+							? `${btnClassName} ${btnActiveClassName}`
 							: btnClassName
 					}
 					ref={(el) => {

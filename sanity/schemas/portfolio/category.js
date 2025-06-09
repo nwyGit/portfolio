@@ -1,4 +1,4 @@
-export const category = {
+const category = {
 	name: "category",
 	title: "Category",
 	type: "document",
@@ -10,3 +10,5 @@ export const category = {
 		},
 	],
 };
+
+export default category;

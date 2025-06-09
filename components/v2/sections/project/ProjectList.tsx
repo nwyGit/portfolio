@@ -89,6 +89,7 @@ export default function ProjectListSection({
 						setActive={setActive}
 						className="project-section-categories"
 						btnClassName="category-filter-btn"
+						btnActiveClassName="category-filter-btn--active"
 						highlighterClassName="category-filter-highlighter"
 						withHighlighter
 					/>

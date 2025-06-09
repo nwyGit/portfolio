@@ -1,4 +1,4 @@
-export const about = {
+const about = {
 	name: "about",
 	title: "About",
 	type: "document",
@@ -25,3 +25,5 @@ export const about = {
 		},
 	],
 };
+
+export default about;

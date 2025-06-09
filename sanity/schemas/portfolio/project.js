@@ -1,4 +1,4 @@
-export const project = {
+const project = {
 	name: "project",
 	title: "Project",
 	type: "document",
@@ -57,3 +57,5 @@ export const project = {
 		},
 	],
 };
+
+export default project;

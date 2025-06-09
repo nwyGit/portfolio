@@ -1,4 +1,4 @@
-export const hero = {
+const hero = {
 	name: "hero",
 	title: "Hero",
 	type: "document",
@@ -30,3 +30,5 @@ export const hero = {
 		},
 	],
 };
+
+export default hero;

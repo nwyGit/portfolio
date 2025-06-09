@@ -37,50 +37,32 @@ p {
 	background: #8bff2d;
 	opacity: 0.7;
 	border-radius: 50%;
-	box-shadow:
-		0 0 0 10px #8bff2d44,
-		0 0 50px #8bff2d,
-		0 0 100px #8bff2d;
+	box-shadow: 0 0 0 10px #8bff2d44, 0 0 50px #8bff2d, 0 0 100px #8bff2d;
 	animation: animate 15s linear infinite;
 	animation-duration: calc(150s / var(--i));
 }
 .bubbles span:nth-child(even) {
 	background: #f4ff2d;
-	box-shadow:
-		0 0 0 10px #f4ff2d44,
-		0 0 50px #f4ff2d,
-		0 0 100px #f4ff2d;
+	box-shadow: 0 0 0 10px #f4ff2d44, 0 0 50px #f4ff2d, 0 0 100px #f4ff2d;
 }
 @media (max-width: 640px) {
 	.bubbles span {
 		width: 10px;
 		height: 10px;
-		box-shadow:
-			0 0 0 4px #8bff2d44,
-			0 0 20px #8bff2d,
-			0 0 40px #8bff2d;
+		box-shadow: 0 0 0 4px #8bff2d44, 0 0 20px #8bff2d, 0 0 40px #8bff2d;
 	}
 	.bubbles span:nth-child(even) {
-		box-shadow:
-			0 0 0 4px #f4ff2d44,
-			0 0 20px #f4ff2d,
-			0 0 40px #f4ff2d;
+		box-shadow: 0 0 0 4px #f4ff2d44, 0 0 20px #f4ff2d, 0 0 40px #f4ff2d;
 	}
 }
 @media (max-width: 768px) {
 	.bubbles span {
 		width: 20px;
 		height: 20px;
-		box-shadow:
-			0 0 0 6px #8bff2d44,
-			0 0 30px #8bff2d,
-			0 0 60px #8bff2d;
+		box-shadow: 0 0 0 6px #8bff2d44, 0 0 30px #8bff2d, 0 0 60px #8bff2d;
 	}
 	.bubbles span:nth-child(even) {
-		box-shadow:
-			0 0 0 6px #f4ff2d44,
-			0 0 30px #f4ff2d,
-			0 0 60px #f4ff2d;
+		box-shadow: 0 0 0 6px #f4ff2d44, 0 0 30px #f4ff2d, 0 0 60px #f4ff2d;
 	}
 }
 @keyframes animate {
@@ -208,8 +190,7 @@ p {
 		background: #000;
 		border-radius: 9999px;
 		bottom: 0;
-		transition:
-			left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
 			width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		z-index: 1;
 	}
@@ -380,6 +361,14 @@ p {
 	}
 
 	@media (max-width: 640px) {
+		.holographic-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
+		.holographic-card:hover::before {
+			opacity: 0;
+			transform: none;
+		}
 		/* Make skills section title single-line */
 		.skills-section-title {
 			white-space: nowrap;
@@ -525,9 +514,7 @@ p {
 		background: #000;
 		border: none;
 		cursor: pointer;
-		transition:
-			background 0.2s,
-			color 0.2s;
+		transition: background 0.2s, color 0.2s;
 		outline: none;
 		color: #fff;
 		font-size: 20px;
@@ -691,9 +678,7 @@ p {
 		line-height: 1.32;
 		text-transform: uppercase;
 		border: 1px solid #000;
-		transition:
-			background 0.2s,
-			color 0.2s;
+		transition: background 0.2s, color 0.2s;
 		cursor: pointer;
 		outline: none;
 	}

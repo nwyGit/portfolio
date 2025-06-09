@@ -1,4 +1,4 @@
-export const resume = {
+const resume = {
 	name: "resume",
 	title: "Resume",
 	type: "document",
@@ -10,3 +10,5 @@ export const resume = {
 		},
 	],
 };
+
+export default resume;

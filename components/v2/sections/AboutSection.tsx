@@ -58,7 +58,7 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 						icon={<HiOutlineDownload size={24} />}
 						href="/resume.pdf"
 						download
-						className="about-resume-btn mt-4 xl:hidden"
+						className="btn-black mt-4 xl:hidden"
 						iconPosition="left"
 					/>
 				</div>
