@@ -98,8 +98,8 @@ export default function ProjectListSection({
 			{/* Project Cards Grid */}
 			<div className="project-section-grid-wrapper">
 				<div className="project-section-grid">
-					{projectsToShow.map((project) => (
-						<ProjectCard key={project._id} project={project} />
+					{projectsToShow.map((project, i) => (
+						<ProjectCard key={i} project={project} />
 					))}
 				</div>
 			</div>

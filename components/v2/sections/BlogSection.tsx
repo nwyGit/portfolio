@@ -54,8 +54,8 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 					background: "#fff",
 				}}
 			>
-				{filteredBlogs.map((blog) => (
-					<BlogCard key={blog.slug} post={blog} />
+				{filteredBlogs.map((blog, i) => (
+					<BlogCard key={i} post={blog} />
 				))}
 			</div>
 		</section>

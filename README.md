@@ -36,3 +36,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Sitemap & Indexing
+
+### Dynamic Sitemaps
+
+- `/api/sitemap`: Sitemap index referencing all sitemaps
+- `/api/sitemap/posts`: Blog posts sitemap
+- `/api/sitemap/categories`: Blog categories sitemap
+- `/api/sitemap/tags`: Blog tags sitemap
+
+### robots.txt
+
+- Located at `/robots.txt`
+- Disallows `/studio`
+- Points to the sitemap index
+
+### Google Search Console
+
+- Submit `https://raymond-ng.com/api/sitemap` as your sitemap in Google Search Console.
+- Sitemaps update automatically as content changes.
