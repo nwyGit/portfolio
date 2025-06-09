@@ -1,67 +1,20 @@
-import React from "react";
-import Share from "./BlogShare";
-import { FaHome } from "react-icons/fa";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import Link from "next/link";
 import { BlogPost } from "@/components/v2/shared/type/types";
+import React from "react";
+import Breadcrumbs, {
+	BreadcrumbItem,
+} from "../../shared/component/Breadcrumbs";
+import Share from "./BlogShare";
 
 interface BlogDetailProps {
 	post: BlogPost;
+	items: BreadcrumbItem[];
 }
 
-const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
+const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
 	return (
 		<section className="blog-detail-section">
 			{/* Breadcrumb */}
-			<div className="sticky top-[64px] z-10 w-full border-b bg-white py-3 transition-all duration-300 translate-y-0">
-				<nav aria-label="breadcrumb">
-					<ol className="flex items-center text-sm gap-2">
-						<li className="flex items-center">
-							<Link
-								href="/"
-								className="inline-flex items-center hover:text-black transition-colors"
-								style={{ color: "#8b8b8b" }}
-							>
-								<FaHome style={{ width: 16, height: 16, marginRight: 8 }} />
-								Home
-							</Link>
-						</li>
-						<li
-							aria-hidden="true"
-							className="flex items-center"
-							style={{ color: "#8b8b8b" }}
-						>
-							<MdOutlineKeyboardArrowRight />
-						</li>
-						<li className="flex items-center">
-							<Link
-								href="/blogs"
-								style={{ color: "#8b8b8b" }}
-								className="hover:text-black transition-colors"
-							>
-								Blogs
-							</Link>
-						</li>
-						<li
-							aria-hidden="true"
-							className="flex items-center"
-							style={{ color: "#8b8b8b" }}
-						>
-							<MdOutlineKeyboardArrowRight />
-						</li>
-						<li className="flex items-center">
-							<span
-								role="link"
-								aria-disabled="true"
-								aria-current="page"
-								className="line-clamp-1 font-medium text-black"
-							>
-								{post.title}
-							</span>
-						</li>
-					</ol>
-				</nav>
-			</div>
+			<Breadcrumbs items={items} />
 			<div className="blog-detail-content">
 				<div className="blog-detail-main">
 					{/* Title & Date */}

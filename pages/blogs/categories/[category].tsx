@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import Breadcrumbs from "@/components/v2/shared/component/Breadcrumbs";
 
 const mockPosts = [
 	{
@@ -42,8 +43,14 @@ const CategoryPage: NextPage<{
 	category: string;
 	posts: { slug: string; title: string }[];
 }> = ({ category, posts }) => {
+	const breadcrumbItems = [
+		{ name: "Home", href: "/" },
+		{ name: "Blogs", href: "/blogs" },
+		{ name: category },
+	];
 	return (
 		<div style={{ padding: 40 }}>
+			<Breadcrumbs items={breadcrumbItems} />
 			<h1>Category: {category}</h1>
 			<ul>
 				{posts.map((post) => (

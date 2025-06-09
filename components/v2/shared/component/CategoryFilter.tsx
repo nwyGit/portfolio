@@ -71,3 +71,16 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 };
 
 export default CategoryFilter;
+
+export const TagCloud: React.FC<{ tags: string[] }> = ({ tags }) => (
+	<div className="mt-4 flex flex-wrap gap-2">
+		{tags.map((tag) => (
+			<span
+				key={tag}
+				className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs cursor-pointer hover:bg-blue-200"
+			>
+				#{tag}
+			</span>
+		))}
+	</div>
+);

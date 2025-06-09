@@ -1,12 +1,13 @@
 import { FC } from "react";
 // import { getBlogs } from "../lib/sanity/queries";
-import BlogSection from "@/components/v2/sections/BlogSection";
 import Layout from "@/components/v2/Layout";
+import BlogSection from "@/components/v2/sections/BlogSection";
 import { SEO } from "@/components/v2/shared/component/SEO";
+import { BlogPost } from "@/components/v2/shared/type/types";
 import { getBreadcrumbListSchema } from "@/utils/schemaBlogPosting";
 
 interface BlogsPageProps {
-	blogs: any[];
+	blogs: BlogPost[];
 }
 
 export async function getStaticProps() {

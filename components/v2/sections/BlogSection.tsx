@@ -3,21 +3,10 @@ import BlogCard from "@/components/v2/sections/blog/BlogCard";
 import CategoryFilter, {
 	Category,
 } from "@/components/v2/shared/component/CategoryFilter";
-
-interface Blog {
-	id: string;
-	title: string;
-	content: string;
-	date: string;
-	author: {
-		name: string;
-		image: string;
-	};
-	tags: string[];
-}
+import { BlogPost } from "@/components/v2/shared/type/types";
 
 interface BlogsProps {
-	blogs: Blog[];
+	blogs: BlogPost[];
 }
 
 const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
@@ -66,7 +55,7 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 				}}
 			>
 				{filteredBlogs.map((blog) => (
-					<BlogCard key={blog.id} {...blog} />
+					<BlogCard key={blog.slug} post={blog} />
 				))}
 			</div>
 		</section>

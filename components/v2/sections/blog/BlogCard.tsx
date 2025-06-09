@@ -1,15 +1,14 @@
 import React from "react";
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
+import { BlogPost } from "@/components/v2/shared/type/types";
 
 interface BlogCardProps {
-	title: string;
-	content: string;
-	date: string;
-	tags: string[];
+	post: BlogPost;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ title, content, date, tags }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
+	const { title, content, tags, publishedAt } = post;
 	return (
 		<div
 			style={{
@@ -78,7 +77,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ title, content, date, tags }) => {
 							marginBottom: 8,
 						}}
 					>
-						{date}
+						{publishedAt}
 					</div>
 					<div
 						style={{

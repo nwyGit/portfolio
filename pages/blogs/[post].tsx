@@ -88,11 +88,27 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 		authorName: post.author?.name || "Raymond Ng",
 	});
 
-	const breadcrumbSchema = getBreadcrumbListSchema([
-		{ name: "Home", url: "https://raymond-ng.com" },
-		{ name: "Blogs", url: "https://raymond-ng.com/blogs" },
-		{ name: post.title, url },
-	]);
+	const breadcrumbItems = [
+		{ name: "Home", href: "/" },
+		{ name: "Blogs", href: "/blogs" },
+		// If category exists, add it
+		...(post.category?.name
+			? [
+					{
+						name: post.category.name,
+						href: `/blogs/categories/${post.category.name}`,
+					},
+				]
+			: []),
+		{ name: post.title },
+	];
+
+	const breadcrumbSchema = getBreadcrumbListSchema(
+		breadcrumbItems.map(({ name, href }) => ({
+			name,
+			url: href ? `https://raymond-ng.com${href}` : url,
+		}))
+	);
 
 	const metaErrors = validateMetaTags({
 		title: post.metaTitle || post.title,
@@ -119,12 +135,12 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 				dateModified={post.updatedAt}
 				schemaMarkup={schemaMarkup}
 				extraStructuredData={[breadcrumbSchema]}
-				twitterCardType="summary_large_image"
-				twitterSite="@raymondngdev"
-				twitterCreator="@raymondngdev"
+				// twitterCardType="summary_large_image"
+				// twitterSite="@raymondngdev"
+				// twitterCreator="@raymondngdev"
 			/>
 			<main>
-				<BlogDetail post={post} />
+				<BlogDetail post={post} items={breadcrumbItems} />
 			</main>
 		</Layout>
 	);
