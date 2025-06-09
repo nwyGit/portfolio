@@ -3,7 +3,8 @@ import LandingSection from "@/components/v2/sections/LandingSection";
 import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import { fetchHero, fetchProjects, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";
-import Head from "next/head";
+import { SEO } from "@/components/v2/shared/component/SEO";
+
 interface HomeProps {
 	hero: Hero;
 	skills: Skill[];
@@ -24,11 +25,12 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 export default function Home({ hero, skills, projects }: HomeProps) {
 	return (
 		<Layout>
-			<Head>
-				<title>Raymond Ng</title>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<SEO
+				title="Raymond Ng | Portfolio"
+				description="Welcome to Raymond Ng's portfolio. Explore projects, skills, and more."
+				canonical="https://raymond-ng.com"
+				// image="https://raymond-ng.com/og-image.jpg"
+			/>
 			<main>
 				<LandingSection hero={hero} skills={skills} projects={projects} />
 			</main>

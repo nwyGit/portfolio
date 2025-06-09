@@ -42,3 +42,29 @@ export interface Category {
 	_id: string;
 	name: string;
 }
+
+export interface BlogPost {
+	title: string;
+	metaTitle?: string;
+	metaDescription?: string;
+	slug: string;
+	summary?: string;
+	content: string; // or PortableTextBlock[] if using Portable Text
+	author: {
+		name: string;
+		image?: string;
+	};
+	category?: {
+		name: string;
+	};
+	tags: string[];
+	featuredImage?: {
+		url: string;
+		alt?: string;
+	};
+	publishedAt: string;
+	updatedAt?: string;
+	status?: string;
+	canonicalUrl?: string;
+	keywords?: string[];
+}

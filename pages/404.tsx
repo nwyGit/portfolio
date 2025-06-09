@@ -1,9 +1,15 @@
 import Layout from "@/components/v2/Layout";
 import Link from "next/link";
+import { SEO } from "@/components/v2/shared/component/SEO";
 
 export default function Custom404() {
 	return (
 		<Layout>
+			<SEO
+				title="404 - Page Not Found | Raymond Ng"
+				description="Sorry, the page you are looking for does not exist."
+				canonical="https://raymond-ng.com/404"
+			/>
 			<section className="flex flex-col flex-grow h-full justify-center items-center bg-white">
 				<div className="flex flex-col md:flex-row items-center gap-8">
 					<h1 className="font-ubuntu font-bold text-black text-6xl lg:text-8xl">

@@ -2,7 +2,7 @@ import { FC } from "react";
 // import { getBlogs } from "../lib/sanity/queries";
 import BlogSection from "@/components/v2/sections/BlogSection";
 import Layout from "@/components/v2/Layout";
-import Head from "next/head";
+import { SEO } from "@/components/v2/shared/component/SEO";
 
 interface BlogsPageProps {
 	blogs: any[];
@@ -48,11 +48,11 @@ export async function getStaticProps() {
 const BlogsPage: FC<BlogsPageProps> = ({ blogs }) => {
 	return (
 		<Layout>
-			<Head>
-				<title>Raymond Ng</title>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<SEO
+				title="Blog | Raymond Ng"
+				description="Read the latest blog posts by Raymond Ng on web development, React, TypeScript, and more."
+				canonical="https://raymond-ng.com/blogs"
+			/>
 			<main>
 				<BlogSection blogs={blogs} />
 			</main>

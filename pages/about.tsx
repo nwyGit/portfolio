@@ -2,7 +2,7 @@ import Layout from "@/components/v2/Layout";
 import AboutSection from "@/components/v2/sections/AboutSection";
 import { fetchAbout, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";
-import Head from "next/head";
+import { SEO } from "@/components/v2/shared/component/SEO";
 import { About, Skill } from "@/components/v2/shared/type/types";
 interface AboutProps {
 	about: About;
@@ -22,11 +22,11 @@ export const getStaticProps: GetStaticProps<AboutProps> = async () => {
 export default function AboutPage({ about, skills }: AboutProps) {
 	return (
 		<Layout>
-			<Head>
-				<title>Raymond Ng</title>
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<SEO
+				title="About Raymond Ng"
+				description="Learn more about Raymond Ng, his background, and his skills."
+				canonical="https://raymond-ng.com/about"
+			/>
 			<main>
 				<AboutSection about={about} skills={skills} />
 			</main>

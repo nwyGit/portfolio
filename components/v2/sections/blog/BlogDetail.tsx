@@ -3,14 +3,10 @@ import Share from "./BlogShare";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
+import { BlogPost } from "@/components/v2/shared/type/types";
 
 interface BlogDetailProps {
-	post: {
-		title: string;
-		content: string; // HTML string from CMS
-		date: string;
-		tags: string[];
-	};
+	post: BlogPost;
 }
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
@@ -72,7 +68,9 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
 					<div className="blog-detail-title-date">
 						<div className="blog-detail-title">{post.title}</div>
 						<div className="blog-detail-date" style={{ color: "#8b8b8b" }}>
-							{post.date}
+							{post.publishedAt
+								? new Date(post.publishedAt).toLocaleDateString()
+								: ""}
 						</div>
 					</div>
 					{/* Tags */}
@@ -86,8 +84,11 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
 					{/* Main Image */}
 					<div className="blog-detail-image-container">
 						<img
-							src={"/assets/blog/image_blog_detail_1.png"}
-							alt="Blog Detail"
+							src={
+								post.featuredImage?.url ||
+								"/assets/blog/image_blog_detail_1.png"
+							}
+							alt={post.featuredImage?.alt || "Blog Detail"}
 							className="blog-detail-image"
 							onError={(e) => {
 								(e.target as HTMLImageElement).src =
