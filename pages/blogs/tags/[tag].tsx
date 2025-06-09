@@ -21,11 +21,11 @@ const mockPosts = [
 ];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const tagSet = new Set();
+	const tagSet = new Set<string>();
 	mockPosts.forEach((p) => p.tags.forEach((tag) => tagSet.add(tag)));
 	const tags = Array.from(tagSet);
 	return {
-		paths: tags.map((tag) => ({ params: { tag } })),
+		paths: tags.map((tag) => ({ params: { tag: String(tag) } })),
 		fallback: false,
 	};
 };
