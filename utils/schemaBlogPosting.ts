@@ -32,3 +32,54 @@ export function getBlogPostingSchema({
 		},
 	};
 }
+
+export function getBreadcrumbListSchema(
+	items: Array<{ name: string; url: string }>
+) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: items.map((item, idx) => ({
+			"@type": "ListItem",
+			position: idx + 1,
+			name: item.name,
+			item: item.url,
+		})),
+	};
+}
+
+export function getPersonSchema({
+	name,
+	url,
+	image,
+}: {
+	name: string;
+	url?: string;
+	image?: string;
+}) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Person",
+		name,
+		url,
+		image,
+	};
+}
+
+export function getOrganizationSchema({
+	name,
+	url,
+	logo,
+}: {
+	name: string;
+	url: string;
+	logo?: string;
+}) {
+	return {
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		name,
+		url,
+		logo,
+	};
+}

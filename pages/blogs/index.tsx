@@ -3,6 +3,7 @@ import { FC } from "react";
 import BlogSection from "@/components/v2/sections/BlogSection";
 import Layout from "@/components/v2/Layout";
 import { SEO } from "@/components/v2/shared/component/SEO";
+import { getBreadcrumbListSchema } from "@/utils/schemaBlogPosting";
 
 interface BlogsPageProps {
 	blogs: any[];
@@ -52,6 +53,12 @@ const BlogsPage: FC<BlogsPageProps> = ({ blogs }) => {
 				title="Blog | Raymond Ng"
 				description="Read the latest blog posts by Raymond Ng on web development, React, TypeScript, and more."
 				canonical="https://raymond-ng.com/blogs"
+				extraStructuredData={[
+					getBreadcrumbListSchema([
+						{ name: "Home", url: "https://raymond-ng.com" },
+						{ name: "Blogs", url: "https://raymond-ng.com/blogs" },
+					]),
+				]}
 			/>
 			<main>
 				<BlogSection blogs={blogs} />

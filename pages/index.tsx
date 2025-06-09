@@ -4,6 +4,7 @@ import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import { fetchHero, fetchProjects, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";
 import { SEO } from "@/components/v2/shared/component/SEO";
+import { getOrganizationSchema } from "@/utils/schemaBlogPosting";
 
 interface HomeProps {
 	hero: Hero;
@@ -29,6 +30,13 @@ export default function Home({ hero, skills, projects }: HomeProps) {
 				title="Raymond Ng | Portfolio"
 				description="Welcome to Raymond Ng's portfolio. Explore projects, skills, and more."
 				canonical="https://raymond-ng.com"
+				extraStructuredData={[
+					getOrganizationSchema({
+						name: "Raymond Ng",
+						url: "https://raymond-ng.com",
+						logo: "https://raymond-ng.com/logo.png",
+					}),
+				]}
 				// image="https://raymond-ng.com/og-image.jpg"
 			/>
 			<main>

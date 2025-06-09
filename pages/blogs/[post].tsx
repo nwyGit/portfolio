@@ -1,7 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import BlogDetail from "@/components/v2/sections/blog/BlogDetail";
 import { SEO } from "@/components/v2/shared/component/SEO";
-import { getBlogPostingSchema } from "@/utils/schemaBlogPosting";
+import {
+	getBlogPostingSchema,
+	getBreadcrumbListSchema,
+} from "@/utils/schemaBlogPosting";
 import { validateMetaTags } from "@/utils/metaTagValidation";
 import Layout from "@/components/v2/Layout";
 import { BlogPost } from "@/components/v2/shared/type/types";
@@ -85,6 +88,12 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 		authorName: post.author?.name || "Raymond Ng",
 	});
 
+	const breadcrumbSchema = getBreadcrumbListSchema([
+		{ name: "Home", url: "https://raymond-ng.com" },
+		{ name: "Blogs", url: "https://raymond-ng.com/blogs" },
+		{ name: post.title, url },
+	]);
+
 	const metaErrors = validateMetaTags({
 		title: post.metaTitle || post.title,
 		description:
@@ -109,6 +118,10 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 				datePublished={post.publishedAt}
 				dateModified={post.updatedAt}
 				schemaMarkup={schemaMarkup}
+				extraStructuredData={[breadcrumbSchema]}
+				twitterCardType="summary_large_image"
+				twitterSite="@raymondngdev"
+				twitterCreator="@raymondngdev"
 			/>
 			<main>
 				<BlogDetail post={post} />

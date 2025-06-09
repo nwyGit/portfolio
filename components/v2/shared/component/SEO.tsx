@@ -10,6 +10,11 @@ interface SEOProps {
 	datePublished?: string;
 	dateModified?: string;
 	schemaMarkup?: object;
+	twitterCardType?: string;
+	twitterSite?: string;
+	twitterCreator?: string;
+	extraMetaTags?: Array<{ name: string; content: string }>;
+	extraStructuredData?: object[];
 }
 
 const defaultTitle = "My Website";
@@ -25,6 +30,11 @@ export const SEO: React.FC<SEOProps> = ({
 	datePublished,
 	dateModified,
 	schemaMarkup,
+	twitterCardType = "summary_large_image",
+	twitterSite,
+	twitterCreator,
+	extraMetaTags = [],
+	extraStructuredData = [],
 }) => {
 	return (
 		<HelmetProvider>
@@ -42,11 +52,30 @@ export const SEO: React.FC<SEOProps> = ({
 				{dateModified && (
 					<meta property="article:modified_time" content={dateModified} />
 				)}
+				{/* Twitter Card tags */}
+				<meta name="twitter:card" content={twitterCardType} />
+				{twitterSite && <meta name="twitter:site" content={twitterSite} />}
+				{twitterCreator && (
+					<meta name="twitter:creator" content={twitterCreator} />
+				)}
+				{image && <meta name="twitter:image" content={image} />}
+				<meta name="twitter:title" content={title} />
+				<meta name="twitter:description" content={description} />
+				{/* Extra meta tags */}
+				{extraMetaTags.map((tag, i) => (
+					<meta key={i} name={tag.name} content={tag.content} />
+				))}
+				{/* Structured Data */}
 				{schemaMarkup && (
 					<script type="application/ld+json">
 						{JSON.stringify(schemaMarkup)}
 					</script>
 				)}
+				{extraStructuredData.map((schema, i) => (
+					<script key={i} type="application/ld+json">
+						{JSON.stringify(schema)}
+					</script>
+				))}
 			</Helmet>
 		</HelmetProvider>
 	);

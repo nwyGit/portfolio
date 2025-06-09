@@ -13,5 +13,5 @@ export async function generateSitemap(
 		sitemap.write({ url, lastmod });
 	});
 	sitemap.end();
-	await streamToPromise(writeStream);
+	await streamToPromise(sitemap);
 }
