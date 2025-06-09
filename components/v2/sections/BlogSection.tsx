@@ -11,6 +11,7 @@ interface BlogsProps {
 
 const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 	const [active, setActive] = useState("all");
+	const [search, setSearch] = useState("");
 
 	const categories: Category[] = useMemo(() => {
 		const tagSet = new Set<string>();
@@ -21,10 +22,18 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 		];
 	}, [blogs]);
 
-	const filteredBlogs =
-		active === "all"
-			? blogs
-			: blogs.filter((blog) => blog.tags.includes(active));
+	const filteredBlogs = useMemo(() => {
+		const byCategory =
+			active === "all"
+				? blogs
+				: blogs.filter((blog) => blog.tags.includes(active));
+		if (!search.trim()) return byCategory;
+		return byCategory.filter(
+			(blog) =>
+				blog.title.toLowerCase().includes(search.toLowerCase()) ||
+				blog.content.toLowerCase().includes(search.toLowerCase())
+		);
+	}, [blogs, active, search]);
 
 	return (
 		<section className="pt-[130px]">
@@ -41,6 +50,23 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 					btnActiveClassName="category-filter-btn--active"
 					highlighterClassName="category-filter-highlighter"
 					withHighlighter
+				/>
+			</div>
+			<div
+				style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}
+			>
+				<input
+					type="text"
+					placeholder="Search blogs..."
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					style={{
+						padding: 8,
+						borderRadius: 6,
+						border: "1px solid #ccc",
+						width: 320,
+						fontSize: 16,
+					}}
 				/>
 			</div>
 			<div

@@ -1,7 +1,3 @@
-import { SitemapStream } from "sitemap";
-import { NextApiRequest, NextApiResponse } from "next";
-import { sanityClient } from "@/utils/sanity";
-
 const hostname = "https://raymond-ng.com";
 
 const routes = [

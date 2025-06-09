@@ -4,6 +4,7 @@ import Breadcrumbs, {
 	BreadcrumbItem,
 } from "../../shared/component/Breadcrumbs";
 import Share from "./BlogShare";
+import Image from "next/image";
 
 interface BlogDetailProps {
 	post: BlogPost;
@@ -36,18 +37,29 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
 					</div>
 					{/* Main Image */}
 					<div className="blog-detail-image-container">
-						<img
-							src={
-								post.featuredImage?.url ||
-								"/assets/blog/image_blog_detail_1.png"
-							}
-							alt={post.featuredImage?.alt || "Blog Detail"}
-							className="blog-detail-image"
-							onError={(e) => {
-								(e.target as HTMLImageElement).src =
-									"https://via.placeholder.com/700x467?text=Blog+Image";
-							}}
-						/>
+						{post.featuredImage?.url ? (
+							<Image
+								src={post.featuredImage.url}
+								alt={post.featuredImage.alt || "Blog Detail"}
+								width={700}
+								height={467}
+								sizes="(max-width: 700px) 100vw, 700px"
+								style={{ width: "100%", height: "auto" }}
+								placeholder="blur"
+								blurDataURL="/assets/blog/image_blog_detail_1.png"
+								priority={false}
+							/>
+						) : (
+							<Image
+								src="/assets/blog/image_blog_detail_1.png"
+								alt="Blog Detail"
+								width={700}
+								height={467}
+								sizes="(max-width: 700px) 100vw, 700px"
+								style={{ width: "100%", height: "auto" }}
+								priority={false}
+							/>
+						)}
 					</div>
 					{/* Blog Content (HTML) */}
 					<div

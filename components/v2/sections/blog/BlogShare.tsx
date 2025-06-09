@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { SiWechat } from "react-icons/si";
+import Image from "next/image";
 
 const ICONS = [
 	{
@@ -109,14 +110,14 @@ const BlogShare: React.FC = () => {
 					<div className="blog-card" key={idx}>
 						{/* Image */}
 						<div className="blog-card-image-container">
-							<img
+							<Image
 								src="/assets/blog/image_blog_detail_1.png"
 								alt="Blog Card"
-								className="blog-card-image"
-								onError={(e) => {
-									(e.target as HTMLImageElement).src =
-										"https://via.placeholder.com/150x100?text=Blog+Image";
-								}}
+								width={150}
+								height={100}
+								sizes="(max-width: 150px) 100vw, 150px"
+								style={{ width: "100%", height: "auto" }}
+								priority={false}
 							/>
 						</div>
 						{/* Content */}

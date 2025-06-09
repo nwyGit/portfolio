@@ -2,6 +2,7 @@ import React from "react";
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
 import { BlogPost } from "@/components/v2/shared/type/types";
+import Image from "next/image";
 
 interface BlogCardProps {
 	post: BlogPost;
@@ -32,16 +33,29 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					overflow: "hidden",
 				}}
 			>
-				{/* Placeholder image */}
-				<img
-					// src="/assets/blog/image_blog_detail_1.png"
-					alt="Blog Detail"
-					style={{ width: "100%", height: "100%", objectFit: "cover" }}
-					onError={(e) => {
-						(e.target as HTMLImageElement).src =
-							"https://via.placeholder.com/500x333?text=Blog+Image";
-					}}
-				/>
+				{post.featuredImage?.url ? (
+					<Image
+						src={post.featuredImage.url}
+						alt={post.featuredImage.alt || "Blog Detail"}
+						width={500}
+						height={333}
+						sizes="(max-width: 500px) 100vw, 500px"
+						style={{ width: "100%", height: "auto" }}
+						placeholder="blur"
+						blurDataURL="/assets/blog/image_blog_detail_1.png"
+						priority={false}
+					/>
+				) : (
+					<Image
+						src="/assets/blog/image_blog_detail_1.png"
+						alt="Blog Detail"
+						width={500}
+						height={333}
+						sizes="(max-width: 500px) 100vw, 500px"
+						style={{ width: "100%", height: "auto" }}
+						priority={false}
+					/>
+				)}
 			</div>
 			{/* Content Section */}
 			<div
@@ -151,7 +165,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					<DynamicButton
 						text="view more"
 						icon={<RxArrowTopRight size={24} />}
-						href={"/"}
+						href={`/blogs/${post.slug}`}
 						target="_blank"
 						className="btn-black"
 						style={{
