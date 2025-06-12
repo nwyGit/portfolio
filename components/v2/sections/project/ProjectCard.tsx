@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 	} = project;
 
 	return (
-		<div className="project-card-v2">
+		<div className="project-card-v2 holographic-card">
 			{/* Project Image */}
 			<div className="project-card-v2-image">
 				<Image
@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 				/>
 			</div>
 			{/* Card Content */}
-			<div className="project-card-v2-content">
+			<div className="project-card-v2-content gap-[10px] shadow-lg">
 				{/* Title & Description */}
 				<div className="flex flex-col gap-2">
 					<h3 className="project-card-v2-title">{title}</h3>

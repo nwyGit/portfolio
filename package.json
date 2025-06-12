@@ -28,7 +28,8 @@
     "react-responsive": "^9.0.2",
     "sanity": "^3.91.0",
     "sitemap": "^8.0.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@types/node": "^22.15.29",
