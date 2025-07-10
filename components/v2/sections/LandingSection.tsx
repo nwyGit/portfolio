@@ -3,7 +3,6 @@ import Landing from "@/components/v2/sections/landing/Landing";
 import Skills from "@/components/v2/sections/landing/Skills";
 import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import ProjectSection from "./ProjectSection";
-import Insights from "@/components/v2/sections/landing/Insights";
 
 interface LandingProps {
 	hero: Hero;
