@@ -1,6 +1,7 @@
 const hostname = "https://raymond-ng.com";
 
 const routes = [
+	{ path: "/api/sitemap/static", name: "static" },
 	{ path: "/api/sitemap/posts", name: "posts" },
 	{ path: "/api/sitemap/categories", name: "categories" },
 	{ path: "/api/sitemap/tags", name: "tags" },

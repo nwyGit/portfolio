@@ -4,7 +4,7 @@ import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import { fetchHero, fetchProjects, fetchSkills } from "@/utils/fetchData";
 import { GetStaticProps } from "next";
 import { SEO } from "@/components/v2/shared/component/SEO";
-import { getOrganizationSchema } from "@/utils/schemaBlogPosting";
+import { getOrganizationSchema, getWebSiteSchema, getPersonDetailedSchema } from "@/utils/schemaBlogPosting";
 
 interface HomeProps {
 	hero: Hero;
@@ -35,6 +35,20 @@ export default function Home({ hero, skills, projects }: HomeProps) {
 						name: "Raymond Ng",
 						url: "https://raymond-ng.com",
 						logo: "https://raymond-ng.com/logo.png",
+					}),
+					getWebSiteSchema({
+						name: "Raymond Ng Portfolio",
+						url: "https://raymond-ng.com",
+						description: "Full Stack Developer and Data Analyst portfolio showcasing web applications and data visualization projects",
+					}),
+					getPersonDetailedSchema({
+						name: "Raymond Ng",
+						url: "https://raymond-ng.com",
+						image: "https://raymond-ng.com/raymond-ng-profile.jpg",
+						jobTitle: "Full Stack Developer & Data Analyst",
+						workLocation: "Remote / Toronto, ON",
+						knowsAbout: ["React", "Next.js", "TypeScript", "Python", "Data Analytics", "Web Development"],
+						sameAs: ["https://github.com/raymond-ng", "https://linkedin.com/in/raymond-ng"],
 					}),
 				]}
 				// image="https://raymond-ng.com/og-image.jpg"

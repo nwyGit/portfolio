@@ -1,6 +1,9 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import Layout from "@/components/v2/Layout";
+import { SEO } from "@/components/v2/shared/component/SEO";
 import Breadcrumbs from "@/components/v2/shared/component/Breadcrumbs";
+import { getBreadcrumbListSchema } from "@/utils/schemaBlogPosting";
 
 const mockPosts = [
 	{
@@ -48,18 +51,57 @@ const CategoryPage: NextPage<{
 		{ name: "Blogs", href: "/blogs" },
 		{ name: category },
 	];
+
+	const categoryTitle = category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ');
+	const pageTitle = `${categoryTitle} Blog Posts | Raymond Ng`;
+	const pageDescription = `Explore all blog posts in the ${categoryTitle} category. ${posts.length} articles covering topics in ${categoryTitle}.`;
+	const canonicalUrl = `https://raymond-ng.com/blogs/categories/${category}`;
+
+	const breadcrumbSchema = getBreadcrumbListSchema([
+		{ name: "Home", url: "https://raymond-ng.com" },
+		{ name: "Blogs", url: "https://raymond-ng.com/blogs" },
+		{ name: categoryTitle, url: canonicalUrl },
+	]);
+
 	return (
-		<div style={{ padding: 40 }}>
-			<Breadcrumbs items={breadcrumbItems} />
-			<h1>Category: {category}</h1>
-			<ul>
-				{posts.map((post) => (
-					<li key={post.slug}>
-						<Link href={`/blogs/${post.slug}`}>{post.title}</Link>
-					</li>
-				))}
-			</ul>
-		</div>
+		<Layout>
+			<SEO
+				title={pageTitle}
+				description={pageDescription}
+				canonical={canonicalUrl}
+				type="website"
+				keywords={`${categoryTitle}, blog, articles, Raymond Ng, ${category.replace('-', ' ')}`}
+				extraStructuredData={[breadcrumbSchema]}
+			/>
+			<main className="container mx-auto px-4 py-8">
+				<Breadcrumbs items={breadcrumbItems} />
+				<div className="mt-6">
+					<h1 className="text-4xl font-bold mb-4">{categoryTitle} Articles</h1>
+					<p className="text-lg text-gray-600 mb-8">
+						Browse {posts.length} blog posts in the {categoryTitle} category
+					</p>
+					
+					{posts.length > 0 ? (
+						<div className="grid gap-6">
+							{posts.map((post) => (
+								<article key={post.slug} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+									<h2 className="text-xl font-semibold mb-2">
+										<Link href={`/blogs/${post.slug}`} className="text-blue-600 hover:text-blue-800">
+											{post.title}
+										</Link>
+									</h2>
+									<Link href={`/blogs/${post.slug}`} className="text-blue-500 hover:underline">
+										Read more →
+									</Link>
+								</article>
+							))}
+						</div>
+					) : (
+						<p className="text-gray-500">No articles found in this category.</p>
+					)}
+				</div>
+			</main>
+		</Layout>
 	);
 };
 

@@ -13,6 +13,8 @@ export default async function handler(req, res) {
 		stream.write({
 			url: post.canonicalUrl || `/blogs/${post.slug.current}`,
 			lastmod: post.updatedAt || post.publishedAt,
+			changefreq: 'weekly',
+			priority: 0.7,
 		});
 	});
 	stream.end();
