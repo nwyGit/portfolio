@@ -1,12 +1,13 @@
 import { groq } from "next-sanity";
 import { sanityClient } from "@/utils/sanity";
+import { Hero, About, Skill, Project } from "@/components/v2/shared/type/types";
 
-const dataFetcher = async (query) => {
-	const data = await sanityClient.fetch(query);
+const dataFetcher = async <T>(query: string): Promise<T> => {
+	const data = await sanityClient.fetch<T>(query);
 	return data;
 };
 
-export const fetchHero = async () => {
+export const fetchHero = async (): Promise<Hero> => {
 	const query = groq`
 		*[_type == "hero"][0] {
 			greeting,
@@ -20,7 +21,7 @@ export const fetchHero = async () => {
 	return dataFetcher(query);
 };
 
-export const fetchAbout = async () => {
+export const fetchAbout = async (): Promise<About> => {
 	const query = groq`
 		*[_type == "about"][0] {
 			paragraph1,
@@ -33,7 +34,7 @@ export const fetchAbout = async () => {
 	return dataFetcher(query);
 };
 
-export const fetchSkills = async () => {
+export const fetchSkills = async (): Promise<Skill[]> => {
 	const query = groq`
 		*[_type == "skill"]
 	`;
@@ -41,7 +42,7 @@ export const fetchSkills = async () => {
 	return dataFetcher(query);
 };
 
-export const fetchProjects = async () => {
+export const fetchProjects = async (): Promise<Project[]> => {
 	const query = groq`
 		*[_type == "project"] {
 			title,
@@ -60,7 +61,7 @@ export const fetchProjects = async () => {
 	return dataFetcher(query);
 };
 
-export const fetchResume = async () => {
+export const fetchResume = async (): Promise<{ resumeURL: string }> => {
 	const query = groq`
 		*[_type == "resume"][0] {
 			"resumeURL": resume.asset->url

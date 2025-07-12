@@ -32,7 +32,9 @@ const Contact = () => {
 				alert("Form submitted successfully!");
 			})
 			.catch((error) => {
-				console.log(error);
+				if (process.env.NODE_ENV === 'development') {
+					console.log(error);
+				}
 				alert("Form submission failed.");
 			});
 	}

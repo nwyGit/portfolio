@@ -1,4 +1,4 @@
-export const navVariants = (index) => ({
+export const navVariants = (index: number) => ({
 	hidden: {
 		opacity: 0,
 		y: "-100%",
@@ -36,7 +36,7 @@ export const buttonVariants = {
 	pressed: { scale: 0.9 },
 };
 
-export const slideIn = (direction, type, delay, duration) => ({
+export const slideIn = (direction: string, type: string, delay: number, duration: number) => ({
 	hidden: {
 		x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
 		y: direction === "up" ? "100%" : direction === "down" ? "100%" : 0,
@@ -53,7 +53,7 @@ export const slideIn = (direction, type, delay, duration) => ({
 	},
 });
 
-export const staggerContainer = (staggerChildren, delayChildren) => ({
+export const staggerContainer = (staggerChildren: number, delayChildren: number) => ({
 	hidden: {},
 	show: {
 		transition: {
@@ -63,7 +63,7 @@ export const staggerContainer = (staggerChildren, delayChildren) => ({
 	},
 });
 
-export const textVariant = (delay) => ({
+export const textVariant = (delay: number) => ({
 	hidden: {
 		y: 50,
 		opacity: 0,
@@ -104,7 +104,7 @@ export const textVariant2 = {
 	},
 };
 
-export const fadeIn = (direction, type, delay, duration) => ({
+export const fadeIn = (direction: string, type: string, delay: number, duration: number) => ({
 	hidden: {
 		x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
 		y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
@@ -123,7 +123,7 @@ export const fadeIn = (direction, type, delay, duration) => ({
 	},
 });
 
-export const zoomIn = (delay, duration) => ({
+export const zoomIn = (delay: number, duration: number) => ({
 	hidden: {
 		scale: 0,
 		opacity: 0,

@@ -117,7 +117,7 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 		canonical: url,
 		image,
 	});
-	if (metaErrors.length > 0) {
+	if (metaErrors.length > 0 && process.env.NODE_ENV === 'development') {
 		console.warn("SEO Meta Tag Issues:", metaErrors);
 	}
 

@@ -28,9 +28,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"pages/_app.js",
-		"pages/v1/index.js",
-		"sanity/schemas/blog/blogPost.ts"
+		"pages/_app.tsx",
+		"pages/v1/index.js"
 	],
 	"exclude": ["node_modules"]
 }
