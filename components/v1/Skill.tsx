@@ -1,8 +1,9 @@
-import styles from "@/styles";
 import React from "react";
+import styles from "@/styles";
 import SkillIcon from "./SkillIcon";
+import { V1SkillIconProps } from "./types";
 
-const Skill = ({ name, url }) => {
+const Skill: React.FC<V1SkillIconProps> = ({ name, url }) => {
 	return (
 		<div className={`${styles.skillsItem}`}>
 			<SkillIcon name={name} url={url} />

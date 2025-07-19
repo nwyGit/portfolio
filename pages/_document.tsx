@@ -7,7 +7,6 @@ export default function Document() {
 			<Head>
 				{/* Essential meta tags */}
 				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta name="theme-color" content="#023047" />
 				
 				{/* Favicon and app icons */}
@@ -22,21 +21,6 @@ export default function Document() {
 					rel="stylesheet"
 				/>
 				
-				{/* Google Tag (gtag.js) */}
-				<script
-					async
-					src="https://www.googletagmanager.com/gtag/js?id=AW-17247820128"
-				></script>
-				<script
-					dangerouslySetInnerHTML={{
-						__html: `
-							window.dataLayer = window.dataLayer || [];
-							function gtag(){dataLayer.push(arguments);}
-							gtag('js', new Date());
-							gtag('config', 'AW-17247820128');
-						`,
-					}}
-				/>
 			</Head>
 			<body>
 				<Main />

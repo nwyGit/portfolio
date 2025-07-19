@@ -2,8 +2,17 @@ import React from "react";
 import Image from "next/image";
 import styles from "../../styles";
 import Link from "next/link";
+import { V1FooterProps } from "./types";
 
-const footerItems = [
+interface FooterItem {
+	name: string;
+	imagePath: string;
+	url: string;
+	width: number;
+	height: number;
+}
+
+const footerItems: FooterItem[] = [
 	{
 		name: "github",
 		imagePath: "/github.svg",
@@ -20,9 +29,9 @@ const footerItems = [
 	},
 ];
 
-const Footer = () => {
+const Footer: React.FC<V1FooterProps> = ({ className }) => {
 	return (
-		<footer className={`${styles.xPaddings} ${styles.FooterBox}`}>
+		<footer className={`${styles.xPaddings} ${styles.FooterBox} ${className || ''}`}>
 			<ul className={`${styles.flexCenter} gap-8 py-6 relative z-5`}>
 				{footerItems.map((item) => (
 					<li key={item.name} className="hover:text-secondary">

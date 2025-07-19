@@ -1,6 +1,8 @@
+import React from "react";
 import styles from "@/styles";
 import { fadeIn } from "@/utils/motion";
 import { motion } from "framer-motion";
+import { V1HeroProps } from "./types";
 
 // const heroItems = [
 // 	<span key="intro">Hey there, I&apos;m</span>,
@@ -26,7 +28,7 @@ import { motion } from "framer-motion";
 // 	</p>,
 // ];
 
-const introComponent = (index, element) => {
+const introComponent = (index: number, element: React.ReactElement): React.ReactElement => {
 	return (
 		<motion.div
 			variants={fadeIn("up", "tween", 1.2 + index * 0.2, 0.6)}
@@ -41,7 +43,7 @@ const introComponent = (index, element) => {
 	);
 };
 
-const Introduction = ({ hero }) => {
+const Introduction: React.FC<V1HeroProps> = ({ hero }) => {
 	const { greeting, name, slogan, description } = hero;
 	return (
 		<section

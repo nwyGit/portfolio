@@ -3,8 +3,14 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
 import styles from "@/styles";
 import Project from "./Project";
+import { V1ProjectSetProps } from "./types";
 
-const ProjectSet = ({ title, data }) => {
+interface ProjectSetSpecificProps {
+	title: string;
+	data: V1ProjectSetProps['projects'];
+}
+
+const ProjectSet: React.FC<ProjectSetSpecificProps> = ({ title, data }) => {
 	return (
 		<section>
 			<motion.div

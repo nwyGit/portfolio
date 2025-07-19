@@ -5,7 +5,7 @@ import { Hero, Skill } from "../../shared/type/types";
 const graySkills = ["Typescript", "PostgreSQL", "C++", "Javascript"];
 
 interface SkillProps {
-	hero: Hero;
+	hero: Hero | null;
 	skills: Skill[];
 }
 
@@ -22,7 +22,7 @@ export default function Skills({ hero, skills }: SkillProps) {
 					</div>
 					<div className="skills-section-desc-group">
 						<p className="skills-section-desc">
-							{hero.skillDescription}
+							{hero?.skillDescription || "Developing expertise across multiple technologies and frameworks."}
 						</p>
 						<div className="skills-section-divider" />
 					</div>

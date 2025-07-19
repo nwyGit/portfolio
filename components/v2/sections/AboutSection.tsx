@@ -4,11 +4,20 @@ import { HiOutlineDownload } from "react-icons/hi";
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 
 interface AboutSectionProps {
-	about: About;
+	about: About | null;
 	skills: Skill[];
 }
 
 export default function AboutSection({ about, skills }: AboutSectionProps) {
+	if (!about) {
+		return (
+			<div className="bg-white w-full flex flex-col items-center justify-center pt-[130px] pb-20">
+				<h1 className="text-2xl font-bold text-gray-800 mb-4">About information unavailable</h1>
+				<p className="text-gray-600">We&apos;re working to load this content. Please try again later.</p>
+			</div>
+		);
+	}
+	
 	const { paragraph1, paragraph2, aboutMeImageURL } = about;
 
 	return (

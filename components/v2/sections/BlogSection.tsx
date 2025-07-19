@@ -15,7 +15,12 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 
 	const categories: Category[] = useMemo(() => {
 		const tagSet = new Set<string>();
-		blogs.forEach((blog) => blog.tags.forEach((tag) => tagSet.add(tag)));
+		blogs.forEach((blog) => {
+			blog.tags?.forEach((tag) => {
+				const tagName = typeof tag === 'string' ? tag : tag.name;
+				tagSet.add(tagName);
+			});
+		});
 		return [
 			{ id: "all", label: "All" },
 			...Array.from(tagSet).map((tag) => ({ id: tag, label: tag })),
@@ -26,13 +31,26 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 		const byCategory =
 			active === "all"
 				? blogs
-				: blogs.filter((blog) => blog.tags.includes(active));
+				: blogs.filter((blog) => 
+					blog.tags?.some(tag => {
+						const tagName = typeof tag === 'string' ? tag : tag.name;
+						return tagName === active;
+					})
+				);
 		if (!search.trim()) return byCategory;
-		return byCategory.filter(
-			(blog) =>
-				blog.title.toLowerCase().includes(search.toLowerCase()) ||
-				blog.content.toLowerCase().includes(search.toLowerCase())
-		);
+		return byCategory.filter((blog) => {
+			const contentText = blog.content
+				?.map(block => {
+					if (block._type === 'block' && block.children) {
+						return block.children.map((child) => (child as any).text).join('');
+					}
+					return '';
+				})
+				.join(' ') || '';
+			
+			return blog.title.toLowerCase().includes(search.toLowerCase()) ||
+				contentText.toLowerCase().includes(search.toLowerCase());
+		});
 	}, [blogs, active, search]);
 
 	return (

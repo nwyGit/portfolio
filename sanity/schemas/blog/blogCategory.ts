@@ -1,4 +1,6 @@
-export const blogCategory = {
+import { SchemaDefinition, ValidationRule } from '../../types'
+
+export const blogCategory: SchemaDefinition = {
 	name: "blogCategory",
 	title: "Blog Category",
 	type: "document",
@@ -7,7 +9,7 @@ export const blogCategory = {
 			name: "name",
 			title: "Name",
 			type: "string",
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "slug",
@@ -16,7 +18,7 @@ export const blogCategory = {
 			options: {
 				source: "name",
 			},
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "description",

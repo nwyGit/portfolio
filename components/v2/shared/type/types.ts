@@ -1,3 +1,5 @@
+import { PortableTextBlock } from '@portabletext/types';
+
 export interface Project {
 	_id: string;
 	title: string;
@@ -44,27 +46,69 @@ export interface Category {
 }
 
 export interface BlogPost {
+	_id: string;
 	title: string;
 	metaTitle?: string;
 	metaDescription?: string;
-	slug: string;
+	slug: {
+		current: string;
+	};
 	summary?: string;
-	content: string; // or PortableTextBlock[] if using Portable Text
-	author: {
-		name: string;
-		image?: string;
-	};
-	category?: {
-		name: string;
-	};
-	tags: string[];
+	content: PortableTextBlock[];
+	author: BlogAuthor;
+	category?: BlogCategory;
+	tags?: BlogTag[] | string[];
 	featuredImage?: {
-		url: string;
+		asset: {
+			url: string;
+		};
 		alt?: string;
 	};
 	publishedAt: string;
 	updatedAt?: string;
-	status?: string;
+	status?: 'draft' | 'published' | 'archived';
 	canonicalUrl?: string;
 	keywords?: string[];
+}
+
+export interface BlogAuthor {
+	_id: string;
+	name: string;
+	slug?: {
+		current: string;
+	};
+	bio?: string;
+	image?: {
+		asset: {
+			url: string;
+		};
+	};
+	socialLinks?: {
+		twitter?: string;
+		linkedin?: string;
+		github?: string;
+	};
+}
+
+export interface BlogCategory {
+	_id: string;
+	name: string;
+	slug: {
+		current: string;
+	};
+	description?: string;
+	keywords?: string[];
+}
+
+export interface BlogTag {
+	_id: string;
+	name: string;
+	slug: {
+		current: string;
+	};
+}
+
+export interface Resume {
+	_id: string;
+	resumeURL: string;
 }

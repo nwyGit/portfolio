@@ -3,7 +3,7 @@ export const navVariants = (index: number) => ({
 		opacity: 0,
 		y: "-100%",
 		transition: {
-			type: "spring",
+			type: "spring" as const,
 			stiffness: 300,
 			damping: 140,
 		},
@@ -12,7 +12,7 @@ export const navVariants = (index: number) => ({
 		opacity: 1,
 		y: 0,
 		transition: {
-			type: "spring",
+			type: "spring" as const,
 			stiffness: 80,
 			delay: 0.2 * (1 + index),
 		},
@@ -36,7 +36,7 @@ export const buttonVariants = {
 	pressed: { scale: 0.9 },
 };
 
-export const slideIn = (direction: string, type: string, delay: number, duration: number) => ({
+export const slideIn = (direction: string, type: "spring" | "tween" | "inertia" | "keyframes", delay: number, duration: number) => ({
 	hidden: {
 		x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
 		y: direction === "up" ? "100%" : direction === "down" ? "100%" : 0,
@@ -48,7 +48,7 @@ export const slideIn = (direction: string, type: string, delay: number, duration
 			type,
 			delay,
 			duration,
-			ease: "easeOut",
+			ease: "easeOut" as const,
 		},
 	},
 });
@@ -72,7 +72,7 @@ export const textVariant = (delay: number) => ({
 		y: 0,
 		opacity: 1,
 		transition: {
-			type: "spring",
+			type: "spring" as const,
 			duration: 1.25,
 			delay,
 		},
@@ -98,13 +98,13 @@ export const textVariant2 = {
 		opacity: 1,
 		y: 0,
 		transition: {
-			type: "tween",
-			ease: "easeIn",
+			type: "tween" as const,
+			ease: "easeIn" as const,
 		},
 	},
 };
 
-export const fadeIn = (direction: string, type: string, delay: number, duration: number) => ({
+export const fadeIn = (direction: string, type: "spring" | "tween" | "inertia" | "keyframes", delay: number, duration: number) => ({
 	hidden: {
 		x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
 		y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
@@ -118,7 +118,7 @@ export const fadeIn = (direction: string, type: string, delay: number, duration:
 			type,
 			delay,
 			duration,
-			ease: "easeOut",
+			ease: "easeOut" as const,
 		},
 	},
 });
@@ -145,7 +145,7 @@ export const footerVariants = {
 		opacity: 0,
 		y: 50,
 		transition: {
-			type: "spring",
+			type: "spring" as const,
 			stiffness: 300,
 			damping: 140,
 		},
@@ -154,7 +154,7 @@ export const footerVariants = {
 		opacity: 1,
 		y: 0,
 		transition: {
-			type: "spring",
+			type: "spring" as const,
 			stiffness: 80,
 			delay: 0.5,
 		},

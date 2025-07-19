@@ -1,4 +1,6 @@
-export const blogAuthor = {
+import { SchemaDefinition, ValidationRule } from '../../types'
+
+export const blogAuthor: SchemaDefinition = {
 	name: "author",
 	title: "Author",
 	type: "document",
@@ -7,7 +9,7 @@ export const blogAuthor = {
 			name: "name",
 			title: "Name",
 			type: "string",
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "slug",

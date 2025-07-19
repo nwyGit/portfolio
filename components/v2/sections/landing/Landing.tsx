@@ -2,7 +2,7 @@ import SocialLinks from "@/components/v2/shared/component/SocialLinks";
 import { Hero } from "@/components/v2/shared/type/types";
 
 interface LandingProps {
-	hero: Hero;
+	hero: Hero | null;
 }
 
 function LandingSubtitleTag({
@@ -18,6 +18,16 @@ function LandingSubtitleTag({
 }
 
 export default function Landing({ hero }: LandingProps) {
+	if (!hero) {
+		return (
+			<section className="landing-hero">
+				<div className="landing-content">
+					<h1 className="landing-title">Loading...</h1>
+					<p className="landing-description">Please wait while we load the content.</p>
+				</div>
+			</section>
+		);
+	}
 	const { greeting, name, description } = hero;
 
 	return (

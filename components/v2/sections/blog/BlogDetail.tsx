@@ -5,6 +5,7 @@ import Breadcrumbs, {
 } from "../../shared/component/Breadcrumbs";
 import Share from "./BlogShare";
 import Image from "next/image";
+import { PortableTextBlock } from '@portabletext/types';
 
 interface BlogDetailProps {
 	post: BlogPost;
@@ -12,6 +13,17 @@ interface BlogDetailProps {
 }
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
+	// Extract text content from PortableText blocks
+	const getTextContent = (blocks: PortableTextBlock[]): string => {
+		return blocks
+			?.map(block => {
+				if (block._type === 'block' && block.children) {
+					return block.children.map((child) => (child as any).text).join('');
+				}
+				return '';
+			})
+			.join('\n\n');
+	};
 	return (
 		<section className="blog-detail-section">
 			{/* Breadcrumb */}
@@ -29,17 +41,17 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
 					</div>
 					{/* Tags */}
 					<div className="blog-detail-tags">
-						{post.tags.map((tag, idx) => (
-							<span className="blog-detail-tag" key={tag + idx}>
-								{tag}
+						{post.tags?.map((tag, idx) => (
+							<span className="blog-detail-tag" key={(typeof tag === 'string' ? tag : tag.name) + idx}>
+								{typeof tag === 'string' ? tag : tag.name}
 							</span>
 						))}
 					</div>
 					{/* Main Image */}
 					<div className="blog-detail-image-container">
-						{post.featuredImage?.url ? (
+						{post.featuredImage?.asset?.url ? (
 							<Image
-								src={post.featuredImage.url}
+								src={post.featuredImage.asset.url}
 								alt={post.featuredImage.alt || "Blog Detail"}
 								width={700}
 								height={467}
@@ -61,11 +73,14 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
 							/>
 						)}
 					</div>
-					{/* Blog Content (HTML) */}
-					<div
-						className="blog-detail-content"
-						dangerouslySetInnerHTML={{ __html: post.content }}
-					/>
+					{/* Blog Content */}
+					<div className="blog-detail-content">
+						{getTextContent(post.content).split('\n\n').map((paragraph, idx) => (
+							<p key={idx} style={{ marginBottom: '1em' }}>
+								{paragraph}
+							</p>
+						))}
+					</div>
 				</div>
 				{/* Share Section */}
 				<div className="blog-detail-share">

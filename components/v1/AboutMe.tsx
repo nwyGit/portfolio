@@ -6,8 +6,9 @@ import Skill from "./Skill";
 import { urlFor } from "@/utils/sanity";
 import Image from "next/image";
 import Overlay from "./Overlay";
+import { V1AboutMeProps } from "./types";
 
-const AboutMe = ({ about, skills }) => {
+const AboutMe: React.FC<V1AboutMeProps> = ({ about, skills }) => {
 	return (
 		<section id="About" className={`${styles.section} ${styles.paddings}`}>
 			<motion.div
@@ -26,7 +27,7 @@ const AboutMe = ({ about, skills }) => {
 					<div className="flex md:order-last md:w-[40%] justify-center items-center">
 						<div className="relative">
 							<Image
-								src={about?.selfieURL}
+								src={about?.selfieURL || ''}
 								alt="selfie"
 								width={300}
 								height="0"

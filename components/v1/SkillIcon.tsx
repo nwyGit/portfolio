@@ -1,8 +1,9 @@
+import React from "react";
 import styles from "@/styles";
 import Image from "next/image";
-import React from "react";
+import { V1SkillIconProps } from "./types";
 
-const SkillIcon = ({ name, url }) => {
+const SkillIcon: React.FC<V1SkillIconProps> = ({ name, url }) => {
 	return (
 		<Image
 			src={url}

@@ -2,6 +2,7 @@ import React from "react";
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
 import { BlogPost } from "@/components/v2/shared/type/types";
+import { PortableTextBlock } from '@portabletext/types';
 import Image from "next/image";
 
 interface BlogCardProps {
@@ -10,6 +11,19 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 	const { title, content, tags, publishedAt } = post;
+	
+	// Extract text content from PortableText blocks for preview
+	const getTextContent = (blocks: PortableTextBlock[]): string => {
+		return blocks
+			?.map(block => {
+				if (block._type === 'block' && block.children) {
+					return block.children.map((child) => (child as any).text).join('');
+				}
+				return '';
+			})
+			.join(' ')
+			.slice(0, 200) + '...';
+	};
 	return (
 		<div
 			style={{
@@ -33,9 +47,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					overflow: "hidden",
 				}}
 			>
-				{post.featuredImage?.url ? (
+				{post.featuredImage?.asset?.url ? (
 					<Image
-						src={post.featuredImage.url}
+						src={post.featuredImage.asset.url}
 						alt={post.featuredImage.alt || "Blog Detail"}
 						width={500}
 						height={333}
@@ -102,9 +116,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 							marginBottom: 8,
 						}}
 					>
-						{tags.map((tag) => (
+						{tags?.map((tag) => (
 							<span
-								key={tag}
+								key={typeof tag === 'string' ? tag : tag.name}
 								style={{
 									display: "inline-flex",
 									alignItems: "center",
@@ -120,7 +134,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 									color: "#000",
 								}}
 							>
-								{tag}
+								{typeof tag === 'string' ? tag : tag.name}
 							</span>
 						))}
 					</div>
@@ -140,7 +154,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 							height: "4.2em",
 						}}
 					>
-						{content}
+						{getTextContent(content)}
 					</div>
 				</div>
 				{/* Button */}
@@ -165,7 +179,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					<DynamicButton
 						text="view more"
 						icon={<RxArrowTopRight size={24} />}
-						href={`/blogs/${post.slug}`}
+						href={`/blogs/${typeof post.slug === 'string' ? post.slug : post.slug?.current}`}
 						target="_blank"
 						className="btn-black"
 						style={{

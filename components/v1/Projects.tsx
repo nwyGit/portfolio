@@ -3,15 +3,16 @@ import { motion } from "framer-motion";
 import { fadeIn } from "@/utils/motion";
 import styles from "@/styles";
 import ProjectSet from "./ProjectSet";
+import { V1ProjectsProps, Project } from "./types";
 
-const Projects = ({ projects }) => {
-	const SDprojects = projects
-		.filter((pj) => pj.category.name === "Software Development")
-		.sort((a, b) => b.order - a.order);
+const Projects: React.FC<V1ProjectsProps> = ({ projects }) => {
+	const SDprojects: Project[] = projects
+		.filter((pj) => pj.category?.name === "Software Development")
+		.sort((a, b) => (b.order || 0) - (a.order || 0));
 
-	const DAprojects = projects
-		.filter((pj) => pj.category.name === "Data Analytics")
-		.sort((a, b) => b.order - a.order);
+	const DAprojects: Project[] = projects
+		.filter((pj) => pj.category?.name === "Data Analytics")
+		.sort((a, b) => (b.order || 0) - (a.order || 0));
 
 	return (
 		<section id="Projects" className={`${styles.section} ${styles.paddings}`}>

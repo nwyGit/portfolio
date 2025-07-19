@@ -7,7 +7,7 @@ import { SEO } from "@/components/v2/shared/component/SEO";
 import { getOrganizationSchema, getWebSiteSchema, getPersonDetailedSchema } from "@/utils/schemaBlogPosting";
 
 interface HomeProps {
-	hero: Hero;
+	hero: Hero | null;
 	skills: Skill[];
 	projects: Project[];
 }

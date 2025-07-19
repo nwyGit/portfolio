@@ -23,6 +23,19 @@ module.exports = {
 				secondary: "#219EBC",
 				"primary-contrast-text": "#FB8500",
 				"secondary-contrast-text": "#FFB703",
+				brand: {
+					primary: "#8ECAE6",
+					secondary: "#219EBC",
+				},
+			},
+			animation: {
+				shimmer: "shimmer 2s ease-in-out infinite",
+			},
+			keyframes: {
+				shimmer: {
+					"0%": { backgroundPosition: "-200% 0" },
+					"100%": { backgroundPosition: "200% 0" },
+				},
 			},
 		},
 	},

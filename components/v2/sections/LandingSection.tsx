@@ -5,7 +5,7 @@ import { Hero, Project, Skill } from "@/components/v2/shared/type/types";
 import ProjectSection from "./ProjectSection";
 
 interface LandingProps {
-	hero: Hero;
+	hero: Hero | null;
 	skills: Skill[];
 	projects: Project[];
 }

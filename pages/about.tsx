@@ -7,7 +7,7 @@ import { About, Skill } from "@/components/v2/shared/type/types";
 import { getPersonSchema } from "@/utils/schemaBlogPosting";
 
 interface AboutProps {
-	about: About;
+	about: About | null;
 	skills: Skill[];
 }
 

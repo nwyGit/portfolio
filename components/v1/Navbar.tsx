@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { fetchResume } from "@/utils/fetchData";
 import {
 	buttonVariants,
@@ -7,12 +8,13 @@ import {
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import styles from "../../styles";
-// navItems attributes
-const navItems = ["About", "Projects", "Contact"];
+import { ClickHandler } from "./types";
 
-const navComponent = (index, element) => {
+// navItems attributes
+const navItems: string[] = ["About", "Projects", "Contact"];
+
+const navComponent = (index: number, element: React.ReactElement): React.ReactElement => {
 	return (
 		<motion.li
 			variants={navVariants(index)}
@@ -27,12 +29,12 @@ const navComponent = (index, element) => {
 	);
 };
 
-const navLinks = navItems.map((item, index) => {
+const navLinks: React.ReactElement[] = navItems.map((item, index) => {
 	const element = <a href={`#${item}`}>{item}</a>;
 	return navComponent(index, element);
 });
 
-const Resume = ({ resumeURL }) => {
+const Resume = ({ resumeURL }: { resumeURL: string }): React.ReactElement => {
 	const element = (
 		<motion.button
 			variants={buttonVariants}
@@ -47,12 +49,12 @@ const Resume = ({ resumeURL }) => {
 };
 
 // NavBar component
-const Navbar = () => {
-	const [showMenu, setShowMenu] = useState(false);
-	const [resumeURL, setResumeURL] = useState("");
+const Navbar: React.FC = () => {
+	const [showMenu, setShowMenu] = useState<boolean>(false);
+	const [resumeURL, setResumeURL] = useState<string>("");
 
 	useEffect(() => {
-		async function getResume() {
+		async function getResume(): Promise<void> {
 			const data = await fetchResume();
 			setResumeURL(data?.resumeURL || "");
 		}
@@ -73,6 +75,8 @@ const Navbar = () => {
 			document.body.classList.add("overflow-hidden");
 		};
 	}, [showMenu]);
+
+	const toggleMenu: ClickHandler = () => setShowMenu(!showMenu);
 
 	return (
 		<>
@@ -101,7 +105,7 @@ const Navbar = () => {
 						</motion.div>
 						<ul className={`${styles.flexEnd} gap-16 items-center`}>
 							{navLinks}
-							{Resume(resumeURL)}
+							{Resume({ resumeURL })}
 						</ul>
 					</>
 				)}
@@ -119,7 +123,7 @@ const Navbar = () => {
 						className="h-[40px] w-auto"
 					/>
 				</Link>
-				<button onClick={() => setShowMenu(!showMenu)} className={``}>
+				<button onClick={toggleMenu} className={``}>
 					<Image
 						src="/menu.svg"
 						alt="Menu"
@@ -133,7 +137,7 @@ const Navbar = () => {
 			{showMenu && (
 				<div
 					className={`${styles.blurOverlay} z-20`}
-					onClick={() => setShowMenu(!showMenu)}
+					onClick={toggleMenu}
 				></div>
 			)}
 			{/* nav sidebar */}
@@ -145,7 +149,7 @@ const Navbar = () => {
 			>
 				{/* close button */}
 				<div className={`${styles.flexEnd} pt-4 pr-12`}>
-					<button onClick={() => setShowMenu(!showMenu)}>
+					<button onClick={toggleMenu}>
 						<Image
 							src="/close.svg"
 							alt="Menu"
@@ -161,13 +165,13 @@ const Navbar = () => {
 				>
 					{navItems.map((item, index) => {
 						const element = (
-							<a href={`#${item}`} onClick={() => setShowMenu(!showMenu)}>
+							<a href={`#${item}`} onClick={toggleMenu}>
 								{item}
 							</a>
 						);
 						return navComponent(index, element);
 					})}
-					{Resume(resumeURL)}
+					{Resume({ resumeURL })}
 				</ul>
 			</motion.aside>
 		</>

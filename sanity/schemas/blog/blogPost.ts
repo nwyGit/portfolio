@@ -1,4 +1,6 @@
-export const blogPost = {
+import { SchemaDefinition, ValidationRule, PreviewSelection } from '../../types'
+
+export const blogPost: SchemaDefinition = {
 	name: "post",
 	title: "Post",
 	type: "document",
@@ -7,7 +9,7 @@ export const blogPost = {
 			name: "title",
 			title: "Title",
 			type: "string",
-			validation: (Rule: any) => Rule.required().max(60),
+			validation: (Rule: ValidationRule) => Rule.required().max(60),
 		},
 		{
 			name: "slug",
@@ -17,27 +19,27 @@ export const blogPost = {
 				source: "title",
 				maxLength: 96,
 			},
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "summary",
 			title: "Summary",
 			type: "text",
 			rows: 3,
-			validation: (Rule: any) => Rule.max(160),
+			validation: (Rule: ValidationRule) => Rule.max(160),
 		},
 		{
 			name: "metaTitle",
 			title: "Meta Title (SEO)",
 			type: "string",
-			validation: (Rule: any) => Rule.max(60),
+			validation: (Rule: ValidationRule) => Rule.max(60),
 		},
 		{
 			name: "metaDescription",
 			title: "Meta Description (SEO)",
 			type: "text",
 			rows: 2,
-			validation: (Rule: any) => Rule.max(160),
+			validation: (Rule: ValidationRule) => Rule.max(160),
 		},
 		{
 			name: "keywords",
@@ -74,14 +76,14 @@ export const blogPost = {
 			title: "Author",
 			type: "reference",
 			to: [{ type: "author" }],
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "category",
 			title: "Category",
 			type: "reference",
 			to: [{ type: "blogCategory" }],
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "tags",
@@ -98,7 +100,7 @@ export const blogPost = {
 			name: "publishedAt",
 			title: "Published Date",
 			type: "datetime",
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
 			name: "updatedAt",
@@ -130,7 +132,7 @@ export const blogPost = {
 			author: "author.name",
 			media: "featuredImage",
 		},
-		prepare(selection: any) {
+		prepare(selection: PreviewSelection) {
 			const { author } = selection;
 			return Object.assign({}, selection, {
 				subtitle: author && `by ${author}`,

@@ -1,3 +1,5 @@
+import { withErrorHandling, validateMethod, ApiErrorHandler } from '@/utils/apiHelpers';
+
 const hostname = "https://raymond-ng.com";
 
 // Static pages with their priorities and change frequencies
@@ -28,8 +30,19 @@ const staticPages = [
 	},
 ];
 
-export default async function handler(req, res) {
+async function handler(req, res) {
+	validateMethod(req, res, ['GET']);
+	
+	if (!hostname) {
+		throw new ApiErrorHandler('Hostname not configured', 500, 'CONFIG_ERROR');
+	}
+
+	if (!Array.isArray(staticPages) || staticPages.length === 0) {
+		throw new ApiErrorHandler('No static pages configured', 500, 'CONFIG_ERROR');
+	}
+
 	res.setHeader("Content-Type", "application/xml");
+	res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=86400"); // Cache for 24 hours
 	
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -47,3 +60,5 @@ ${staticPages
 
 	res.status(200).send(sitemap);
 }
+
+export default withErrorHandling(handler);

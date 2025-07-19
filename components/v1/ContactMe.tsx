@@ -9,17 +9,18 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { fadeIn, buttonVariants } from "@/utils/motion";
 import styles from "@/styles";
+import { V1ContactMeProps, ContactFormData } from "./types";
 
-const Contact = () => {
+const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
+	} = useForm<ContactFormData>({
 		defaultValues: { name: "", email: "", phone: "", message: "" },
 	});
 
-	function submitForm(formData) {
+	function submitForm(formData: ContactFormData): void {
 		fetch("https://formsubmit.co/ajax/66a07d84c10938629ee19b58c7904c69", {
 			method: "POST",
 			headers: {
@@ -40,7 +41,7 @@ const Contact = () => {
 	}
 
 	return (
-		<section id="Contact" className={`${styles.section}  ${styles.paddings}`}>
+		<section id="Contact" className={`${styles.section} ${styles.paddings} ${className || ''}`}>
 			<motion.div
 				variants={fadeIn("up", "tween", 0.6, 1)}
 				initial="hidden"
@@ -104,12 +105,12 @@ const Contact = () => {
 							<HiOutlinePhone className="h-5 w-5 text-gray-500" />
 						</span>
 						<input
-							type="phone"
+							type="tel"
 							{...register("phone")}
 							placeholder="+1-333-666-8888"
 							required
 							className={`${styles.formInput}`}
-						></input>
+						/>
 					</div>
 					{errors.message?.type === "required" && (
 						<span className="text-primary-contrast-text">
@@ -122,7 +123,7 @@ const Contact = () => {
 						</span>
 						<textarea
 							{...register("message", { required: true })}
-							rows="5"
+							rows={5}
 							placeholder="Your message..."
 							className={`${styles.formInput} ${
 								errors.message && "inputError"

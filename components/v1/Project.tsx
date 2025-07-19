@@ -8,9 +8,10 @@ import { useMediaQuery } from "react-responsive";
 import Overlay from "./Overlay";
 import SkillIcon from "./SkillIcon";
 import { urlFor } from "@/utils/sanity";
+import { V1ProjectProps } from "./types";
 
-const Project = ({ data }) => {
-	const [mobileScreen, setMobileScreen] = useState(false);
+const Project: React.FC<V1ProjectProps> = ({ data }) => {
+	const [mobileScreen, setMobileScreen] = useState<boolean>(false);
 	const isMobile = useMediaQuery({ maxWidth: 767 });
 
 	useEffect(() => {
@@ -47,8 +48,8 @@ const Project = ({ data }) => {
 					<p>{summary}</p>
 					<ul className={`${styles.FrameworkBox}`}>
 						{technologies
-							?.sort((a, b) => a.order - b.order)
-							.map((tech, idx) => {
+							?.sort((a: any, b: any) => a.order - b.order)
+							.map((tech: any, idx: number) => {
 								return (
 									<li key={idx} className="bg-white p-1 rounded-full">
 										<SkillIcon
