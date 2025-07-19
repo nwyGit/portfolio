@@ -68,11 +68,18 @@ export default function ChineseBlogIndex({ posts }: BlogIndexProps) {
 											{new Date(localizedPost.publishedAt).toLocaleDateString('zh-TW')}
 										</time>
 									</div>
-									{localizedPost.category && (
+									{localizedPost.categories && localizedPost.categories.length > 0 && (
 										<div className="mt-3">
-											<span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
-												{localizedPost.category.name}
-											</span>
+											<div className="flex flex-wrap gap-1">
+												{localizedPost.categories.map((category) => (
+													<span 
+														key={category._id} 
+														className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+													>
+														{category.name_zh || category.name}
+													</span>
+												))}
+											</div>
 										</div>
 									)}
 								</div>
@@ -89,11 +96,9 @@ export const getStaticProps: GetStaticProps<BlogIndexProps> = async () => {
 	const query = groq`
 		*[_type == "post" && status == "published" && defined(title_zh)] | order(publishedAt desc) {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			metaTitle,
@@ -111,22 +116,21 @@ export const getStaticProps: GetStaticProps<BlogIndexProps> = async () => {
 				name,
 				slug
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			tags[]-> {
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
-			keywords
+			keywords,
+			keywords_zh
 		}
 	`;
 

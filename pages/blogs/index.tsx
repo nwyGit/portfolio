@@ -17,7 +17,6 @@ export async function getStaticProps() {
 	const blogs: BlogPost[] = [
 		{
 			_id: "1",
-			language: "en" as const,
 			title: "Blog Post 1",
 			slug: { current: "blog-post-1" },
 			content: [
@@ -44,7 +43,6 @@ export async function getStaticProps() {
 		},
 		{
 			_id: "2",
-			language: "en" as const,
 			title: "Blog Post 2",
 			slug: { current: "blog-post-2" },
 			content: [

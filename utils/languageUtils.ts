@@ -18,7 +18,7 @@ export function localizeBlogPost(post: BlogPost, language: Language): BlogPostWi
 	return {
 		...post,
 		title: isEnglish ? post.title : (post.title_zh || post.title),
-		slug: isEnglish ? post.slug : (post.slug_zh || post.slug),
+		slug: post.slug, // Single slug for both languages
 		summary: isEnglish ? post.summary : (post.summary_zh || post.summary),
 		content: isEnglish ? post.content : (post.content_zh || post.content),
 		metaTitle: isEnglish ? post.metaTitle : (post.metaTitle_zh || post.metaTitle),
@@ -35,7 +35,7 @@ export function localizeBlogCategory(category: BlogCategory, language: Language)
 	return {
 		...category,
 		name: isEnglish ? category.name : (category.name_zh || category.name),
-		slug: isEnglish ? category.slug : (category.slug_zh || category.slug),
+		slug: category.slug, // Using single slug for categories too
 		description: isEnglish ? category.description : (category.description_zh || category.description),
 	};
 }
@@ -49,7 +49,7 @@ export function localizeBlogTag(tag: BlogTag, language: Language) {
 	return {
 		...tag,
 		name: isEnglish ? tag.name : (tag.name_zh || tag.name),
-		slug: isEnglish ? tag.slug : (tag.slug_zh || tag.slug),
+		slug: tag.slug, // Using single slug for tags too
 	};
 }
 

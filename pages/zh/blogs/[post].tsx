@@ -119,12 +119,19 @@ export default function ChineseBlogPost({ post, faqs }: BlogPostPageProps) {
 								day: 'numeric',
 							})}
 						</time>
-						{localizedPost.category && (
+						{localizedPost.categories && localizedPost.categories.length > 0 && (
 							<>
 								<span>•</span>
-								<span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-									{localizedPost.category.name_zh || localizedPost.category.name}
-								</span>
+								<div className="flex flex-wrap gap-1">
+									{localizedPost.categories.map((category) => (
+										<span 
+											key={category._id} 
+											className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm"
+										>
+											{category.name_zh || category.name}
+										</span>
+									))}
+								</div>
 							</>
 						)}
 					</div>
@@ -160,18 +167,16 @@ export default function ChineseBlogPost({ post, faqs }: BlogPostPageProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
 	const query = groq`
 		*[_type == "post" && status == "published" && defined(title_zh)] {
-			slug,
-			slug_zh
+			slug
 		}
 	`;
 
 	const posts = await sanityClient.fetch<{ 
 		slug: { current: string };
-		slug_zh?: { current: string };
 	}[]>(query);
 	
 	const paths = posts.map((post) => ({
-		params: { post: post.slug_zh?.current || post.slug.current },
+		params: { post: post.slug.current },
 	}));
 
 	return {
@@ -183,15 +188,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params }) => {
 	const slug = params?.post as string;
 
-	// Try to find post by Chinese slug first, then fallback to English slug
+	// Find post by slug
 	const postQuery = groq`
-		*[_type == "post" && (slug_zh.current == $slug || slug.current == $slug) && status == "published"][0] {
+		*[_type == "post" && slug.current == $slug && status == "published"][0] {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			content,
@@ -217,12 +220,11 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 					}
 				}
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
 				slug,
-				slug_zh,
 				description,
 				description_zh
 			},
@@ -230,12 +232,12 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
 			updatedAt,
 			keywords,
+			keywords_zh,
 			canonicalUrl
 		}
 	`;
@@ -248,8 +250,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 			answer,
 			answer_zh,
 			order,
-			category,
-			language
+			category
 		}
 	`;
 

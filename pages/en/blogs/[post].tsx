@@ -75,7 +75,7 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 						← {messages.backToBlog}
 					</Link>
 					<Link 
-						href={`/zh/blogs/${post.slug_zh?.current || localizedPost.slug.current}`}
+						href={`/zh/blogs/${localizedPost.slug.current}`}
 						className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
 					>
 						{messages.switchLanguage}
@@ -117,12 +117,19 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 								day: 'numeric',
 							})}
 						</time>
-						{localizedPost.category && (
+						{localizedPost.categories && localizedPost.categories.length > 0 && (
 							<>
 								<span>•</span>
-								<span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-									{localizedPost.category.name}
-								</span>
+								<div className="flex flex-wrap gap-1">
+									{localizedPost.categories.map((category) => (
+										<span 
+											key={category._id} 
+											className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm"
+										>
+											{category.name}
+										</span>
+									))}
+								</div>
 							</>
 						)}
 					</div>
@@ -180,11 +187,9 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 	const postQuery = groq`
 		*[_type == "post" && slug.current == $slug && status == "published"][0] {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			content,
@@ -210,12 +215,11 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 					}
 				}
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
 				slug,
-				slug_zh,
 				description,
 				description_zh
 			},
@@ -223,12 +227,12 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
 			updatedAt,
 			keywords,
+			keywords_zh,
 			canonicalUrl
 		}
 	`;
@@ -241,8 +245,7 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 			answer,
 			answer_zh,
 			order,
-			category,
-			language
+			category
 		}
 	`;
 

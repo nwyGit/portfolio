@@ -18,20 +18,12 @@ export const blogTag: SchemaDefinition = {
 		},
 		{
 			name: "slug",
-			title: "Slug (English)",
+			title: "Slug",
 			type: "slug",
 			options: {
 				source: "name",
 			},
 			validation: (Rule: ValidationRule) => Rule.required(),
-		},
-		{
-			name: "slug_zh",
-			title: "Slug (Traditional Chinese)",
-			type: "slug",
-			options: {
-				source: "name_zh",
-			},
 		},
 	],
 };

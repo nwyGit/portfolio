@@ -6,19 +6,6 @@ export const blogPost: SchemaDefinition = {
 	type: "document",
 	fields: [
 		{
-			name: "language",
-			title: "Language",
-			type: "string",
-			options: {
-				list: [
-					{ title: "English", value: "en" },
-					{ title: "Traditional Chinese", value: "zh-Hant" },
-				],
-			},
-			initialValue: "en",
-			validation: (Rule: ValidationRule) => Rule.required(),
-		},
-		{
 			name: "title",
 			title: "Title (English)",
 			type: "string",
@@ -32,22 +19,13 @@ export const blogPost: SchemaDefinition = {
 		},
 		{
 			name: "slug",
-			title: "Slug (English)",
+			title: "Slug",
 			type: "slug",
 			options: {
 				source: "title",
 				maxLength: 96,
 			},
 			validation: (Rule: ValidationRule) => Rule.required(),
-		},
-		{
-			name: "slug_zh",
-			title: "Slug (Traditional Chinese)",
-			type: "slug",
-			options: {
-				source: "title_zh",
-				maxLength: 96,
-			},
 		},
 		{
 			name: "summary",
@@ -91,7 +69,16 @@ export const blogPost: SchemaDefinition = {
 		},
 		{
 			name: "keywords",
-			title: "Keywords",
+			title: "Keywords (English)",
+			type: "array",
+			of: [{ type: "string" }],
+			options: {
+				layout: "tags",
+			},
+		},
+		{
+			name: "keywords_zh",
+			title: "Keywords (Traditional Chinese)",
 			type: "array",
 			of: [{ type: "string" }],
 			options: {
@@ -133,11 +120,16 @@ export const blogPost: SchemaDefinition = {
 			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
-			name: "category",
-			title: "Category",
-			type: "reference",
-			to: [{ type: "blogCategory" }],
-			validation: (Rule: ValidationRule) => Rule.required(),
+			name: "categories",
+			title: "Categories",
+			type: "array",
+			of: [
+				{
+					type: "reference",
+					to: [{ type: "blogCategory" }],
+				},
+			],
+			validation: (Rule: ValidationRule) => Rule.required().min(1),
 		},
 		{
 			name: "tags",

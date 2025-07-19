@@ -36,7 +36,6 @@ interface BlogPostProps {
 const mockPosts: BlogPost[] = [
 	{
 		_id: "1",
-		language: "en" as const,
 		title: "Blog Post 1",
 		metaTitle: "Blog Post 1 | Raymond Ng",
 		metaDescription: "This is a meta description for Blog Post 1.",
@@ -73,7 +72,6 @@ const mockPosts: BlogPost[] = [
 	},
 	{
 		_id: "2",
-		language: "en" as const,
 		title: "Blog Post 2",
 		metaTitle: "Blog Post 2 | Raymond Ng",
 		metaDescription: "This is a meta description for Blog Post 2.",
@@ -150,12 +148,12 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 	const breadcrumbItems = [
 		{ name: "Home", href: "/" },
 		{ name: "Blogs", href: "/blogs" },
-		// If category exists, add it
-		...(post.category?.name
+		// If categories exist, add the first one
+		...(post.categories && post.categories.length > 0
 			? [
 					{
-						name: post.category.name,
-						href: `/blogs/categories/${post.category.name}`,
+						name: post.categories[0].name,
+						href: `/blogs/categories/${post.categories[0].name}`,
 					},
 				]
 			: []),

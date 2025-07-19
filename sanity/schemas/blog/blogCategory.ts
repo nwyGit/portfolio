@@ -18,20 +18,12 @@ export const blogCategory: SchemaDefinition = {
 		},
 		{
 			name: "slug",
-			title: "Slug (English)",
+			title: "Slug",
 			type: "slug",
 			options: {
 				source: "name",
 			},
 			validation: (Rule: ValidationRule) => Rule.required(),
-		},
-		{
-			name: "slug_zh",
-			title: "Slug (Traditional Chinese)",
-			type: "slug",
-			options: {
-				source: "name_zh",
-			},
 		},
 		{
 			name: "description",
@@ -45,7 +37,16 @@ export const blogCategory: SchemaDefinition = {
 		},
 		{
 			name: "keywords",
-			title: "SEO Keywords",
+			title: "SEO Keywords (English)",
+			type: "array",
+			of: [{ type: "string" }],
+			options: {
+				layout: "tags",
+			},
+		},
+		{
+			name: "keywords_zh",
+			title: "SEO Keywords (Traditional Chinese)",
 			type: "array",
 			of: [{ type: "string" }],
 			options: {

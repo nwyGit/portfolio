@@ -143,11 +143,9 @@ export const fetchBlogPosts = async (language?: Language): Promise<BlogPost[]> =
 	const query = groq`
 		*[_type == "post" && status == "published" ${languageFilter}] | order(publishedAt desc) {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			metaTitle,
@@ -165,23 +163,22 @@ export const fetchBlogPosts = async (language?: Language): Promise<BlogPost[]> =
 				name,
 				slug
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			tags[]-> {
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
 			updatedAt,
-			keywords
+			keywords,
+			keywords_zh
 		}
 	`;
 
@@ -196,16 +193,12 @@ export const fetchBlogPosts = async (language?: Language): Promise<BlogPost[]> =
 };
 
 export const fetchBlogPost = async (slug: string, language?: Language): Promise<BlogPost | null> => {
-	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
-	
 	const query = groq`
-		*[_type == "post" && ${slugField} == $slug && status == "published"][0] {
+		*[_type == "post" && slug.current == $slug && status == "published"][0] {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			content,
@@ -231,12 +224,11 @@ export const fetchBlogPost = async (slug: string, language?: Language): Promise<
 					}
 				}
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
 				slug,
-				slug_zh,
 				description,
 				description_zh
 			},
@@ -244,12 +236,12 @@ export const fetchBlogPost = async (slug: string, language?: Language): Promise<
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
 			updatedAt,
 			keywords,
+			keywords_zh,
 			canonicalUrl
 		}
 	`;
@@ -271,10 +263,10 @@ export const fetchBlogCategories = async (language?: Language): Promise<BlogCate
 			name,
 			name_zh,
 			slug,
-			slug_zh,
 			description,
 			description_zh,
-			keywords
+			keywords,
+			keywords_zh
 		}
 	`;
 
@@ -294,8 +286,7 @@ export const fetchBlogTags = async (language?: Language): Promise<BlogTag[]> => 
 			_id,
 			name,
 			name_zh,
-			slug,
-			slug_zh
+			slug
 		}
 	`;
 
@@ -336,7 +327,6 @@ export const fetchBlogFAQs = async (postId: string): Promise<BlogFAQ[]> => {
 };
 
 export const fetchPostsByCategory = async (categorySlug: string, language?: Language): Promise<BlogPost[]> => {
-	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
 	const postLanguageFilter = language 
 		? language === 'en' 
 			? '&& defined(title)'
@@ -344,13 +334,11 @@ export const fetchPostsByCategory = async (categorySlug: string, language?: Lang
 		: '';
 
 	const query = groq`
-		*[_type == "post" && status == "published" && category->${slugField} == $categorySlug ${postLanguageFilter}] | order(publishedAt desc) {
+		*[_type == "post" && status == "published" && $categorySlug in categories[]->slug.current ${postLanguageFilter}] | order(publishedAt desc) {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			metaTitle,
@@ -368,15 +356,15 @@ export const fetchPostsByCategory = async (categorySlug: string, language?: Lang
 				name,
 				slug
 			},
-			category-> {
+			categories[]-> {
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
-			keywords
+			keywords,
+			keywords_zh
 		}
 	`;
 
@@ -391,7 +379,6 @@ export const fetchPostsByCategory = async (categorySlug: string, language?: Lang
 };
 
 export const fetchPostsByTag = async (tagSlug: string, language?: Language): Promise<BlogPost[]> => {
-	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
 	const postLanguageFilter = language 
 		? language === 'en' 
 			? '&& defined(title)'
@@ -399,13 +386,11 @@ export const fetchPostsByTag = async (tagSlug: string, language?: Language): Pro
 		: '';
 
 	const query = groq`
-		*[_type == "post" && status == "published" && $tagSlug in tags[]->${slugField} ${postLanguageFilter}] | order(publishedAt desc) {
+		*[_type == "post" && status == "published" && $tagSlug in tags[]->slug.current ${postLanguageFilter}] | order(publishedAt desc) {
 			_id,
-			language,
 			title,
 			title_zh,
 			slug,
-			slug_zh,
 			summary,
 			summary_zh,
 			metaTitle,
@@ -427,11 +412,11 @@ export const fetchPostsByTag = async (tagSlug: string, language?: Language): Pro
 				_id,
 				name,
 				name_zh,
-				slug,
-				slug_zh
+				slug
 			},
 			publishedAt,
-			keywords
+			keywords,
+			keywords_zh
 		}
 	`;
 

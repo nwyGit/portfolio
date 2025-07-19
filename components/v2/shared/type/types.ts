@@ -47,7 +47,6 @@ export interface Category {
 
 export interface BlogPost {
 	_id: string;
-	language: 'en' | 'zh-Hant';
 	title: string;
 	title_zh?: string;
 	metaTitle?: string;
@@ -57,15 +56,12 @@ export interface BlogPost {
 	slug: {
 		current: string;
 	};
-	slug_zh?: {
-		current: string;
-	};
 	summary?: string;
 	summary_zh?: string;
 	content: PortableTextBlock[];
 	content_zh?: PortableTextBlock[];
 	author: BlogAuthor;
-	category?: BlogCategory;
+	categories?: BlogCategory[];
 	tags?: BlogTag[] | string[];
 	featuredImage?: {
 		asset: {
@@ -78,6 +74,7 @@ export interface BlogPost {
 	status?: 'draft' | 'published' | 'archived';
 	canonicalUrl?: string;
 	keywords?: string[];
+	keywords_zh?: string[];
 	faqs?: BlogFAQ[];
 }
 
@@ -107,12 +104,10 @@ export interface BlogCategory {
 	slug: {
 		current: string;
 	};
-	slug_zh?: {
-		current: string;
-	};
 	description?: string;
 	description_zh?: string;
 	keywords?: string[];
+	keywords_zh?: string[];
 }
 
 export interface BlogTag {
@@ -120,9 +115,6 @@ export interface BlogTag {
 	name: string;
 	name_zh?: string;
 	slug: {
-		current: string;
-	};
-	slug_zh?: {
 		current: string;
 	};
 }
