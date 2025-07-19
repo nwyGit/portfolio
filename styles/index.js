@@ -1,52 +1,4 @@
-interface StylesConfig {
-	readonly innerWidth: string;
-	readonly interWidth: string;
-
-	readonly paddings: string;
-	readonly yPaddings: string;
-	readonly xPaddings: string;
-	readonly topPaddings: string;
-	readonly bottomPaddings: string;
-
-	readonly flexCenter: string;
-	readonly flexStart: string;
-	readonly flexEnd: string;
-	readonly navPadding: string;
-
-	readonly bubbleContainer: string;
-
-	readonly lgNavBar: string;
-	readonly smNavBar: string;
-	readonly popUpNav: string;
-	readonly blurOverlay: string;
-
-	readonly introHeading: string;
-	readonly introHeading2: string;
-	readonly sectionHeader: string;
-	readonly section: string;
-	readonly divider: string;
-
-	readonly text: string;
-	readonly highlightText: string;
-	readonly contentBox: string;
-	readonly skillsBox: string;
-	readonly skillsItem: string;
-	readonly skillsIcon: string;
-
-	readonly formIcon: string;
-	readonly formInput: string;
-	readonly formInputPos: string;
-	readonly button: string;
-
-	readonly FrameworkBox: string;
-
-	readonly FooterBox: string;
-
-	readonly FourOhFourHeading: string;
-	readonly FourOhFourHeading2: string;
-}
-
-const styles: StylesConfig = {
+const styles = {
 	innerWidth: "2xl:max-w-[1280px] w-full",
 	interWidth: "lg:w-[80%] w-[100%]",
 
@@ -63,10 +15,8 @@ const styles: StylesConfig = {
 
 	bubbleContainer: "fixed inset-0 w-full h-screen",
 
-	lgNavBar:
-		"bg-[#002538] sm:px-12 sm:py-4 md:px-18 lg:px-32 p-6 md:block hidden drop-shadow-md fixed top-0 w-full z-20",
-	smNavBar:
-		"flex justify-end justify-between bg-[#002538] md:hidden sm:px-20 px-10 py-4 fixed top-0 w-full drop-shadow-md z-20",
+	lgNavBar: "bg-[#002538] sm:px-12 sm:py-4 md:px-18 lg:px-32 p-6 md:block hidden drop-shadow-md fixed top-0 w-full z-20",
+	smNavBar: "flex justify-end justify-between bg-[#002538] md:hidden sm:px-20 px-10 py-4 fixed top-0 w-full drop-shadow-md z-20",
 	popUpNav: "bg-[#02415A] fixed right-0 min-w-[66.6%] h-full top-0",
 	blurOverlay: "backdrop-blur-sm fixed top-0 left-0 w-full h-full",
 
@@ -80,15 +30,13 @@ const styles: StylesConfig = {
 	highlightText: "text-secondary-contrast-text relative",
 	contentBox: "md:w-[60%] w-full",
 	skillsBox: "grid grid-cols-4 lg:grid-cols-5 2xl:grid-cols-6 pt-4",
-	skillsItem:
-		"md:flex grid place-items-center md:text-base text-xs bg-gray-200 rounded-xl m-1 p-1",
+	skillsItem: "md:flex grid place-items-center md:text-base text-xs bg-gray-200 rounded-xl m-1 p-1",
 	skillsIcon: "inline-block w-6 h-6 m-1",
 
 	formIcon: "absolute inset-y-0 flex items-center pl-4",
 	formInput: "rounded-2xl p-4 pl-14 w-full text-background-color",
 	formInputPos: "relative md:w-[70%] lg:w-[50%] w-full",
-	button:
-		"border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full",
+	button: "border-2 text-white bg-secondary-contrast-text hover:bg-primary-contrast-text hover:text-white rounded-full",
 
 	FrameworkBox: "flex flex-wrap justify-around items-around mt-4 gap-2",
 
@@ -98,4 +46,4 @@ const styles: StylesConfig = {
 	FourOhFourHeading2: "font-medium lg:text-4xl text-3xl",
 };
 
-export default styles;
+module.exports = styles;
