@@ -1,10 +1,11 @@
 import { FC } from "react";
-// import { getBlogs } from "../lib/sanity/queries";
+import { GetStaticProps } from "next";
 import Layout from "@/components/v2/Layout";
 import BlogSection from "@/components/v2/sections/BlogSection";
 import { SEO } from "@/components/v2/shared/component/SEO";
 import { BlogPost } from "@/components/v2/shared/type/types";
 import { getBreadcrumbListSchema } from "@/utils/schemaBlogPosting";
+import { fetchBlogPosts } from "@/utils/fetchData";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -12,69 +13,25 @@ interface BlogsPageProps {
 	blogs: BlogPost[];
 }
 
-export async function getStaticProps() {
-	// const blogs = await getBlogs();
-	const blogs: BlogPost[] = [
-		{
-			_id: "1",
-			title: "Blog Post 1",
-			slug: { current: "blog-post-1" },
-			content: [
-				{
-					_type: 'block',
-					_key: 'content1',
-					children: [
-						{
-							_type: 'span',
-							text: 'This is a sample blog post content. It will be replaced with actual content from Sanity later.',
-							marks: []
-						}
-					],
-					markDefs: [],
-					style: 'normal'
-				}
-			],
-			publishedAt: "2024-03-01T10:00:00Z",
-			author: {
-				_id: "1",
-				name: "Raymond Ng",
-			},
-			tags: ["Web Development", "React"],
-		},
-		{
-			_id: "2",
-			title: "Blog Post 2",
-			slug: { current: "blog-post-2" },
-			content: [
-				{
-					_type: 'block',
-					_key: 'content2',
-					children: [
-						{
-							_type: 'span',
-							text: 'Another sample blog post content. This will also be replaced with actual content from Sanity later.',
-							marks: []
-						}
-					],
-					markDefs: [],
-					style: 'normal'
-				}
-			],
-			publishedAt: "2024-03-02T10:00:00Z",
-			author: {
-				_id: "2",
-				name: "Raymond Ng",
-			},
-			tags: ["TypeScript", "Next.js"],
-		},
-	];
+export const getStaticProps: GetStaticProps<BlogsPageProps> = async () => {
+	try {
+		const blogs = await fetchBlogPosts();
 
-	return {
-		props: {
-			blogs,
-		},
-		revalidate: 60, // Revalidate every minute
-	};
+		return {
+			props: {
+				blogs,
+			},
+			revalidate: 60, // Revalidate every minute
+		};
+	} catch (error) {
+		console.error('Failed to fetch blog posts:', error);
+		return {
+			props: {
+				blogs: [],
+			},
+			revalidate: 60,
+		};
+	}
 }
 
 const BLOGS_PER_PAGE = 5;

@@ -9,6 +9,7 @@ import { validateMetaTags } from "@/utils/metaTagValidation";
 import Layout from "@/components/v2/Layout";
 import { BlogPost } from "@/components/v2/shared/type/types";
 import { PortableTextBlock } from '@portabletext/types';
+import { fetchBlogPosts, fetchBlogPost } from "@/utils/fetchData";
 
 interface PortableTextChild {
 	_type?: string;
@@ -33,101 +34,50 @@ interface BlogPostProps {
 	post: BlogPost;
 }
 
-const mockPosts: BlogPost[] = [
-	{
-		_id: "1",
-		title: "Blog Post 1",
-		metaTitle: "Blog Post 1 | Raymond Ng",
-		metaDescription: "This is a meta description for Blog Post 1.",
-		slug: { current: "blog-post-1" },
-		summary: "This is a summary for Blog Post 1.",
-		content: [
-			{
-				_type: 'block',
-				_key: 'content1',
-				children: [
-					{
-						_type: 'span',
-						text: 'This is a sample blog post content. It will be replaced with actual content from Sanity later.',
-						marks: []
-					}
-				],
-				markDefs: [],
-				style: 'normal'
-			}
-		],
-		author: { _id: "1", name: "Raymond Ng" },
-		tags: ["Web Development", "React"],
-		featuredImage: {
-			asset: {
-				url: "https://raymond-ng.com/images/blog-post-1.jpg",
-			},
-			alt: "Blog Post 1 image",
-		},
-		publishedAt: "2024-03-01T10:00:00Z",
-		updatedAt: "2024-03-02T12:00:00Z",
-		status: "published" as const,
-		canonicalUrl: "https://raymond-ng.com/blogs/blog-post-1",
-		keywords: ["web", "react"],
-	},
-	{
-		_id: "2",
-		title: "Blog Post 2",
-		metaTitle: "Blog Post 2 | Raymond Ng",
-		metaDescription: "This is a meta description for Blog Post 2.",
-		slug: { current: "blog-post-2" },
-		summary: "This is a summary for Blog Post 2.",
-		content: [
-			{
-				_type: 'block',
-				_key: 'content2',
-				children: [
-					{
-						_type: 'span',
-						text: 'Another sample blog post content. This will also be replaced with actual content from Sanity later.',
-						marks: []
-					}
-				],
-				markDefs: [],
-				style: 'normal'
-			}
-		],
-		author: { _id: "2", name: "Raymond Ng" },
-		tags: ["TypeScript", "Next.js"],
-		featuredImage: {
-			asset: {
-				url: "https://raymond-ng.com/images/blog-post-2.jpg",
-			},
-			alt: "Blog Post 2 image",
-		},
-		publishedAt: "2024-03-02T10:00:00Z",
-		updatedAt: "2024-03-03T12:00:00Z",
-		status: "published" as const,
-		canonicalUrl: "https://raymond-ng.com/blogs/blog-post-2",
-		keywords: ["typescript", "nextjs"],
-	},
-];
-
 export const getStaticPaths: GetStaticPaths = async () => {
-	return {
-		paths: mockPosts.map((post) => ({ params: { post: post.slug.current } })),
-		fallback: false,
-	};
+	try {
+		const posts = await fetchBlogPosts();
+		
+		const paths = posts.map((post) => ({
+			params: { post: post.slug.current },
+		}));
+
+		return {
+			paths,
+			fallback: 'blocking',
+		};
+	} catch (error) {
+		console.error('Failed to fetch blog posts for static paths:', error);
+		return {
+			paths: [],
+			fallback: 'blocking',
+		};
+	}
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const { post } = context.params as { post: string };
-	const found = mockPosts.find((p) => p.slug.current === post);
-	if (!found) {
+	try {
+		const { post: slug } = context.params as { post: string };
+		const post = await fetchBlogPost(slug);
+		
+		if (!post) {
+			return {
+				notFound: true,
+			};
+		}
+
+		return {
+			props: {
+				post,
+			},
+			revalidate: 60,
+		};
+	} catch (error) {
+		console.error('Failed to fetch blog post:', error);
 		return {
 			notFound: true,
 		};
 	}
-	return {
-		props: {
-			post: found,
-		},
-	};
 };
 
 const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {

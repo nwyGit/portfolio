@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PortableText } from '@portabletext/react';
+import { portableTextComponents } from './PortableTextComponents';
 import { BlogFAQWithLanguage, Language } from '../type/types';
 import { getLocalizedMessages } from '@/utils/languageUtils';
 
@@ -51,7 +52,10 @@ const FAQItem: React.FC<FAQItemProps> = ({ faq, isOpen, onToggle }) => {
 			>
 				<div className="px-6 py-4 bg-white">
 					<div className="prose prose-sm max-w-none text-gray-700">
-						<PortableText value={faq.answer} />
+						<PortableText 
+							value={faq.answer} 
+							components={portableTextComponents}
+						/>
 					</div>
 				</div>
 			</div>

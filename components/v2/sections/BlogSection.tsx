@@ -23,7 +23,7 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 		const tagSet = new Set<string>();
 		blogs.forEach((blog) => {
 			blog.tags?.forEach((tag) => {
-				const tagName = typeof tag === 'string' ? tag : tag.name;
+				const tagName = typeof tag === "string" ? tag : tag.name;
 				tagSet.add(tagName);
 			});
 		});
@@ -37,31 +37,65 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 		const byCategory =
 			active === "all"
 				? blogs
-				: blogs.filter((blog) => 
-					blog.tags?.some(tag => {
-						const tagName = typeof tag === 'string' ? tag : tag.name;
-						return tagName === active;
-					})
-				);
+				: blogs.filter((blog) =>
+						blog.tags?.some((tag) => {
+							const tagName = typeof tag === "string" ? tag : tag.name;
+							return tagName === active;
+						})
+					);
 		if (!search.trim()) return byCategory;
 		return byCategory.filter((blog) => {
-			const contentText = blog.content
-				?.map(block => {
-					if (block._type === 'block' && block.children) {
-						return block.children.map((child) => (child as PortableTextChild).text || '').join('');
-					}
-					return '';
-				})
-				.join(' ') || '';
-			
-			return blog.title.toLowerCase().includes(search.toLowerCase()) ||
-				contentText.toLowerCase().includes(search.toLowerCase());
+			const contentText =
+				blog.content
+					?.map((block) => {
+						if (block._type === "block" && block.children) {
+							return block.children
+								.map((child) => (child as PortableTextChild).text || "")
+								.join("");
+						}
+						return "";
+					})
+					.join(" ") || "";
+
+			return (
+				blog.title.toLowerCase().includes(search.toLowerCase()) ||
+				contentText.toLowerCase().includes(search.toLowerCase())
+			);
 		});
 	}, [blogs, active, search]);
 
 	return (
 		<section className="pt-[130px]">
-			<h2 className="project-section-title">Blogs</h2>
+			<div
+				style={{
+					position: "relative",
+					textAlign: "center",
+					marginBottom: 24,
+					maxWidth: 1200,
+					margin: "0 auto 24px auto",
+					padding: "0 20px",
+				}}
+			>
+				<h2 className="project-section-title" style={{ margin: 0 }}>Blogs</h2>
+				<input
+					type="text"
+					placeholder="Search blogs..."
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					style={{
+						position: "absolute",
+						right: 20,
+						top: "50%",
+						transform: "translateY(-50%)",
+						padding: 8,
+						borderRadius: 6,
+						border: "1px solid #ccc",
+						width: 320,
+						fontSize: 16,
+					}}
+				/>
+			</div>
+
 			<div
 				style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
 			>
@@ -74,23 +108,6 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 					btnActiveClassName="category-filter-btn--active"
 					highlighterClassName="category-filter-highlighter"
 					withHighlighter
-				/>
-			</div>
-			<div
-				style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}
-			>
-				<input
-					type="text"
-					placeholder="Search blogs..."
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-					style={{
-						padding: 8,
-						borderRadius: 6,
-						border: "1px solid #ccc",
-						width: 320,
-						fontSize: 16,
-					}}
 				/>
 			</div>
 			<div

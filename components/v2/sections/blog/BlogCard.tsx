@@ -2,13 +2,6 @@ import React from "react";
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
 import { BlogPost } from "@/components/v2/shared/type/types";
-import { PortableTextBlock } from '@portabletext/types';
-
-interface PortableTextChild {
-	_type?: string;
-	text?: string;
-	marks?: string[];
-}
 import Image from "next/image";
 
 interface BlogCardProps {
@@ -16,19 +9,20 @@ interface BlogCardProps {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
-	const { title, content, tags, publishedAt } = post;
+	const { title, summary, tags, publishedAt } = post;
 	
-	// Extract text content from PortableText blocks for preview
-	const getTextContent = (blocks: PortableTextBlock[]): string => {
-		return blocks
-			?.map(block => {
-				if (block._type === 'block' && block.children) {
-					return block.children.map((child) => (child as PortableTextChild).text || '').join('');
-				}
-				return '';
-			})
-			.join(' ')
-			.slice(0, 200) + '...';
+	// Format date for display
+	const formatDate = (dateString: string): string => {
+		try {
+			const date = new Date(dateString);
+			return date.toLocaleDateString('en-US', {
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			});
+		} catch {
+			return dateString;
+		}
 	};
 	return (
 		<div
@@ -48,7 +42,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 				style={{
 					width: 500,
 					height: 333.33,
-					background: "rgba(0,0,0,0.05)",
 					borderRadius: 10,
 					overflow: "hidden",
 				}}
@@ -60,7 +53,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 						width={500}
 						height={333}
 						sizes="(max-width: 500px) 100vw, 500px"
-						style={{ width: "100%", height: "auto" }}
+						style={{ 
+							width: "100%", 
+							height: "100%", 
+							objectFit: "cover" 
+						}}
 						placeholder="blur"
 						blurDataURL="/assets/blog/image_blog_detail_1.png"
 						priority={false}
@@ -72,7 +69,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 						width={500}
 						height={333}
 						sizes="(max-width: 500px) 100vw, 500px"
-						style={{ width: "100%", height: "auto" }}
+						style={{ 
+							width: "100%", 
+							height: "100%", 
+							objectFit: "cover" 
+						}}
 						priority={false}
 					/>
 				)}
@@ -111,7 +112,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 							marginBottom: 8,
 						}}
 					>
-						{publishedAt}
+						{publishedAt ? formatDate(publishedAt) : ''}
 					</div>
 					<div
 						style={{
@@ -144,24 +145,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 							</span>
 						))}
 					</div>
-					<div
-						style={{
-							fontFamily: "Red Hat Text, sans-serif",
-							fontWeight: 300,
-							fontSize: 16,
-							lineHeight: 1.32,
-							color: "#000",
-							marginTop: 0,
-							display: "-webkit-box",
-							WebkitLineClamp: 3,
-							WebkitBoxOrient: "vertical",
-							overflow: "hidden",
-							textOverflow: "ellipsis",
-							height: "4.2em",
-						}}
-					>
-						{getTextContent(content)}
-					</div>
+					<p className="blog-card-summary font-red-hat-display font-normal text-[16px] leading-[1.32] text-black mt-0">
+						{summary || 'No summary available'}
+					</p>
 				</div>
 				{/* Button */}
 				<div

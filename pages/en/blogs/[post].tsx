@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import BlogFAQSection from '@/components/v2/shared/component/BlogFAQSection';
+import { portableTextComponents } from '@/components/v2/shared/component/PortableTextComponents';
 
 interface BlogPostPageProps {
 	post: BlogPost;
@@ -150,7 +151,10 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 
 				{/* Article content */}
 				<article className="prose prose-lg max-w-none mb-12">
-					<PortableText value={localizedPost.content} />
+					<PortableText 
+						value={localizedPost.content} 
+						components={portableTextComponents}
+					/>
 				</article>
 
 				{/* FAQ Section */}

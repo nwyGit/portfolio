@@ -9,13 +9,13 @@ export const blogPost: SchemaDefinition = {
 			name: "title",
 			title: "Title (English)",
 			type: "string",
-			validation: (Rule: ValidationRule) => Rule.required().max(60),
+			validation: (Rule: ValidationRule) => Rule.required().max(200),
 		},
 		{
 			name: "title_zh",
 			title: "Title (Traditional Chinese)",
 			type: "string",
-			validation: (Rule: ValidationRule) => Rule.max(60),
+			validation: (Rule: ValidationRule) => Rule.max(200),
 		},
 		{
 			name: "slug",
@@ -31,41 +31,41 @@ export const blogPost: SchemaDefinition = {
 			name: "summary",
 			title: "Summary (English)",
 			type: "text",
-			rows: 3,
-			validation: (Rule: ValidationRule) => Rule.max(160),
+			rows: 5,
+			validation: (Rule: ValidationRule) => Rule.max(500),
 		},
 		{
 			name: "summary_zh",
 			title: "Summary (Traditional Chinese)",
 			type: "text",
-			rows: 3,
-			validation: (Rule: ValidationRule) => Rule.max(160),
+			rows: 5,
+			validation: (Rule: ValidationRule) => Rule.max(500),
 		},
 		{
 			name: "metaTitle",
 			title: "Meta Title (English - SEO)",
 			type: "string",
-			validation: (Rule: ValidationRule) => Rule.max(60),
+			validation: (Rule: ValidationRule) => Rule.max(120),
 		},
 		{
 			name: "metaTitle_zh",
 			title: "Meta Title (Traditional Chinese - SEO)",
 			type: "string",
-			validation: (Rule: ValidationRule) => Rule.max(60),
+			validation: (Rule: ValidationRule) => Rule.max(120),
 		},
 		{
 			name: "metaDescription",
 			title: "Meta Description (English - SEO)",
 			type: "text",
-			rows: 2,
-			validation: (Rule: ValidationRule) => Rule.max(160),
+			rows: 3,
+			validation: (Rule: ValidationRule) => Rule.max(300),
 		},
 		{
 			name: "metaDescription_zh",
 			title: "Meta Description (Traditional Chinese - SEO)",
 			type: "text",
-			rows: 2,
-			validation: (Rule: ValidationRule) => Rule.max(160),
+			rows: 3,
+			validation: (Rule: ValidationRule) => Rule.max(300),
 		},
 		{
 			name: "keywords",
@@ -104,13 +104,59 @@ export const blogPost: SchemaDefinition = {
 			name: "content",
 			title: "Content (English)",
 			type: "array",
-			of: [{ type: "block" }],
+			of: [
+				{ 
+					type: "block",
+				},
+				{
+					type: "image",
+					options: {
+						hotspot: true,
+					},
+					fields: [
+						{
+							name: "alt",
+							title: "Alt Text",
+							type: "string",
+							validation: (Rule: ValidationRule) => Rule.required(),
+						},
+						{
+							name: "caption",
+							title: "Caption",
+							type: "string",
+						},
+					],
+				},
+			],
 		},
 		{
 			name: "content_zh",
 			title: "Content (Traditional Chinese)",
 			type: "array",
-			of: [{ type: "block" }],
+			of: [
+				{ 
+					type: "block",
+				},
+				{
+					type: "image",
+					options: {
+						hotspot: true,
+					},
+					fields: [
+						{
+							name: "alt",
+							title: "Alt Text",
+							type: "string",
+							validation: (Rule: ValidationRule) => Rule.required(),
+						},
+						{
+							name: "caption",
+							title: "Caption",
+							type: "string",
+						},
+					],
+				},
+			],
 		},
 		{
 			name: "author",

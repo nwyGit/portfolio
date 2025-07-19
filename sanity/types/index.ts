@@ -38,7 +38,12 @@ export interface SchemaField {
   type: string
   validation?: (rule: ValidationRule) => ValidationRule
   options?: Record<string, any>
-  of?: Array<{ type: string; to?: Array<{ type: string }> }>
+  of?: Array<{ 
+    type: string; 
+    to?: Array<{ type: string }>;
+    options?: Record<string, any>;
+    fields?: SchemaField[];
+  }>
   to?: Array<{ type: string }>
   fields?: SchemaField[]
   rows?: number
