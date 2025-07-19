@@ -7,18 +7,31 @@ export const blogTag: SchemaDefinition = {
 	fields: [
 		{
 			name: "name",
-			title: "Name",
+			title: "Name (English)",
 			type: "string",
 			validation: (Rule: ValidationRule) => Rule.required(),
 		},
 		{
+			name: "name_zh",
+			title: "Name (Traditional Chinese)",
+			type: "string",
+		},
+		{
 			name: "slug",
-			title: "Slug",
+			title: "Slug (English)",
 			type: "slug",
 			options: {
 				source: "name",
 			},
 			validation: (Rule: ValidationRule) => Rule.required(),
+		},
+		{
+			name: "slug_zh",
+			title: "Slug (Traditional Chinese)",
+			type: "slug",
+			options: {
+				source: "name_zh",
+			},
 		},
 	],
 };

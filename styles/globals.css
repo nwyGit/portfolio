@@ -15,7 +15,7 @@ h4,
 h5,
 h6 {
 	font-family: "Ubuntu", "Red Hat Display", "Open Sans", sans-serif;
-	color: theme("colors.primary-contrast-text");
+	color: theme("colors.primary-contrast");
 	font-weight: 700;
 }
 

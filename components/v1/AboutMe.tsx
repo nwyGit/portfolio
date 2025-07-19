@@ -26,7 +26,7 @@ const AboutMe: React.FC<V1AboutMeProps> = ({ about, skills }) => {
 				className="sm:space-y-2"
 			>
 				<div>
-					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">
+					<span className="text-primary-contrast text-3xl font-semibold mr-6">
 						| About Me
 					</span>
 				</div>

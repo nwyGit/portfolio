@@ -50,7 +50,7 @@ const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 				className="sm:space-y-2"
 			>
 				<span
-					className={`${styles.flexCenter} text-secondary-contrast-text text-xl`}
+					className={`${styles.flexCenter} text-secondary-contrast text-xl`}
 				>
 					What&apos;s Next?
 				</span>
@@ -68,7 +68,7 @@ const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 						to emails promptly.
 					</p>
 					{errors.name?.type === "required" && (
-						<span className="text-primary-contrast-text">Name is required</span>
+						<span className="text-primary-contrast">Name is required</span>
 					)}
 					<div className={`${styles.formInputPos}`}>
 						<span className={`${styles.formIcon}`}>
@@ -83,7 +83,7 @@ const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 						/>
 					</div>
 					{errors.email?.type === "required" && (
-						<span className="text-primary-contrast-text">
+						<span className="text-primary-contrast">
 							Email is required
 						</span>
 					)}
@@ -113,7 +113,7 @@ const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 						/>
 					</div>
 					{errors.message?.type === "required" && (
-						<span className="text-primary-contrast-text">
+						<span className="text-primary-contrast">
 							Please leave your message
 						</span>
 					)}

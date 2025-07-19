@@ -8,7 +8,7 @@ import {
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles";
+import styles from "@/styles";
 import { ClickHandler } from "./types";
 
 // navItems attributes
@@ -22,7 +22,7 @@ const navComponent = (index: number, element: React.ReactElement): React.ReactEl
 			whileInView="show"
 			viewport={{ once: true, amount: 0.25 }}
 			key={index}
-			className="hover:text-secondary-contrast-text"
+			className="hover:text-secondary-contrast"
 		>
 			{element}
 		</motion.li>
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
 							whileInView="show"
 							viewport={{ once: true, amount: 0.25 }}
 							key="logo"
-							className="fixed ml-10 hover:text-secondary-contrast-text"
+							className="fixed ml-10 hover:text-secondary-contrast"
 						>
 							<Link href="/">
 								<Image

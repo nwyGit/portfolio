@@ -47,14 +47,23 @@ export interface Category {
 
 export interface BlogPost {
 	_id: string;
+	language: 'en' | 'zh-Hant';
 	title: string;
+	title_zh?: string;
 	metaTitle?: string;
+	metaTitle_zh?: string;
 	metaDescription?: string;
+	metaDescription_zh?: string;
 	slug: {
 		current: string;
 	};
+	slug_zh?: {
+		current: string;
+	};
 	summary?: string;
+	summary_zh?: string;
 	content: PortableTextBlock[];
+	content_zh?: PortableTextBlock[];
 	author: BlogAuthor;
 	category?: BlogCategory;
 	tags?: BlogTag[] | string[];
@@ -69,6 +78,7 @@ export interface BlogPost {
 	status?: 'draft' | 'published' | 'archived';
 	canonicalUrl?: string;
 	keywords?: string[];
+	faqs?: BlogFAQ[];
 }
 
 export interface BlogAuthor {
@@ -93,22 +103,75 @@ export interface BlogAuthor {
 export interface BlogCategory {
 	_id: string;
 	name: string;
+	name_zh?: string;
 	slug: {
 		current: string;
 	};
+	slug_zh?: {
+		current: string;
+	};
 	description?: string;
+	description_zh?: string;
 	keywords?: string[];
 }
 
 export interface BlogTag {
 	_id: string;
 	name: string;
+	name_zh?: string;
 	slug: {
 		current: string;
 	};
+	slug_zh?: {
+		current: string;
+	};
+}
+
+export interface BlogFAQ {
+	_id: string;
+	blogPost: {
+		_ref: string;
+	};
+	language: 'en' | 'zh-Hant';
+	question: string;
+	question_zh?: string;
+	answer: PortableTextBlock[];
+	answer_zh?: PortableTextBlock[];
+	order: number;
+	category: 'general' | 'technical' | 'implementation' | 'troubleshooting' | 'best-practices';
+	isActive: boolean;
 }
 
 export interface Resume {
 	_id: string;
 	resumeURL: string;
+}
+
+// Utility types for language support
+export type Language = 'en' | 'zh-Hant';
+
+export interface LocalizedContent<T> {
+	en: T;
+	'zh-Hant'?: T;
+}
+
+export interface LanguageRouteParams {
+	lang: Language;
+	post?: string;
+	category?: string;
+	tag?: string;
+}
+
+export interface BlogPostWithLanguage extends Omit<BlogPost, 'title' | 'slug' | 'summary' | 'content' | 'metaTitle' | 'metaDescription'> {
+	title: string;
+	slug: { current: string };
+	summary?: string;
+	content: PortableTextBlock[];
+	metaTitle?: string;
+	metaDescription?: string;
+}
+
+export interface BlogFAQWithLanguage extends Omit<BlogFAQ, 'question' | 'answer'> {
+	question: string;
+	answer: PortableTextBlock[];
 }

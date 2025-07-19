@@ -8,6 +8,7 @@ import blogPost from "./schemas/blog/blogPost";
 import blogCategory from "./schemas/blog/blogCategory";
 import blogTag from "./schemas/blog/blogTag";
 import blogAuthor from "./schemas/blog/blogAuthor";
+import blogFAQ from "./schemas/blog/blogFAQ";
 
 export const schema = {
 	types: [
@@ -21,5 +22,6 @@ export const schema = {
 		blogCategory,
 		blogTag,
 		blogAuthor,
+		blogFAQ,
 	],
 };

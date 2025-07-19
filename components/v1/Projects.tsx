@@ -24,7 +24,7 @@ const Projects: React.FC<V1ProjectsProps> = ({ projects }) => {
 				className="sm:space-y-2 relative"
 			>
 				<div>
-					<span className="text-primary-contrast-text text-3xl font-semibold mr-6">
+					<span className="text-primary-contrast text-3xl font-semibold mr-6">
 						| Projects
 					</span>
 				</div>

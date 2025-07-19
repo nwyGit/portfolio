@@ -21,9 +21,9 @@ const ProjectSet: React.FC<ProjectSetSpecificProps> = ({ title, data }) => {
 				className="sm:space-y-2 relative"
 			>
 				<div className={`${styles.sectionHeader} mt-10`}>
-					<hr className="border-secondary-contrast-text opacity-50" />
-					<span className="ml-[8%] text-secondary-contrast-text text-2xl">{title}</span>
-					<hr className="border-secondary-contrast-text opacity-50" />
+					<hr className="border-secondary-contrast opacity-50" />
+					<span className="ml-[8%] text-secondary-contrast text-2xl">{title}</span>
+					<hr className="border-secondary-contrast opacity-50" />
 				</div>
 			</motion.div>
 			{data.map((project, i) => (

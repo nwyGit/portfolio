@@ -1,6 +1,16 @@
 import { groq } from "next-sanity";
 import { sanityClient } from "@/utils/sanity";
-import { Hero, About, Skill, Project } from "@/components/v2/shared/type/types";
+import { 
+	Hero, 
+	About, 
+	Skill, 
+	Project, 
+	BlogPost, 
+	BlogCategory, 
+	BlogTag, 
+	BlogFAQ, 
+	Language 
+} from "@/components/v2/shared/type/types";
 
 const dataFetcher = async <T>(query: string, defaultValue?: T): Promise<T> => {
 	try {
@@ -118,5 +128,319 @@ export const fetchResume = async (): Promise<{ resumeURL: string } | null> => {
 			console.error('Failed to fetch resume data:', error);
 		}
 		return null;
+	}
+};
+
+// Blog-related fetch functions with bilingual support
+
+export const fetchBlogPosts = async (language?: Language): Promise<BlogPost[]> => {
+	const languageFilter = language 
+		? language === 'en' 
+			? '&& defined(title)'
+			: '&& defined(title_zh)'
+		: '';
+
+	const query = groq`
+		*[_type == "post" && status == "published" ${languageFilter}] | order(publishedAt desc) {
+			_id,
+			language,
+			title,
+			title_zh,
+			slug,
+			slug_zh,
+			summary,
+			summary_zh,
+			metaTitle,
+			metaTitle_zh,
+			metaDescription,
+			metaDescription_zh,
+			featuredImage {
+				asset-> {
+					url
+				},
+				alt
+			},
+			author-> {
+				_id,
+				name,
+				slug
+			},
+			category-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh
+			},
+			tags[]-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh
+			},
+			publishedAt,
+			updatedAt,
+			keywords
+		}
+	`;
+
+	try {
+		return await dataFetcher<BlogPost[]>(query, []);
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch blog posts:', error);
+		}
+		return [];
+	}
+};
+
+export const fetchBlogPost = async (slug: string, language?: Language): Promise<BlogPost | null> => {
+	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
+	
+	const query = groq`
+		*[_type == "post" && ${slugField} == $slug && status == "published"][0] {
+			_id,
+			language,
+			title,
+			title_zh,
+			slug,
+			slug_zh,
+			summary,
+			summary_zh,
+			content,
+			content_zh,
+			metaTitle,
+			metaTitle_zh,
+			metaDescription,
+			metaDescription_zh,
+			featuredImage {
+				asset-> {
+					url
+				},
+				alt
+			},
+			author-> {
+				_id,
+				name,
+				slug,
+				bio,
+				image {
+					asset-> {
+						url
+					}
+				}
+			},
+			category-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh,
+				description,
+				description_zh
+			},
+			tags[]-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh
+			},
+			publishedAt,
+			updatedAt,
+			keywords,
+			canonicalUrl
+		}
+	`;
+
+	try {
+		return await sanityClient.fetch<BlogPost>(query, { slug });
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch blog post:', error);
+		}
+		return null;
+	}
+};
+
+export const fetchBlogCategories = async (language?: Language): Promise<BlogCategory[]> => {
+	const query = groq`
+		*[_type == "blogCategory"] | order(name asc) {
+			_id,
+			name,
+			name_zh,
+			slug,
+			slug_zh,
+			description,
+			description_zh,
+			keywords
+		}
+	`;
+
+	try {
+		return await dataFetcher<BlogCategory[]>(query, []);
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch blog categories:', error);
+		}
+		return [];
+	}
+};
+
+export const fetchBlogTags = async (language?: Language): Promise<BlogTag[]> => {
+	const query = groq`
+		*[_type == "tag"] | order(name asc) {
+			_id,
+			name,
+			name_zh,
+			slug,
+			slug_zh
+		}
+	`;
+
+	try {
+		return await dataFetcher<BlogTag[]>(query, []);
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch blog tags:', error);
+		}
+		return [];
+	}
+};
+
+export const fetchBlogFAQs = async (postId: string): Promise<BlogFAQ[]> => {
+	const query = groq`
+		*[_type == "blogFAQ" && blogPost._ref == $postId && isActive == true] | order(order asc) {
+			_id,
+			blogPost,
+			language,
+			question,
+			question_zh,
+			answer,
+			answer_zh,
+			order,
+			category,
+			isActive
+		}
+	`;
+
+	try {
+		return await sanityClient.fetch<BlogFAQ[]>(query, { postId });
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch blog FAQs:', error);
+		}
+		return [];
+	}
+};
+
+export const fetchPostsByCategory = async (categorySlug: string, language?: Language): Promise<BlogPost[]> => {
+	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
+	const postLanguageFilter = language 
+		? language === 'en' 
+			? '&& defined(title)'
+			: '&& defined(title_zh)'
+		: '';
+
+	const query = groq`
+		*[_type == "post" && status == "published" && category->${slugField} == $categorySlug ${postLanguageFilter}] | order(publishedAt desc) {
+			_id,
+			language,
+			title,
+			title_zh,
+			slug,
+			slug_zh,
+			summary,
+			summary_zh,
+			metaTitle,
+			metaTitle_zh,
+			metaDescription,
+			metaDescription_zh,
+			featuredImage {
+				asset-> {
+					url
+				},
+				alt
+			},
+			author-> {
+				_id,
+				name,
+				slug
+			},
+			category-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh
+			},
+			publishedAt,
+			keywords
+		}
+	`;
+
+	try {
+		return await sanityClient.fetch<BlogPost[]>(query, { categorySlug });
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch posts by category:', error);
+		}
+		return [];
+	}
+};
+
+export const fetchPostsByTag = async (tagSlug: string, language?: Language): Promise<BlogPost[]> => {
+	const slugField = language === 'zh-Hant' ? 'slug_zh.current' : 'slug.current';
+	const postLanguageFilter = language 
+		? language === 'en' 
+			? '&& defined(title)'
+			: '&& defined(title_zh)'
+		: '';
+
+	const query = groq`
+		*[_type == "post" && status == "published" && $tagSlug in tags[]->${slugField} ${postLanguageFilter}] | order(publishedAt desc) {
+			_id,
+			language,
+			title,
+			title_zh,
+			slug,
+			slug_zh,
+			summary,
+			summary_zh,
+			metaTitle,
+			metaTitle_zh,
+			metaDescription,
+			metaDescription_zh,
+			featuredImage {
+				asset-> {
+					url
+				},
+				alt
+			},
+			author-> {
+				_id,
+				name,
+				slug
+			},
+			tags[]-> {
+				_id,
+				name,
+				name_zh,
+				slug,
+				slug_zh
+			},
+			publishedAt,
+			keywords
+		}
+	`;
+
+	try {
+		return await sanityClient.fetch<BlogPost[]>(query, { tagSlug });
+	} catch (error) {
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch posts by tag:', error);
+		}
+		return [];
 	}
 };

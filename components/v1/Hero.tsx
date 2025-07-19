@@ -8,13 +8,13 @@ import { V1HeroProps } from "./types";
 // 	<span key="intro">Hey there, I&apos;m</span>,
 // 	<h1
 // 		key="name"
-// 		className={`text-primary-contrast-text ${styles.introHeading} pt-2`}
+// 		className={`text-primary-contrast ${styles.introHeading} pt-2`}
 // 	>
 // 		Raymond Ng.
 // 	</h1>,
 // 	<h1
 // 		key="slogan"
-// 		className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
+// 		className={`text-secondary-contrast ${styles.introHeading2} pt-4`}
 // 	>
 // 		I build things for the web.
 // 	</h1>,
@@ -61,7 +61,7 @@ const Introduction: React.FC<V1HeroProps> = ({ hero }) => {
 				1,
 				<h1
 					key="name"
-					className={`text-primary-contrast-text ${styles.introHeading} pt-2`}
+					className={`text-primary-contrast ${styles.introHeading} pt-2`}
 				>
 					{name}.
 				</h1>
@@ -70,7 +70,7 @@ const Introduction: React.FC<V1HeroProps> = ({ hero }) => {
 				2,
 				<h1
 					key="slogan"
-					className={`text-secondary-contrast-text ${styles.introHeading2} pt-4`}
+					className={`text-secondary-contrast ${styles.introHeading2} pt-4`}
 				>
 					{slogan}
 				</h1>

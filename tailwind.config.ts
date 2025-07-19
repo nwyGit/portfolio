@@ -22,8 +22,8 @@ const config: Config = {
 				"background-color": "#023047",
 				primary: "#8ECAE6",
 				secondary: "#219EBC",
-				"primary-contrast-text": "#FB8500",
-				"secondary-contrast-text": "#FFB703",
+				"primary-contrast": "#FB8500",
+				"secondary-contrast": "#FFB703",
 				brand: {
 					primary: "#8ECAE6",
 					secondary: "#219EBC",
