@@ -17,7 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 				const data = await fetchResume();
 				setResumeURL(data?.resumeURL || "");
 			} catch (error) {
-				console.error("Failed to fetch resume:", error);
+				if (process.env.NODE_ENV === 'development') {
+					console.error("Failed to fetch resume:", error);
+				}
 				// Continue without resume URL
 			}
 		}

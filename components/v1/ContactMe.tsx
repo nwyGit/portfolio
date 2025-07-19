@@ -34,7 +34,7 @@ const Contact: React.FC<V1ContactMeProps> = ({ className }) => {
 			})
 			.catch((error) => {
 				if (process.env.NODE_ENV === 'development') {
-					console.log(error);
+					console.error('Contact form submission error:', error);
 				}
 				alert("Form submission failed.");
 			});

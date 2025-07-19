@@ -9,6 +9,7 @@ import Overlay from "./Overlay";
 import SkillIcon from "./SkillIcon";
 import { urlFor } from "@/utils/sanity";
 import { V1ProjectProps } from "./types";
+import { Skill } from "@/components/v2/shared/type/types";
 
 const Project: React.FC<V1ProjectProps> = ({ data }) => {
 	const [mobileScreen, setMobileScreen] = useState<boolean>(false);
@@ -48,8 +49,8 @@ const Project: React.FC<V1ProjectProps> = ({ data }) => {
 					<p>{summary}</p>
 					<ul className={`${styles.FrameworkBox}`}>
 						{technologies
-							?.sort((a: any, b: any) => a.order - b.order)
-							.map((tech: any, idx: number) => {
+							?.sort((a: Skill, b: Skill) => a.order - b.order)
+							.map((tech: Skill, idx: number) => {
 								return (
 									<li key={idx} className="bg-white p-1 rounded-full">
 										<SkillIcon

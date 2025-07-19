@@ -9,6 +9,13 @@ import Overlay from "./Overlay";
 import { V1AboutMeProps } from "./types";
 
 const AboutMe: React.FC<V1AboutMeProps> = ({ about, skills }) => {
+	if (!about) {
+		return (
+			<section id="About" className={`${styles.section} ${styles.paddings}`}>
+				<span>Loading about section...</span>
+			</section>
+		);
+	}
 	return (
 		<section id="About" className={`${styles.section} ${styles.paddings}`}>
 			<motion.div

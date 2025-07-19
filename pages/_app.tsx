@@ -2,8 +2,16 @@ import "@/styles/globals.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
+import { useEffect } from "react";
+import { performanceMonitor } from "@/utils/performanceMonitoring";
 
 export default function App({ Component, pageProps }: AppProps) {
+	useEffect(() => {
+		// Initialize performance monitoring on client side
+		if (typeof window !== 'undefined') {
+			performanceMonitor.getCurrentMetrics();
+		}
+	}, []);
 	return (
 		<>
 			<Head>

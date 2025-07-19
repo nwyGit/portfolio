@@ -25,7 +25,7 @@ export interface V1LayoutProps {
 }
 
 export interface V1HeroProps {
-  hero: Hero;
+  hero: Hero | null;
 }
 
 export interface V1ProjectProps {
@@ -50,7 +50,7 @@ export interface V1SkillIconProps {
 }
 
 export interface V1AboutMeProps {
-  about: About;
+  about: About | null;
   skills: Skill[];
 }
 
@@ -95,6 +95,6 @@ export interface ContactFormData {
 // Animation variant types for framer-motion
 export interface MotionVariants {
   [key: string]: {
-    [key: string]: any;
+    [key: string]: string | number | boolean | object;
   };
 }

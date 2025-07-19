@@ -3,6 +3,12 @@ import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
 import { BlogPost } from "@/components/v2/shared/type/types";
 import { PortableTextBlock } from '@portabletext/types';
+
+interface PortableTextChild {
+	_type?: string;
+	text?: string;
+	marks?: string[];
+}
 import Image from "next/image";
 
 interface BlogCardProps {
@@ -17,7 +23,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 		return blocks
 			?.map(block => {
 				if (block._type === 'block' && block.children) {
-					return block.children.map((child) => (child as any).text).join('');
+					return block.children.map((child) => (child as PortableTextChild).text || '').join('');
 				}
 				return '';
 			})

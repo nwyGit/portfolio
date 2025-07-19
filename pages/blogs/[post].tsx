@@ -10,12 +10,18 @@ import Layout from "@/components/v2/Layout";
 import { BlogPost } from "@/components/v2/shared/type/types";
 import { PortableTextBlock } from '@portabletext/types';
 
+interface PortableTextChild {
+	_type?: string;
+	text?: string;
+	marks?: string[];
+}
+
 // Helper function to extract text from PortableText content
 const getContentPreview = (content: PortableTextBlock[]): string => {
 	return content
 		?.map(block => {
 			if (block._type === 'block' && block.children) {
-				return block.children.map((child) => (child as any).text).join('');
+				return block.children.map((child) => (child as PortableTextChild).text || '').join('');
 			}
 			return '';
 		})

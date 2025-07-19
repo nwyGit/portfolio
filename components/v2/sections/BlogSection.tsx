@@ -5,6 +5,12 @@ import CategoryFilter, {
 } from "@/components/v2/shared/component/CategoryFilter";
 import { BlogPost } from "@/components/v2/shared/type/types";
 
+interface PortableTextChild {
+	_type?: string;
+	text?: string;
+	marks?: string[];
+}
+
 interface BlogsProps {
 	blogs: BlogPost[];
 }
@@ -42,7 +48,7 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 			const contentText = blog.content
 				?.map(block => {
 					if (block._type === 'block' && block.children) {
-						return block.children.map((child) => (child as any).text).join('');
+						return block.children.map((child) => (child as PortableTextChild).text || '').join('');
 					}
 					return '';
 				})

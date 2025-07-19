@@ -44,6 +44,13 @@ const introComponent = (index: number, element: React.ReactElement): React.React
 };
 
 const Introduction: React.FC<V1HeroProps> = ({ hero }) => {
+	if (!hero) {
+		return (
+			<section className={`${styles.section} ${styles.paddings} min-h-screen grid content-center`}>
+				<span>Loading...</span>
+			</section>
+		);
+	}
 	const { greeting, name, slogan, description } = hero;
 	return (
 		<section

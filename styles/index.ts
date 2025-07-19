@@ -1,4 +1,52 @@
-const styles = {
+interface StylesConfig {
+	readonly innerWidth: string;
+	readonly interWidth: string;
+
+	readonly paddings: string;
+	readonly yPaddings: string;
+	readonly xPaddings: string;
+	readonly topPaddings: string;
+	readonly bottomPaddings: string;
+
+	readonly flexCenter: string;
+	readonly flexStart: string;
+	readonly flexEnd: string;
+	readonly navPadding: string;
+
+	readonly bubbleContainer: string;
+
+	readonly lgNavBar: string;
+	readonly smNavBar: string;
+	readonly popUpNav: string;
+	readonly blurOverlay: string;
+
+	readonly introHeading: string;
+	readonly introHeading2: string;
+	readonly sectionHeader: string;
+	readonly section: string;
+	readonly divider: string;
+
+	readonly text: string;
+	readonly highlightText: string;
+	readonly contentBox: string;
+	readonly skillsBox: string;
+	readonly skillsItem: string;
+	readonly skillsIcon: string;
+
+	readonly formIcon: string;
+	readonly formInput: string;
+	readonly formInputPos: string;
+	readonly button: string;
+
+	readonly FrameworkBox: string;
+
+	readonly FooterBox: string;
+
+	readonly FourOhFourHeading: string;
+	readonly FourOhFourHeading2: string;
+}
+
+const styles: StylesConfig = {
 	innerWidth: "2xl:max-w-[1280px] w-full",
 	interWidth: "lg:w-[80%] w-[100%]",
 

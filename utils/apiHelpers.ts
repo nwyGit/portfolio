@@ -100,7 +100,7 @@ export function withErrorHandling(handler: (req: NextApiRequest, res: NextApiRes
 }
 
 // Utility to validate and sanitize Sanity query parameters
-export function validateSanityParams(params: Record<string, any>) {
+export function validateSanityParams(params: Record<string, string | number | boolean>) {
   // Remove any potential injection attempts
   const sanitized = { ...params };
   

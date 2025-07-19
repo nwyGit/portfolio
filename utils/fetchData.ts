@@ -10,8 +10,11 @@ const dataFetcher = async <T>(query: string, defaultValue?: T): Promise<T> => {
 		}
 		return data;
 	} catch (error) {
-		console.error('Error fetching data from Sanity:', error);
-		console.error('Query:', query);
+		// Log errors only in development
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Error fetching data from Sanity:', error);
+			console.error('Query:', query);
+		}
 		if (defaultValue !== undefined) {
 			return defaultValue;
 		}
@@ -33,7 +36,9 @@ export const fetchHero = async (): Promise<Hero | null> => {
 	try {
 		return await dataFetcher<Hero>(query);
 	} catch (error) {
-		console.error('Failed to fetch hero data:', error);
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch hero data:', error);
+		}
 		return null;
 	}
 };
@@ -51,7 +56,9 @@ export const fetchAbout = async (): Promise<About | null> => {
 	try {
 		return await dataFetcher<About>(query);
 	} catch (error) {
-		console.error('Failed to fetch about data:', error);
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch about data:', error);
+		}
 		return null;
 	}
 };
@@ -64,7 +71,9 @@ export const fetchSkills = async (): Promise<Skill[]> => {
 	try {
 		return await dataFetcher<Skill[]>(query, []);
 	} catch (error) {
-		console.error('Failed to fetch skills data:', error);
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch skills data:', error);
+		}
 		return [];
 	}
 };
@@ -88,7 +97,9 @@ export const fetchProjects = async (): Promise<Project[]> => {
 	try {
 		return await dataFetcher<Project[]>(query, []);
 	} catch (error) {
-		console.error('Failed to fetch projects data:', error);
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch projects data:', error);
+		}
 		return [];
 	}
 };
@@ -103,7 +114,9 @@ export const fetchResume = async (): Promise<{ resumeURL: string } | null> => {
 	try {
 		return await dataFetcher<{ resumeURL: string }>(query);
 	} catch (error) {
-		console.error('Failed to fetch resume data:', error);
+		if (process.env.NODE_ENV === 'development') {
+			console.error('Failed to fetch resume data:', error);
+		}
 		return null;
 	}
 };

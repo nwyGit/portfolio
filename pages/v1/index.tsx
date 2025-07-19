@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { GetStaticProps } from "next";
 import Introduction from "@/components/v1/Hero";
 import AboutMe from "@/components/v1/AboutMe";
 import Projects from "@/components/v1/Projects";
@@ -11,8 +12,16 @@ import {
 	fetchSkills,
 } from "@/utils/fetchData";
 import Layout from "@/components/v1/Layout";
+import { Hero, About, Skill, Project } from "@/components/v2/shared/type/types";
 
-export const getStaticProps = async () => {
+interface HomeProps {
+	hero: Hero | null;
+	about: About | null;
+	skills: Skill[];
+	projects: Project[];
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
 	const hero = await fetchHero();
 	const about = await fetchAbout();
 	const skills = await fetchSkills();
@@ -24,7 +33,7 @@ export const getStaticProps = async () => {
 	};
 };
 
-export default function Home({ hero, about, skills, projects }) {
+export default function Home({ hero, about, skills, projects }: HomeProps) {
 	return (
 		<Layout>
 			<Head>

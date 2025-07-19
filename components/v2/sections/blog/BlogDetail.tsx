@@ -7,6 +7,12 @@ import Share from "./BlogShare";
 import Image from "next/image";
 import { PortableTextBlock } from '@portabletext/types';
 
+interface PortableTextChild {
+	_type?: string;
+	text?: string;
+	marks?: string[];
+}
+
 interface BlogDetailProps {
 	post: BlogPost;
 	items: BreadcrumbItem[];
@@ -18,7 +24,7 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post, items }) => {
 		return blocks
 			?.map(block => {
 				if (block._type === 'block' && block.children) {
-					return block.children.map((child) => (child as any).text).join('');
+					return block.children.map((child) => (child as PortableTextChild).text || '').join('');
 				}
 				return '';
 			})

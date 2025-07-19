@@ -119,11 +119,13 @@ class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 // Helper function to create performance middleware
-export function withPerformanceMonitoring<T extends (...args: any[]) => Promise<void>>(
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export function withPerformanceMonitoring<T extends (req: NextApiRequest, res: NextApiResponse) => Promise<void>>(
   handler: T,
   endpointName?: string
 ): T {
-  return (async (req: any, res: any) => {
+  return (async (req: NextApiRequest, res: NextApiResponse) => {
     const startTime = Date.now();
     const endpoint = endpointName || req.url || 'unknown';
     const method = req.method || 'unknown';
