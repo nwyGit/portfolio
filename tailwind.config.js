@@ -1,11 +1,10 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
 	content: [
 		"./app/**/*.{js,ts,jsx,tsx}",
 		"./pages/**/*.{js,ts,jsx,tsx}",
 		"./components/**/*.{js,ts,jsx,tsx}",
-		"./styles/**/*.{js,ts}",
+		"./styles/**/*.{js,jsx,ts,tsx}",
 
 		// Or if using `src` directory:
 		"./src/**/*.{js,ts,jsx,tsx}",
@@ -22,8 +21,8 @@ const config: Config = {
 				"background-color": "#023047",
 				primary: "#8ECAE6",
 				secondary: "#219EBC",
-				"primary-contrast": "#FB8500",
-				"secondary-contrast": "#FFB703",
+				"primary-contrast-text": "#FB8500",
+				"secondary-contrast-text": "#FFB703",
 				brand: {
 					primary: "#8ECAE6",
 					secondary: "#219EBC",
@@ -42,5 +41,3 @@ const config: Config = {
 	},
 	plugins: [],
 };
-
-export default config;
