@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { PortableTextComponents } from '@portabletext/react';
+
+// Simple HTML sanitization function
+const sanitizeHTML = (html: string): string => {
+	const sanitized = html
+		.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+		.replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
+		.replace(/on\w+="[^"]*"/gi, '') // Remove event handlers
+		.replace(/javascript:/gi, ''); // Remove javascript: URLs
+	
+	return sanitized;
+};
 
 // Interface for image blocks in PortableText
 interface PortableTextImage {
@@ -47,19 +58,27 @@ const ImageComponent: React.FC<{ value: PortableTextImage }> = ({ value }) => {
 	const imageUrl = urlFor(value);
 	const alt = value.alt || 'Blog post image';
 	
+	// Debug logging
+	if (process.env.NODE_ENV === 'development') {
+		console.log('PortableText Image - Asset ref:', value.asset._ref);
+		console.log('PortableText Image - Generated URL:', imageUrl);
+	}
+	
 	return (
-		<figure className="my-8">
+		<figure className="my-8 w-full">
 			<div className="relative w-full overflow-hidden rounded-lg shadow-lg">
 				<Image
 					src={imageUrl}
 					alt={alt}
-					width={800}
-					height={600}
+					width={1200}
+					height={800}
+					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
 					className="w-full h-auto object-cover"
 					style={{
-						maxWidth: '100%',
+						width: '100%',
 						height: 'auto',
 					}}
+					priority={false}
 				/>
 			</div>
 			{value.caption && (
@@ -103,11 +122,48 @@ export const portableTextComponents: PortableTextComponents = {
 				{children}
 			</blockquote>
 		),
-		normal: ({ children }) => (
-			<p className="mb-4 leading-relaxed text-gray-800">
-				{children}
-			</p>
-		),
+		normal: ({ children, value }) => {
+			const [htmlContent, setHtmlContent] = useState<string>('');
+			const [isClient, setIsClient] = useState(false);
+			
+			// Get the raw text content from the block
+			const textContent = value?.children?.map((child: any) => child.text).join('') || '';
+			
+			useEffect(() => {
+				setIsClient(true);
+				if (textContent.includes('<') && textContent.includes('>')) {
+					const sanitized = sanitizeHTML(textContent);
+					setHtmlContent(sanitized);
+				}
+			}, [textContent]);
+			
+			// Check if content contains HTML tags
+			if (textContent.includes('<') && textContent.includes('>')) {
+				if (!isClient) {
+					// Show placeholder during SSR to prevent hydration mismatch
+					return (
+						<div className="blog-html-content">
+							<p className="mb-4 leading-relaxed text-gray-800">Loading content...</p>
+						</div>
+					);
+				}
+				
+				// Render sanitized HTML on client side only
+				return (
+					<div 
+						className="blog-html-content"
+						dangerouslySetInnerHTML={{ __html: htmlContent }} 
+					/>
+				);
+			}
+			
+			// Regular text content - keep existing styling
+			return (
+				<p className="mb-4 leading-relaxed text-gray-800">
+					{children}
+				</p>
+			);
+		},
 	},
 	marks: {
 		// Customize inline styles

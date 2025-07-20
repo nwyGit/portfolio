@@ -46,7 +46,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					overflow: "hidden",
 				}}
 			>
-				{post.featuredImage?.asset?.url ? (
+				{post.featuredImage?.asset?.url && (
 					<Image
 						src={post.featuredImage.asset.url}
 						alt={post.featuredImage.alt || "Blog Detail"}
@@ -60,20 +60,6 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 						}}
 						placeholder="blur"
 						blurDataURL="/assets/blog/image_blog_detail_1.png"
-						priority={false}
-					/>
-				) : (
-					<Image
-						src="/assets/blog/image_blog_detail_1.png"
-						alt="Blog Detail"
-						width={500}
-						height={333}
-						sizes="(max-width: 500px) 100vw, 500px"
-						style={{ 
-							width: "100%", 
-							height: "100%", 
-							objectFit: "cover" 
-						}}
 						priority={false}
 					/>
 				)}
