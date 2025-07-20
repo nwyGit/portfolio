@@ -136,13 +136,13 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post, items, language, faqs = [
 					
 					{/* Share Section - Mobile: Bottom of article */}
 					<div className="lg:hidden mt-8">
-						<Share />
+						<Share relatedArticles={post.relatedArticles} language={language} />
 					</div>
 				</div>
 				
 				{/* Share Section - Desktop: Sidebar */}
 				<div className="hidden lg:block lg:flex-[0_1_28%] lg:sticky lg:top-24 lg:self-start">
-					<Share />
+					<Share relatedArticles={post.relatedArticles} language={language} />
 				</div>
 			</div>
 		</section>

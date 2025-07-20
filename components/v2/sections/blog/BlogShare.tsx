@@ -2,6 +2,9 @@ import React from "react";
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { SiWechat } from "react-icons/si";
 import Image from "next/image";
+import { BlogPost, Language } from "@/components/v2/shared/type/types";
+import { localizeBlogPost, getLocalizedMessages, formatDate } from "@/utils/languageUtils";
+import Link from "next/link";
 
 const ICONS = [
 	{
@@ -29,23 +32,10 @@ const ICONS = [
 	},
 ];
 
-const MORE_ARTICLES = [
-	{
-		title: "Title Name Title Name Title Name Title Title Name Title Name Title",
-		date: "31/12/2024",
-		tags: ["Tag1", "Tag2"],
-	},
-	{
-		title: "Title Name Title Name Title Name Title Title Name Title Name Title",
-		date: "31/12/2024",
-		tags: ["Tag1", "Tag2"],
-	},
-	{
-		title: "Title Name Title Name Title Name Title Title Name Title Name Title",
-		date: "31/12/2024",
-		tags: ["Tag1", "Tag2"],
-	},
-];
+interface BlogShareProps {
+	relatedArticles?: BlogPost[];
+	language?: Language;
+}
 
 const handleShare = (shareUrl: string, platform: string) => {
 	if (platform === "WeChat") {
@@ -57,8 +47,13 @@ const handleShare = (shareUrl: string, platform: string) => {
 	}
 };
 
-const BlogShare: React.FC = () => {
+const BlogShare: React.FC<BlogShareProps> = ({ relatedArticles = [], language = 'en' }) => {
 	const url = typeof window !== "undefined" ? window.location.href : "";
+	const messages = getLocalizedMessages(language);
+	
+	// Don't render the "More Articles" section if no related articles
+	const hasRelatedArticles = relatedArticles && relatedArticles.length > 0;
+	
 	return (
 		<div className="blog-share-container">
 			{/* Share Row */}
@@ -100,36 +95,54 @@ const BlogShare: React.FC = () => {
 					))}
 				</div>
 			</div>
-			{/* Divider Line */}
-			<div className="blog-share-divider" />
-			{/* More Articles Label */}
-			<div className="blog-share-more-label">More Articles</div>
-			{/* Article Cards */}
-			<div className="blog-share-articles">
-				{MORE_ARTICLES.map((article, idx) => (
-					<div className="blog-card" key={idx}>
-						{/* Image */}
-						<div className="blog-card-image-container">
-							<Image
-								src="/assets/blog/image_blog_detail_1.png"
-								alt="Blog Card"
-								width={150}
-								height={100}
-								sizes="(max-width: 150px) 100vw, 150px"
-								style={{ width: "100%", height: "auto" }}
-								priority={false}
-							/>
-						</div>
-						{/* Content */}
-						<div className="blog-card-content">
-							<span className="blog-card-date">{article.date}</span>
-							<span className="blog-card-title">{article.title}</span>
-						</div>
+			{/* Related Articles Section - Only show if articles exist */}
+			{hasRelatedArticles && (
+				<>
+					{/* Divider Line - Desktop only */}
+					<div className="blog-share-divider hidden lg:block" />
+					{/* More Articles Label */}
+					<div className="blog-share-more-label">
+						{language === 'zh' ? '相關文章' : 'More Articles'}
 					</div>
-				))}
-			</div>
-			{/* Divider Line */}
-			<div className="blog-share-divider" />
+					{/* Article Cards */}
+					<div className="blog-share-articles">
+						{relatedArticles.map((article) => {
+							const localizedArticle = localizeBlogPost(article, language);
+							const articleUrl = `/${language === 'zh' ? 'zh' : 'en'}/blogs/${localizedArticle.slug.current}`;
+							
+							return (
+								<Link href={articleUrl} key={article._id} className="block">
+									<div className="blog-card hover:shadow-md transition-shadow duration-200 cursor-pointer">
+										{/* Image */}
+										<div className="blog-card-image-container">
+											<Image
+												src={localizedArticle.featuredImage?.asset?.url || "/assets/placeholder-image.jpg"}
+												alt={localizedArticle.featuredImage?.alt || localizedArticle.title}
+												width={150}
+												height={100}
+												sizes="(max-width: 150px) 100vw, 150px"
+												className="w-full h-full object-cover"
+												priority={false}
+											/>
+										</div>
+										{/* Content */}
+										<div className="blog-card-content">
+											<span className="blog-card-date">
+												{formatDate(localizedArticle.publishedAt, language)}
+											</span>
+											<span className="blog-card-title" title={localizedArticle.title}>
+												{localizedArticle.title}
+											</span>
+										</div>
+									</div>
+								</Link>
+							);
+						})}
+					</div>
+					{/* Divider Line - Desktop only */}
+					<div className="blog-share-divider hidden lg:block" />
+				</>
+			)}
 		</div>
 	);
 };

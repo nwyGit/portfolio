@@ -111,11 +111,11 @@ export default function AboutSection({ about, skills }: AboutSectionProps) {
 					{[...Array(7)].map((_, i) => (
 						<div key={i} className="about-client-logo">
 							<Image
-								src="/v2/assets/client_logo.png"
+								src="/assets/placeholder-image.jpg"
 								alt={`Client Logo ${i + 1}`}
 								width={140}
 								height={140}
-								className="object-contain w-[100px] h-[100px]"
+								className="object-cover w-[100px] h-[100px] rounded-full"
 							/>
 						</div>
 					))}

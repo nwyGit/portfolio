@@ -76,6 +76,7 @@ export interface BlogPost {
 	keywords?: string[];
 	keywords_zh?: string[];
 	faqs?: BlogFAQ[];
+	relatedArticles?: BlogPost[];
 }
 
 export interface BlogAuthor {

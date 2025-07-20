@@ -25,7 +25,7 @@ export default function InsightsCard({
 					src={image || ""}
 					alt={title}
 					fill
-					className="project-card-v2-img"
+					className="project-card-v2-img object-cover"
 					priority
 				/>
 			</div>

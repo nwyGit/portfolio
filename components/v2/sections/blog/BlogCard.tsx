@@ -43,7 +43,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px"
 						className="w-full h-full object-cover"
 						placeholder="blur"
-						blurDataURL="/assets/blog/image_blog_detail_1.png"
+						blurDataURL="/assets/placeholder-image.jpg"
 						priority={false}
 					/>
 				)}

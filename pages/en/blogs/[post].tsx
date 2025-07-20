@@ -158,7 +158,23 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 			updatedAt,
 			keywords,
 			keywords_zh,
-			canonicalUrl
+			canonicalUrl,
+			relatedArticles[]-> {
+				_id,
+				title,
+				title_zh,
+				slug,
+				summary,
+				summary_zh,
+				featuredImage {
+					asset-> {
+						url
+					},
+					alt
+				},
+				publishedAt,
+				status
+			}
 		}
 	`;
 

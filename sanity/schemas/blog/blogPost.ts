@@ -217,6 +217,28 @@ export const blogPost: SchemaDefinition = {
 			title: "Canonical URL",
 			type: "url",
 		},
+		{
+			name: "relatedArticles",
+			title: "Related Articles",
+			type: "array",
+			of: [
+				{
+					type: "reference",
+					to: [{ type: "post" }],
+				},
+			],
+			validation: (Rule: ValidationRule) => Rule.max(3).custom((current, context) => {
+				// Prevent self-reference
+				if (current && context.document && context.document._id) {
+					const selfReference = current.find((ref: any) => ref._ref === context.document?._id);
+					if (selfReference) {
+						return "Cannot reference self as related article";
+					}
+				}
+				return true;
+			}),
+			description: "Select up to 3 related articles to display in the 'More Articles' section (optional)",
+		},
 	],
 	preview: {
 		select: {
