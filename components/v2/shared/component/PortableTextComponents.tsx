@@ -90,6 +90,50 @@ const ImageComponent: React.FC<{ value: PortableTextImage }> = ({ value }) => {
 	);
 };
 
+// Normal block component that handles HTML content
+const NormalBlock: React.FC<{ children?: React.ReactNode; value: any }> = ({ children, value }) => {
+	const [htmlContent, setHtmlContent] = useState<string>('');
+	const [isClient, setIsClient] = useState(false);
+	
+	// Get the raw text content from the block
+	const textContent = value?.children?.map((child: any) => child.text).join('') || '';
+	
+	useEffect(() => {
+		setIsClient(true);
+		if (textContent.includes('<') && textContent.includes('>')) {
+			const sanitized = sanitizeHTML(textContent);
+			setHtmlContent(sanitized);
+		}
+	}, [textContent]);
+	
+	// Check if content contains HTML tags
+	if (textContent.includes('<') && textContent.includes('>')) {
+		if (!isClient) {
+			// Show placeholder during SSR to prevent hydration mismatch
+			return (
+				<div className="blog-html-content">
+					<p className="mb-4 leading-relaxed text-gray-800">Loading content...</p>
+				</div>
+			);
+		}
+		
+		// Render sanitized HTML on client side only
+		return (
+			<div 
+				className="blog-html-content"
+				dangerouslySetInnerHTML={{ __html: htmlContent }} 
+			/>
+		);
+	}
+	
+	// Regular text content - keep existing styling
+	return (
+		<p className="mb-4 leading-relaxed text-gray-800">
+			{children}
+		</p>
+	);
+};
+
 // PortableText components configuration
 export const portableTextComponents: PortableTextComponents = {
 	types: {
@@ -122,48 +166,7 @@ export const portableTextComponents: PortableTextComponents = {
 				{children}
 			</blockquote>
 		),
-		normal: ({ children, value }) => {
-			const [htmlContent, setHtmlContent] = useState<string>('');
-			const [isClient, setIsClient] = useState(false);
-			
-			// Get the raw text content from the block
-			const textContent = value?.children?.map((child: any) => child.text).join('') || '';
-			
-			useEffect(() => {
-				setIsClient(true);
-				if (textContent.includes('<') && textContent.includes('>')) {
-					const sanitized = sanitizeHTML(textContent);
-					setHtmlContent(sanitized);
-				}
-			}, [textContent]);
-			
-			// Check if content contains HTML tags
-			if (textContent.includes('<') && textContent.includes('>')) {
-				if (!isClient) {
-					// Show placeholder during SSR to prevent hydration mismatch
-					return (
-						<div className="blog-html-content">
-							<p className="mb-4 leading-relaxed text-gray-800">Loading content...</p>
-						</div>
-					);
-				}
-				
-				// Render sanitized HTML on client side only
-				return (
-					<div 
-						className="blog-html-content"
-						dangerouslySetInnerHTML={{ __html: htmlContent }} 
-					/>
-				);
-			}
-			
-			// Regular text content - keep existing styling
-			return (
-				<p className="mb-4 leading-relaxed text-gray-800">
-					{children}
-				</p>
-			);
-		},
+		normal: NormalBlock,
 	},
 	marks: {
 		// Customize inline styles

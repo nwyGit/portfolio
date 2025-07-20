@@ -7,7 +7,6 @@ import { useLanguagePreference } from '@/utils/useLanguagePreference';
 import Layout from '@/components/v2/Layout';
 import BlogSection from '@/components/v2/sections/BlogSection';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 

@@ -6,7 +6,6 @@ import CategoryFilter, {
 import { BlogPost } from "@/components/v2/shared/type/types";
 import { useLanguagePreference } from "@/utils/useLanguagePreference";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { MdTranslate } from "react-icons/md";
 
 interface PortableTextChild {
@@ -23,7 +22,7 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 	const [active, setActive] = useState("all");
 	const [search, setSearch] = useState("");
 	const router = useRouter();
-	const { language, setLanguage } = useLanguagePreference();
+	const { setLanguage } = useLanguagePreference();
 	
 	// Determine current language from router path
 	const currentLanguage = router.asPath.startsWith('/zh') ? 'zh' : 'en';

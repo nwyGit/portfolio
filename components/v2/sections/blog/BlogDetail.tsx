@@ -5,7 +5,6 @@ import Breadcrumbs, {
 } from "../../shared/component/Breadcrumbs";
 import Share from "./BlogShare";
 import Image from "next/image";
-import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { portableTextComponents } from "../../shared/component/PortableTextComponents";
 import { localizeBlogPost, getLocalizedFAQs, getLocalizedMessages, formatDate } from "@/utils/languageUtils";
