@@ -213,11 +213,6 @@ export const blogPost: SchemaDefinition = {
 			initialValue: "draft",
 		},
 		{
-			name: "canonicalUrl",
-			title: "Canonical URL",
-			type: "url",
-		},
-		{
 			name: "relatedArticles",
 			title: "Related Articles",
 			type: "array",

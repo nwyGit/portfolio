@@ -13,7 +13,7 @@ async function handler(req, res) {
 
 	try {
 		const posts = await sanityClient.fetch(
-			`*[_type == "post" && status == "published"]{ slug, updatedAt, publishedAt, canonicalUrl }`
+			`*[_type == "post" && status == "published"]{ slug, updatedAt, publishedAt, title_zh }`
 		);
 
 		if (!Array.isArray(posts)) {
@@ -31,12 +31,23 @@ async function handler(req, res) {
 				return;
 			}
 			
+			// Always add English version
 			stream.write({
-				url: post.canonicalUrl || `/blogs/${post.slug.current}`,
+				url: `/en/blogs/${post.slug.current}`,
 				lastmod: post.updatedAt || post.publishedAt || new Date().toISOString(),
 				changefreq: 'weekly',
 				priority: 0.7,
 			});
+			
+			// Add Chinese version if Chinese content exists
+			if (post.title_zh) {
+				stream.write({
+					url: `/zh/blogs/${post.slug.current}`,
+					lastmod: post.updatedAt || post.publishedAt || new Date().toISOString(),
+					changefreq: 'weekly',
+					priority: 0.7,
+				});
+			}
 		});
 		
 		stream.end();

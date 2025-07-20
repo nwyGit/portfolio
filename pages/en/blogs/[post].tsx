@@ -15,6 +15,7 @@ interface BlogPostPageProps {
 export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 	const localizedPost = localizeBlogPost(post, 'en');
 	const hreflangLinks = generateHreflangLinks(`/blogs/${localizedPost.slug.current}`);
+	const canonicalUrl = `https://raymond-ng.com/en/blogs/${localizedPost.slug.current}`;
 
 	const breadcrumbItems = [
 		{ name: "Home", href: "/" },
@@ -37,6 +38,9 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 				<title>{localizedPost.metaTitle || localizedPost.title}</title>
 				<meta name="description" content={localizedPost.metaDescription || localizedPost.summary} />
 				
+				{/* Canonical URL - self-referential for this language version */}
+				<link rel="canonical" href={canonicalUrl} />
+				
 				{/* Hreflang links for SEO */}
 				{hreflangLinks.map(link => (
 					<link key={link.hrefLang} rel="alternate" hrefLang={link.hrefLang} href={link.href} />
@@ -46,6 +50,7 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 				<meta property="og:title" content={localizedPost.title} />
 				<meta property="og:description" content={localizedPost.summary || ''} />
 				<meta property="og:type" content="article" />
+				<meta property="og:url" content={canonicalUrl} />
 				{localizedPost.featuredImage && (
 					<meta property="og:image" content={localizedPost.featuredImage.asset.url} />
 				)}
@@ -158,7 +163,6 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 			updatedAt,
 			keywords,
 			keywords_zh,
-			canonicalUrl,
 			relatedArticles[]-> {
 				_id,
 				title,

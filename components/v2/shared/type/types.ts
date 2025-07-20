@@ -72,7 +72,6 @@ export interface BlogPost {
 	publishedAt: string;
 	updatedAt?: string;
 	status?: 'draft' | 'published' | 'archived';
-	canonicalUrl?: string;
 	keywords?: string[];
 	keywords_zh?: string[];
 	faqs?: BlogFAQ[];

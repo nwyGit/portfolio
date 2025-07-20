@@ -241,8 +241,7 @@ export const fetchBlogPost = async (slug: string, language?: Language): Promise<
 			publishedAt,
 			updatedAt,
 			keywords,
-			keywords_zh,
-			canonicalUrl
+			keywords_zh
 		}
 	`;
 
