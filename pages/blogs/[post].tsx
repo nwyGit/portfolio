@@ -147,7 +147,7 @@ const BlogPostPage: NextPage<BlogPostProps> = ({ post }) => {
 				// twitterCreator="@raymondngdev"
 			/>
 			<main>
-				<BlogDetail post={post} items={breadcrumbItems} />
+				<BlogDetail post={post} items={breadcrumbItems} language="en" />
 			</main>
 		</Layout>
 	);

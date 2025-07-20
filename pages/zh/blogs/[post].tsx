@@ -2,14 +2,10 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { groq } from 'next-sanity';
 import { sanityClient } from '@/utils/sanity';
 import { BlogPost, BlogFAQ } from '@/components/v2/shared/type/types';
-import { localizeBlogPost, getLocalizedFAQs, generateHreflangLinks, getLocalizedMessages } from '@/utils/languageUtils';
+import { localizeBlogPost, generateHreflangLinks } from '@/utils/languageUtils';
 import Layout from '@/components/v2/Layout';
 import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
-import { PortableText } from '@portabletext/react';
-import BlogFAQSection from '@/components/v2/shared/component/BlogFAQSection';
-import { portableTextComponents } from '@/components/v2/shared/component/PortableTextComponents';
+import BlogDetail from '@/components/v2/sections/blog/BlogDetail';
 
 interface BlogPostPageProps {
 	post: BlogPost;
@@ -18,9 +14,22 @@ interface BlogPostPageProps {
 
 export default function ChineseBlogPost({ post, faqs }: BlogPostPageProps) {
 	const localizedPost = localizeBlogPost(post, 'zh-Hant');
-	const localizedFAQs = getLocalizedFAQs(faqs, 'zh-Hant');
-	const messages = getLocalizedMessages('zh-Hant');
 	const hreflangLinks = generateHreflangLinks(`/blogs/${post.slug?.current || localizedPost.slug.current}`);
+
+	const breadcrumbItems = [
+		{ name: "首頁", href: "/" },
+		{ name: "部落格", href: "/zh/blogs" },
+		// If categories exist, add the first one
+		...(post.categories && post.categories.length > 0
+			? [
+					{
+						name: post.categories[0].name_zh || post.categories[0].name,
+						href: `/zh/blogs/categories/${post.categories[0].slug?.current}`,
+					},
+				]
+			: []),
+		{ name: localizedPost.title },
+	];
 
 	return (
 		<Layout>
@@ -68,101 +77,13 @@ export default function ChineseBlogPost({ post, faqs }: BlogPostPageProps) {
 				/>
 			</Head>
 			
-			<main className="container mx-auto px-4 py-8 max-w-4xl">
-				{/* Language switcher and back button */}
-				<div className="flex justify-between items-center mb-8">
-					<Link 
-						href="/zh/blogs"
-						className="text-blue-600 hover:text-blue-800 transition-colors"
-					>
-						← {messages.backToBlog}
-					</Link>
-					<Link 
-						href={`/en/blogs/${post.slug?.current || localizedPost.slug.current}`}
-						className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-					>
-						{messages.switchLanguage}
-					</Link>
-				</div>
-
-				{/* Featured image */}
-				{localizedPost.featuredImage && (
-					<div className="mb-8">
-						<Image 
-							src={localizedPost.featuredImage.asset.url}
-							alt={localizedPost.featuredImage.alt || localizedPost.title}
-							width={800}
-							height={400}
-							className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
-						/>
-					</div>
-				)}
-
-				{/* Article header */}
-				<header className="mb-8">
-					<h1 className="text-4xl md:text-5xl font-bold mb-4">
-						{localizedPost.title}
-					</h1>
-					
-					{localizedPost.summary && (
-						<p className="text-xl text-gray-600 mb-6">
-							{localizedPost.summary}
-						</p>
-					)}
-					
-					<div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
-						<span>{messages.by} {localizedPost.author.name}</span>
-						<span>•</span>
-						<time dateTime={localizedPost.publishedAt}>
-							{messages.publishedOn} {new Date(localizedPost.publishedAt).toLocaleDateString('zh-TW', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-							})}
-						</time>
-						{localizedPost.categories && localizedPost.categories.length > 0 && (
-							<>
-								<span>•</span>
-								<div className="flex flex-wrap gap-1">
-									{localizedPost.categories.map((category) => (
-										<span 
-											key={category._id} 
-											className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm"
-										>
-											{category.name_zh || category.name}
-										</span>
-									))}
-								</div>
-							</>
-						)}
-					</div>
-					
-					{localizedPost.tags && localizedPost.tags.length > 0 && (
-						<div className="flex flex-wrap gap-2">
-							{localizedPost.tags.map((tag) => (
-								<span 
-									key={typeof tag === 'string' ? tag : tag._id}
-									className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
-								>
-									{typeof tag === 'string' ? tag : (tag.name_zh || tag.name)}
-								</span>
-							))}
-						</div>
-					)}
-				</header>
-
-				{/* Article content */}
-				<article className="prose prose-lg max-w-none mb-12">
-					<PortableText 
-						value={localizedPost.content} 
-						components={portableTextComponents}
-					/>
-				</article>
-
-				{/* FAQ Section */}
-				{localizedFAQs.length > 0 && (
-					<BlogFAQSection faqs={localizedFAQs} language="zh-Hant" />
-				)}
+			<main>
+				<BlogDetail 
+					post={post} 
+					items={breadcrumbItems}
+					language="zh-Hant"
+					faqs={faqs}
+				/>
 			</main>
 		</Layout>
 	);

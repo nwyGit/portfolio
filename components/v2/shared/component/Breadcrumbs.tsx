@@ -11,9 +11,10 @@ export interface BreadcrumbItem {
 interface BreadcrumbsProps {
 	items: BreadcrumbItem[];
 	className?: string;
+	rightContent?: React.ReactNode;
 }
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "", rightContent }) => {
 	// Schema.org BreadcrumbList
 	const schemaItems = items.map((item, idx) => ({
 		"@type": "ListItem",
@@ -26,12 +27,13 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
 		<div
 			className={`sticky top-[64px] z-10 w-full border-b bg-white py-3 transition-all duration-300 translate-y-0 ${className}`}
 		>
-			<nav aria-label="breadcrumb">
-				<ol
-					className="flex items-center text-sm gap-2"
-					itemScope
-					itemType="https://schema.org/BreadcrumbList"
-				>
+			<div className="flex justify-between items-center">
+				<nav aria-label="breadcrumb">
+					<ol
+						className="flex items-center text-sm gap-2"
+						itemScope
+						itemType="https://schema.org/BreadcrumbList"
+					>
 					{items.map((item, idx) => (
 						<React.Fragment key={item.name + idx}>
 							<li
@@ -83,8 +85,15 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "" }) => {
 							)}
 						</React.Fragment>
 					))}
-				</ol>
-			</nav>
+					</ol>
+				</nav>
+				
+				{rightContent && (
+					<div className="flex items-center">
+						{rightContent}
+					</div>
+				)}
+			</div>
 			{/* JSON-LD for BreadcrumbList schema */}
 			<script
 				type="application/ld+json"
