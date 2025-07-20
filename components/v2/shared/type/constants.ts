@@ -11,7 +11,7 @@ export const NAVIGATION_LINKS = [
 	},
 	{
 		name: "BLOGS",
-		href: "/blogs",
+		href: "/en/blogs",
 	},
 	{
 		name: "ABOUT",

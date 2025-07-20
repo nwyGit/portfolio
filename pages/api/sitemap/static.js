@@ -17,7 +17,13 @@ const staticPages = [
 		lastmod: new Date().toISOString(),
 	},
 	{
-		url: "/blogs",
+		url: "/en/blogs",
+		changefreq: "daily",
+		priority: 0.9,
+		lastmod: new Date().toISOString(),
+	},
+	{
+		url: "/zh/blogs",
 		changefreq: "daily",
 		priority: 0.9,
 		lastmod: new Date().toISOString(),

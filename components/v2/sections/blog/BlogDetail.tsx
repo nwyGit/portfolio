@@ -9,8 +9,10 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { portableTextComponents } from "../../shared/component/PortableTextComponents";
 import { localizeBlogPost, getLocalizedFAQs, getLocalizedMessages, formatDate } from "@/utils/languageUtils";
+import { useLanguagePreference } from "@/utils/useLanguagePreference";
 import BlogFAQSection from "../../shared/component/BlogFAQSection";
 import { MdTranslate } from "react-icons/md";
+import { useRouter } from "next/router";
 
 interface BlogDetailProps {
 	post: BlogPost;
@@ -20,20 +22,32 @@ interface BlogDetailProps {
 }
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ post, items, language, faqs = [] }) => {
+	const router = useRouter();
+	const { setLanguage } = useLanguagePreference();
 	const localizedPost = localizeBlogPost(post, language);
 	const localizedFAQs = getLocalizedFAQs(faqs, language);
 	const messages = getLocalizedMessages(language);
+	const alternateLanguage = language === 'en' ? 'zh-Hant' : 'en';
 	const alternateLanguageCode = language === 'en' ? 'zh' : 'en';
+	
+	// Handle language switch with preference persistence
+	const handleLanguageSwitch = () => {
+		// Update stored preference
+		setLanguage(alternateLanguage);
+		
+		// Navigate to target language URL
+		router.push(`/${alternateLanguageCode}/blogs/${localizedPost.slug.current}`);
+	};
 	
 	// Language switch button for breadcrumbs
 	const languageSwitchButton = (
-		<Link 
-			href={`/${alternateLanguageCode}/blogs/${localizedPost.slug.current}`}
-			className="flex items-center gap-2 px-3 py-1.5 text-black hover:text-gray-600 transition-colors"
+		<button 
+			onClick={handleLanguageSwitch}
+			className="flex items-center gap-2 px-3 py-1.5 text-black hover:text-gray-600 transition-colors cursor-pointer"
 		>
 			<MdTranslate size={16} />
 			<span className="text-sm">{messages.switchLanguage}</span>
-		</Link>
+		</button>
 	);
 	return (
 		<section className="blog-detail-section">

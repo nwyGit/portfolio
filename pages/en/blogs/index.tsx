@@ -3,16 +3,38 @@ import { groq } from 'next-sanity';
 import { sanityClient } from '@/utils/sanity';
 import { BlogPost } from '@/components/v2/shared/type/types';
 import { localizeBlogPost } from '@/utils/languageUtils';
+import { useLanguagePreference } from '@/utils/useLanguagePreference';
 import Layout from '@/components/v2/Layout';
+import BlogSection from '@/components/v2/sections/BlogSection';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 interface BlogIndexProps {
 	posts: BlogPost[];
 }
 
 export default function EnglishBlogIndex({ posts }: BlogIndexProps) {
+	const router = useRouter();
+	const { language, isLoading } = useLanguagePreference();
+
+	// Auto-redirect to preferred language if different from current page
+	useEffect(() => {
+		if (!isLoading && language === 'zh-Hant') {
+			// User prefers Chinese but is on English page - redirect
+			router.replace('/zh/blogs');
+		}
+	}, [language, isLoading, router]);
+
+	// Don't render content if redirecting
+	if (!isLoading && language === 'zh-Hant') {
+		return null;
+	}
+
+	// Localize all posts for English
+	const localizedPosts = posts.map(post => localizeBlogPost(post, 'en'));
+
 	return (
 		<Layout>
 			<Head>
@@ -23,71 +45,7 @@ export default function EnglishBlogIndex({ posts }: BlogIndexProps) {
 				<link rel="canonical" href="/en/blogs" />
 			</Head>
 			
-			<main className="container mx-auto px-4 py-8">
-				<div className="flex justify-between items-center mb-8">
-					<h1 className="text-4xl font-bold">Blog Posts</h1>
-					<Link 
-						href="/zh/blogs"
-						className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-					>
-						中文版
-					</Link>
-				</div>
-				
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{posts.map((post) => {
-						const localizedPost = localizeBlogPost(post, 'en');
-						return (
-							<article key={post._id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-								{localizedPost.featuredImage && (
-									<Image 
-										src={localizedPost.featuredImage.asset.url}
-										alt={localizedPost.featuredImage.alt || localizedPost.title}
-										width={400}
-										height={192}
-										className="w-full h-48 object-cover"
-									/>
-								)}
-								<div className="p-6">
-									<h2 className="text-xl font-semibold mb-2">
-										<Link 
-											href={`/en/blogs/${localizedPost.slug.current}`}
-											className="hover:text-blue-600 transition-colors"
-										>
-											{localizedPost.title}
-										</Link>
-									</h2>
-									{localizedPost.summary && (
-										<p className="text-gray-600 mb-4 line-clamp-3">
-											{localizedPost.summary}
-										</p>
-									)}
-									<div className="flex justify-between items-center text-sm text-gray-500">
-										<span>{localizedPost.author.name}</span>
-										<time dateTime={localizedPost.publishedAt}>
-											{new Date(localizedPost.publishedAt).toLocaleDateString('en-US')}
-										</time>
-									</div>
-									{localizedPost.categories && localizedPost.categories.length > 0 && (
-										<div className="mt-3">
-											<div className="flex flex-wrap gap-1">
-												{localizedPost.categories.map((category) => (
-													<span 
-														key={category._id} 
-														className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-													>
-														{category.name}
-													</span>
-												))}
-											</div>
-										</div>
-									)}
-								</div>
-							</article>
-						);
-					})}
-				</div>
-			</main>
+			<BlogSection blogs={localizedPosts} />
 		</Layout>
 	);
 }

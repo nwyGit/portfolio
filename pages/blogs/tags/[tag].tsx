@@ -50,7 +50,7 @@ const TagPage: NextPage<{
 }> = ({ tag, posts }) => {
 	const breadcrumbItems = [
 		{ name: "Home", href: "/" },
-		{ name: "Blogs", href: "/blogs" },
+		{ name: "Blogs", href: "/en/blogs" },
 		{ name: `Tag: ${tag}` },
 	];
 
@@ -61,7 +61,7 @@ const TagPage: NextPage<{
 
 	const breadcrumbSchema = getBreadcrumbListSchema([
 		{ name: "Home", url: "https://raymond-ng.com" },
-		{ name: "Blogs", url: "https://raymond-ng.com/blogs" },
+		{ name: "Blogs", url: "https://raymond-ng.com/en/blogs" },
 		{ name: `Tag: ${tagTitle}`, url: canonicalUrl },
 	]);
 
@@ -88,11 +88,11 @@ const TagPage: NextPage<{
 							{posts.map((post) => (
 								<article key={post.slug} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
 									<h2 className="text-xl font-semibold mb-2">
-										<Link href={`/blogs/${post.slug}`} className="text-blue-600 hover:text-blue-800">
+										<Link href={`/en/blogs/${post.slug}`} className="text-blue-600 hover:text-blue-800">
 											{post.title}
 										</Link>
 									</h2>
-									<Link href={`/blogs/${post.slug}`} className="text-blue-500 hover:underline">
+									<Link href={`/en/blogs/${post.slug}`} className="text-blue-500 hover:underline">
 										Read more →
 									</Link>
 								</article>

@@ -3,6 +3,7 @@ import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { RxArrowTopRight } from "react-icons/rx";
 import { BlogPost } from "@/components/v2/shared/type/types";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 interface BlogCardProps {
 	post: BlogPost;
@@ -10,12 +11,17 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 	const { title, summary, tags, publishedAt } = post;
+	const router = useRouter();
+	
+	// Determine current language from router path
+	const currentLanguage = router.asPath.startsWith('/zh') ? 'zh' : 'en';
 	
 	// Format date for display
 	const formatDate = (dateString: string): string => {
 		try {
 			const date = new Date(dateString);
-			return date.toLocaleDateString('en-US', {
+			const locale = currentLanguage === 'zh' ? 'zh-TW' : 'en-US';
+			return date.toLocaleDateString(locale, {
 				year: 'numeric',
 				month: 'long',
 				day: 'numeric'
@@ -157,7 +163,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
 					<DynamicButton
 						text="view more"
 						icon={<RxArrowTopRight size={24} />}
-						href={`/blogs/${typeof post.slug === 'string' ? post.slug : post.slug?.current}`}
+						href={`/${currentLanguage}/blogs/${typeof post.slug === 'string' ? post.slug : post.slug?.current}`}
 						target="_blank"
 						className="btn-black"
 						style={{

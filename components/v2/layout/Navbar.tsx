@@ -1,9 +1,10 @@
 import DynamicButton from "@/components/v2/shared/component/DynamicButton";
 import { NAVIGATION_LINKS } from "@/components/v2/shared/type/constants";
+import { useLanguagePreference, getLanguageAwareBlogUrl } from "@/utils/useLanguagePreference";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC, useState } from "react";
+import { FC, useState, useMemo } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineDownload } from "react-icons/hi";
 
@@ -14,8 +15,22 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
+	const { language } = useLanguagePreference();
 
 	const toggleMenu = () => setIsOpen(!isOpen);
+
+	// Create dynamic navigation links with language-aware blog URL
+	const dynamicNavigationLinks = useMemo(() => {
+		return NAVIGATION_LINKS.map(link => {
+			if (link.name === "BLOGS") {
+				return {
+					...link,
+					href: getLanguageAwareBlogUrl(language)
+				};
+			}
+			return link;
+		});
+	}, [language]);
 
 	return (
 		<nav
@@ -36,7 +51,7 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 				</Link>
 				{/* Desktop Navigation */}
 				<div className="hidden md:flex items-center gap-[50px]">
-					{NAVIGATION_LINKS.map((link) => (
+					{dynamicNavigationLinks.map((link) => (
 						<Link
 							key={link.href}
 							href={link.href}
@@ -70,7 +85,7 @@ const Navbar: FC<NavbarProps> = ({ resumeURL }) => {
 			{isOpen && (
 				<div className="md:hidden w-full bg-white border-t border-gray-200 py-[20px] px-[30px] animate-slide-in">
 					<div className="flex flex-col items-start gap-2">
-						{NAVIGATION_LINKS.map((link) => (
+						{dynamicNavigationLinks.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}

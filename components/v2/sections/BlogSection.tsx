@@ -4,6 +4,10 @@ import CategoryFilter, {
 	Category,
 } from "@/components/v2/shared/component/CategoryFilter";
 import { BlogPost } from "@/components/v2/shared/type/types";
+import { useLanguagePreference } from "@/utils/useLanguagePreference";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { MdTranslate } from "react-icons/md";
 
 interface PortableTextChild {
 	_type?: string;
@@ -18,20 +22,37 @@ interface BlogsProps {
 const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 	const [active, setActive] = useState("all");
 	const [search, setSearch] = useState("");
+	const router = useRouter();
+	const { language, setLanguage } = useLanguagePreference();
+	
+	// Determine current language from router path
+	const currentLanguage = router.asPath.startsWith('/zh') ? 'zh' : 'en';
+	
+	// Handle language switch with preference persistence
+	const handleLanguageSwitch = (targetLanguage: 'en' | 'zh-Hant') => {
+		// Update stored preference
+		setLanguage(targetLanguage);
+		
+		// Navigate to target language URL
+		const targetLangCode = targetLanguage === 'zh-Hant' ? 'zh' : 'en';
+		router.push(`/${targetLangCode}/blogs`);
+	};
 
 	const categories: Category[] = useMemo(() => {
 		const tagSet = new Set<string>();
 		blogs.forEach((blog) => {
 			blog.tags?.forEach((tag) => {
-				const tagName = typeof tag === "string" ? tag : tag.name;
+				// Use localized tag name
+				const tagName = typeof tag === "string" ? tag : 
+					(currentLanguage === 'zh' ? (tag.name_zh || tag.name) : tag.name);
 				tagSet.add(tagName);
 			});
 		});
 		return [
-			{ id: "all", label: "All" },
+			{ id: "all", label: currentLanguage === 'zh' ? "全部" : "All" },
 			...Array.from(tagSet).map((tag) => ({ id: tag, label: tag })),
 		];
-	}, [blogs]);
+	}, [blogs, currentLanguage]);
 
 	const filteredBlogs = useMemo(() => {
 		const byCategory =
@@ -39,7 +60,9 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 				? blogs
 				: blogs.filter((blog) =>
 						blog.tags?.some((tag) => {
-							const tagName = typeof tag === "string" ? tag : tag.name;
+							// Use localized tag name for filtering
+							const tagName = typeof tag === "string" ? tag : 
+								(currentLanguage === 'zh' ? (tag.name_zh || tag.name) : tag.name);
 							return tagName === active;
 						})
 					);
@@ -62,38 +85,53 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 				contentText.toLowerCase().includes(search.toLowerCase())
 			);
 		});
-	}, [blogs, active, search]);
+	}, [blogs, active, search, currentLanguage]);
 
+	// Language switch button with same styling as BlogDetail
+	const alternateLanguage = currentLanguage === 'zh' ? 'en' : 'zh-Hant';
+	const languageSwitchText = currentLanguage === 'zh' ? 'English' : '中文版';
+	
 	return (
 		<section className="pt-[130px]">
 			<div
 				style={{
-					position: "relative",
-					textAlign: "center",
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
 					marginBottom: 24,
 					maxWidth: 1200,
 					margin: "0 auto 24px auto",
 					padding: "0 20px",
 				}}
 			>
-				<h2 className="project-section-title" style={{ margin: 0 }}>Blogs</h2>
-				<input
-					type="text"
-					placeholder="Search blogs..."
-					value={search}
-					onChange={(e) => setSearch(e.target.value)}
-					style={{
-						position: "absolute",
-						right: 20,
-						top: "50%",
-						transform: "translateY(-50%)",
-						padding: 8,
-						borderRadius: 6,
-						border: "1px solid #ccc",
-						width: 320,
-						fontSize: 16,
-					}}
-				/>
+				{/* Left: Title */}
+				<h2 className="project-section-title" style={{ margin: 0 }}>
+					{currentLanguage === 'zh' ? '部落格' : 'Blogs'}
+				</h2>
+				
+				{/* Right: Search + Language Switch */}
+				<div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+					<input
+						type="text"
+						placeholder={currentLanguage === 'zh' ? "搜尋部落格..." : "Search blogs..."}
+						value={search}
+						onChange={(e) => setSearch(e.target.value)}
+						style={{
+							padding: 8,
+							borderRadius: 6,
+							border: "1px solid #ccc",
+							width: 320,
+							fontSize: 16,
+						}}
+					/>
+					<button 
+						onClick={() => handleLanguageSwitch(alternateLanguage)}
+						className="flex items-center gap-2 px-3 py-1.5 text-black hover:text-gray-600 transition-colors cursor-pointer"
+					>
+						<MdTranslate size={16} />
+						<span className="text-sm">{languageSwitchText}</span>
+					</button>
+				</div>
 			</div>
 
 			<div
