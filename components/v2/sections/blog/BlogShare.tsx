@@ -3,7 +3,7 @@ import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { SiWechat } from "react-icons/si";
 import Image from "next/image";
 import { BlogPost, Language } from "@/components/v2/shared/type/types";
-import { localizeBlogPost, getLocalizedMessages, formatDate } from "@/utils/languageUtils";
+import { localizeBlogPost, formatDate } from "@/utils/languageUtils";
 import Link from "next/link";
 
 const ICONS = [
@@ -49,7 +49,6 @@ const handleShare = (shareUrl: string, platform: string) => {
 
 const BlogShare: React.FC<BlogShareProps> = ({ relatedArticles = [], language = 'en' }) => {
 	const url = typeof window !== "undefined" ? window.location.href : "";
-	const messages = getLocalizedMessages(language);
 	
 	// Don't render the "More Articles" section if no related articles
 	const hasRelatedArticles = relatedArticles && relatedArticles.length > 0;
@@ -99,16 +98,16 @@ const BlogShare: React.FC<BlogShareProps> = ({ relatedArticles = [], language = 
 			{hasRelatedArticles && (
 				<>
 					{/* Divider Line - Desktop only */}
-					<div className="blog-share-divider hidden lg:block" />
+					<div className="blog-share-divider" />
 					{/* More Articles Label */}
 					<div className="blog-share-more-label">
-						{language === 'zh' ? '相關文章' : 'More Articles'}
+						{language === 'zh-Hant' ? '相關文章' : 'More Articles'}
 					</div>
 					{/* Article Cards */}
 					<div className="blog-share-articles">
 						{relatedArticles.map((article) => {
 							const localizedArticle = localizeBlogPost(article, language);
-							const articleUrl = `/${language === 'zh' ? 'zh' : 'en'}/blogs/${localizedArticle.slug.current}`;
+							const articleUrl = `/${language === 'zh-Hant' ? 'zh' : 'en'}/blogs/${localizedArticle.slug.current}`;
 							
 							return (
 								<Link href={articleUrl} key={article._id} className="block">

@@ -229,7 +229,7 @@ export const blogPost: SchemaDefinition = {
 			],
 			validation: (Rule: ValidationRule) => Rule.max(3).custom((current, context) => {
 				// Prevent self-reference
-				if (current && context.document && context.document._id) {
+				if (Array.isArray(current) && context.document && context.document._id) {
 					const selfReference = current.find((ref: any) => ref._ref === context.document?._id);
 					if (selfReference) {
 						return "Cannot reference self as related article";
@@ -237,7 +237,6 @@ export const blogPost: SchemaDefinition = {
 				}
 				return true;
 			}),
-			description: "Select up to 3 related articles to display in the 'More Articles' section (optional)",
 		},
 	],
 	preview: {
