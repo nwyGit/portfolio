@@ -425,6 +425,13 @@ p {
 	/* =====================
 	   Blog Section Styles
 	   ===================== */
+	/* Touch target for better mobile interaction */
+	.touch-target {
+		min-height: 44px;
+		min-width: 44px;
+	}
+
+	/* Legacy classes - can be removed when fully migrated to Tailwind */
 	.blog-detail-section {
 		@apply pt-[130px] px-8 md:px-16 xl:px-32 w-full justify-center bg-white;
 	}
@@ -845,10 +852,24 @@ p {
 		border-radius: 0 0.5rem 0.5rem 0;
 	}
 	
+	/* Responsive table wrapper */
 	.blog-html-content table {
 		width: 100%;
 		border-collapse: collapse;
 		margin: 1.5rem 0;
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+	}
+	
+	/* Reset table display for desktop */
+	@media (min-width: 768px) {
+		.blog-html-content table {
+			display: table;
+			white-space: normal;
+			overflow-x: visible;
+		}
 	}
 	
 	.blog-html-content th,
@@ -856,6 +877,8 @@ p {
 		border: 1px solid #d1d5db;
 		padding: 0.75rem;
 		text-align: left;
+		white-space: normal; /* Allow text wrapping in cells */
+		min-width: 120px; /* Minimum cell width for readability */
 	}
 	
 	.blog-html-content th {
@@ -958,10 +981,24 @@ p {
 		border-radius: 0 0.5rem 0.5rem 0;
 	}
 
+	/* Responsive table wrapper */
 	.prose-content table {
 		width: 100%;
 		border-collapse: collapse;
 		margin: 1.5rem 0;
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+	}
+	
+	/* Reset table display for desktop */
+	@media (min-width: 768px) {
+		.prose-content table {
+			display: table;
+			white-space: normal;
+			overflow-x: visible;
+		}
 	}
 
 	.prose-content th,
@@ -969,6 +1006,8 @@ p {
 		border: 1px solid #d1d5db;
 		padding: 0.75rem;
 		text-align: left;
+		white-space: normal; /* Allow text wrapping in cells */
+		min-width: 120px; /* Minimum cell width for readability */
 	}
 
 	.prose-content th {

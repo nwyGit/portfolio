@@ -92,72 +92,81 @@ const BlogSection: React.FC<BlogsProps> = ({ blogs }) => {
 	
 	return (
 		<section className="pt-[130px]">
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
-					marginBottom: 24,
-					maxWidth: 1200,
-					margin: "0 auto 24px auto",
-					padding: "0 20px",
-				}}
-			>
-				{/* Left: Title */}
-				<h2 className="project-section-title" style={{ margin: 0 }}>
-					{currentLanguage === 'zh' ? '部落格' : 'Blogs'}
-				</h2>
-				
-				{/* Right: Search + Language Switch */}
-				<div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+			{/* Header Section - Responsive Layout */}
+			<div className="max-w-[1200px] mx-auto px-5 mb-6">
+				{/* Desktop Layout */}
+				<div className="hidden md:flex justify-between items-center">
+					{/* Left: Title */}
+					<h2 className="project-section-title m-0">
+						{currentLanguage === 'zh' ? '部落格' : 'Blogs'}
+					</h2>
+					
+					{/* Right: Search + Language Switch */}
+					<div className="flex items-center gap-4">
+						<input
+							type="text"
+							placeholder={currentLanguage === 'zh' ? "搜尋部落格..." : "Search blogs..."}
+							value={search}
+							onChange={(e) => setSearch(e.target.value)}
+							className="w-80 p-2 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+						/>
+						<button 
+							onClick={() => handleLanguageSwitch(alternateLanguage)}
+							className="flex items-center gap-2 px-3 py-1.5 text-black hover:text-gray-600 transition-colors cursor-pointer whitespace-nowrap"
+						>
+							<MdTranslate size={16} />
+							<span className="text-sm">{languageSwitchText}</span>
+						</button>
+					</div>
+				</div>
+
+				{/* Mobile Layout */}
+				<div className="md:hidden flex flex-col gap-4">
+					{/* Title */}
+					<h2 className="project-section-title m-0 text-center">
+						{currentLanguage === 'zh' ? '部落格' : 'Blogs'}
+					</h2>
+					
+					{/* Search Input - Full Width */}
 					<input
 						type="text"
 						placeholder={currentLanguage === 'zh' ? "搜尋部落格..." : "Search blogs..."}
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
-						style={{
-							padding: 8,
-							borderRadius: 6,
-							border: "1px solid #ccc",
-							width: 320,
-							fontSize: 16,
-						}}
+						className="w-full p-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 					/>
-					<button 
-						onClick={() => handleLanguageSwitch(alternateLanguage)}
-						className="flex items-center gap-2 px-3 py-1.5 text-black hover:text-gray-600 transition-colors cursor-pointer"
-					>
-						<MdTranslate size={16} />
-						<span className="text-sm">{languageSwitchText}</span>
-					</button>
+					
+					{/* Language Switch - Centered */}
+					<div className="flex justify-center">
+						<button 
+							onClick={() => handleLanguageSwitch(alternateLanguage)}
+							className="flex items-center gap-2 px-4 py-2 text-black hover:text-gray-600 transition-colors cursor-pointer"
+						>
+							<MdTranslate size={16} />
+							<span className="text-sm">{languageSwitchText}</span>
+						</button>
+					</div>
 				</div>
 			</div>
 
-			<div
-				style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
-			>
-				<CategoryFilter
-					categories={categories}
-					active={active}
-					setActive={setActive}
-					className="project-section-categories"
-					btnClassName="category-filter-btn"
-					btnActiveClassName="category-filter-btn--active"
-					highlighterClassName="category-filter-highlighter"
-					withHighlighter
-				/>
+			{/* Category Filter - Mobile Responsive */}
+			<div className="flex justify-center my-5 px-4">
+				<div className="w-full max-w-4xl overflow-x-auto">
+					<CategoryFilter
+						categories={categories}
+						active={active}
+						setActive={setActive}
+						className="project-section-categories flex justify-center min-w-max px-2"
+						btnClassName="category-filter-btn"
+						btnActiveClassName="category-filter-btn--active"
+						highlighterClassName="category-filter-highlighter"
+						withHighlighter
+					/>
+				</div>
 			</div>
-			<div
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					gap: 60,
-					padding: "40px 0",
-					width: "100%",
-					background: "#fff",
-				}}
-			>
+			
+			{/* Blog Cards Container */}
+			<div className="flex flex-col items-center gap-8 lg:gap-[60px] py-10 w-full bg-white px-4">
 				{filteredBlogs.map((blog, i) => (
 					<BlogCard key={i} post={blog} />
 				))}
