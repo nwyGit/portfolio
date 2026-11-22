@@ -1,3 +1,9 @@
+import { SITE_ORIGIN } from "@/components/v2/shared/type/constants";
+import { BlogAuthor } from "@/components/v2/shared/type/types";
+
+export const AUTHOR_JOB_TITLE_FALLBACK =
+	"professional AI applied engineer (also a software engineer)";
+
 export interface BlogPostingSchemaProps {
 	title: string;
 	description: string;
@@ -5,7 +11,9 @@ export interface BlogPostingSchemaProps {
 	image?: string;
 	datePublished: string;
 	dateModified?: string;
-	authorName: string;
+	inLanguage?: string;
+	author?: BlogAuthor;
+	authorName?: string;
 }
 
 export function getFAQSchema(faqs: Array<{ question: string; answer: string }>) {
@@ -23,6 +31,51 @@ export function getFAQSchema(faqs: Array<{ question: string; answer: string }>) 
 	};
 }
 
+function httpUrl(value?: string): string | undefined {
+	const trimmed = value?.trim();
+	if (!trimmed || !/^https?:\/\//i.test(trimmed)) return undefined;
+	return trimmed;
+}
+
+export function authorSameAs(author?: Pick<BlogAuthor, "socialLinks">): string[] | undefined {
+	const links = [
+		author?.socialLinks?.github,
+		author?.socialLinks?.linkedin,
+		author?.socialLinks?.twitter,
+	]
+		.map((link) => httpUrl(link))
+		.filter((link): link is string => Boolean(link));
+	const unique = Array.from(new Set(links));
+	return unique.length ? unique : undefined;
+}
+
+export function authorPageUrl(author?: Pick<BlogAuthor, "url" | "slug">): string | undefined {
+	const explicit = httpUrl(author?.url);
+	if (explicit) return explicit;
+	if (author?.slug?.current === "raymond-ng") return `${SITE_ORIGIN}/about`;
+	return undefined;
+}
+
+function authorEntity(author?: BlogAuthor, authorName?: string) {
+	const name = author?.name || authorName;
+	if (!name) return undefined;
+
+	const sameAs = authorSameAs(author);
+	const image = httpUrl(author?.image?.asset?.url);
+	const description = author?.bio?.trim();
+	const person: Record<string, unknown> = {
+		"@type": "Person",
+		name,
+	};
+	const url = authorPageUrl(author);
+	if (url) person.url = url;
+	person.jobTitle = author?.jobTitle?.trim() || AUTHOR_JOB_TITLE_FALLBACK;
+	if (image) person.image = image;
+	if (description) person.description = description;
+	if (sameAs) person.sameAs = sameAs;
+	return person;
+}
+
 export function getBlogPostingSchema({
 	title,
 	description,
@@ -30,22 +83,28 @@ export function getBlogPostingSchema({
 	image,
 	datePublished,
 	dateModified,
+	inLanguage,
+	author,
 	authorName,
 }: BlogPostingSchemaProps) {
-	return {
+	const person = authorEntity(author, authorName);
+	const schema: Record<string, unknown> = {
 		"@context": "https://schema.org",
 		"@type": "BlogPosting",
 		headline: title,
 		description,
 		url,
-		image: image ? [image] : undefined,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": url,
+		},
 		datePublished,
 		dateModified: dateModified || datePublished,
-		author: {
-			"@type": "Person",
-			name: authorName,
-		},
+		author: person,
 	};
+	if (image) schema.image = [image];
+	if (inLanguage) schema.inLanguage = inLanguage;
+	return schema;
 }
 
 export function getBreadcrumbListSchema(

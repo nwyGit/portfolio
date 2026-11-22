@@ -781,7 +781,8 @@ p {
 		color: #374151;
 	}
 	
-	.blog-html-content h1 {
+	.blog-html-content h1,
+	.blog-html-content h2.blog-html-h1 {
 		font-size: 2.25rem;
 		font-weight: 800;
 		margin-top: 2rem;
