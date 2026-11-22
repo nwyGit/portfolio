@@ -1,18 +1,13 @@
 import type { NextConfig } from 'next';
-
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-});
+import bundleAnalyzer from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	images: {
 		remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
 	},
-	// Bundle optimization settings
 	async redirects() {
 		return [
-			// Redirect legacy blog routes to English localized versions
 			{
 				source: '/blogs',
 				destination: '/en/blogs',
@@ -27,4 +22,6 @@ const nextConfig: NextConfig = {
 	},
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default process.env.ANALYZE === 'true'
+	? bundleAnalyzer({ enabled: true })(nextConfig)
+	: nextConfig;
