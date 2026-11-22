@@ -49,7 +49,7 @@ function checkRateLimit(ip: string, path: string): { allowed: boolean; remaining
   return { allowed: true, remaining: rateLimitConfig.limit - entry.count, resetTime: entry.resetTime };
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
   const { pathname } = request.nextUrl;
 
