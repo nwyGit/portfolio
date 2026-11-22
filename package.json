@@ -14,7 +14,7 @@
     "@portabletext/react": "^3.0.11",
     "@sanity/client": "^7.5.0",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/vision": "^3.91.0",
+    "@sanity/vision": "^6.24.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "eslint-config-next": "^15.4.2",
     "framer-motion": "^12.23.6",
