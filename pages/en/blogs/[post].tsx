@@ -2,7 +2,8 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import { groq } from 'next-sanity';
 import { sanityClient } from '@/utils/sanity';
 import { BlogPost, BlogFAQ } from '@/components/v2/shared/type/types';
-import { localizeBlogPost, generateHreflangLinks } from '@/utils/languageUtils';
+import { localizeBlogPost, generateHreflangLinks, toAbsoluteUrl } from '@/utils/languageUtils';
+import { getBlogPostingSchema } from '@/utils/schemaBlogPosting';
 import Layout from '@/components/v2/Layout';
 import Head from 'next/head';
 import BlogDetail from '@/components/v2/sections/blog/BlogDetail';
@@ -15,7 +16,19 @@ interface BlogPostPageProps {
 export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 	const localizedPost = localizeBlogPost(post, 'en');
 	const hreflangLinks = generateHreflangLinks(`/blogs/${localizedPost.slug.current}`);
-	const canonicalUrl = `https://raymond-ng.com/en/blogs/${localizedPost.slug.current}`;
+	const canonicalUrl = toAbsoluteUrl(`/en/blogs/${localizedPost.slug.current}`);
+	const headline = localizedPost.title;
+	const description = localizedPost.metaDescription || localizedPost.summary || '';
+	const blogPosting = getBlogPostingSchema({
+		title: headline,
+		description,
+		url: canonicalUrl,
+		image: localizedPost.featuredImage?.asset.url,
+		datePublished: localizedPost.publishedAt,
+		dateModified: localizedPost.updatedAt,
+		inLanguage: 'en',
+		author: localizedPost.author,
+	});
 
 	const breadcrumbItems = [
 		{ name: "Home", href: "/" },
@@ -35,8 +48,8 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 	return (
 		<Layout>
 			<Head>
-				<title>{localizedPost.metaTitle || localizedPost.title}</title>
-				<meta name="description" content={localizedPost.metaDescription || localizedPost.summary} />
+				<title>{headline}</title>
+				<meta name="description" content={description} />
 				
 				{/* Canonical URL - self-referential for this language version */}
 				<link rel="canonical" href={canonicalUrl} />
@@ -47,10 +60,11 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 				))}
 				
 				{/* Open Graph tags */}
-				<meta property="og:title" content={localizedPost.title} />
-				<meta property="og:description" content={localizedPost.summary || ''} />
+				<meta property="og:title" content={headline} />
+				<meta property="og:description" content={description} />
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content={canonicalUrl} />
+				<meta property="og:locale" content="en_US" />
 				{localizedPost.featuredImage && (
 					<meta property="og:image" content={localizedPost.featuredImage.asset.url} />
 				)}
@@ -59,23 +73,7 @@ export default function EnglishBlogPost({ post, faqs }: BlogPostPageProps) {
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{
-						__html: JSON.stringify({
-							"@context": "https://schema.org",
-							"@type": "BlogPosting",
-							headline: localizedPost.title,
-							description: localizedPost.summary,
-							author: {
-								"@type": "Person",
-								name: localizedPost.author.name,
-							},
-							datePublished: localizedPost.publishedAt,
-							dateModified: localizedPost.updatedAt || localizedPost.publishedAt,
-							image: localizedPost.featuredImage?.asset.url,
-							mainEntityOfPage: {
-								"@type": "WebPage",
-								"@id": `/en/blogs/${localizedPost.slug.current}`,
-							},
-						}),
+						__html: JSON.stringify(blogPosting),
 					}}
 				/>
 			</Head>
@@ -139,11 +137,14 @@ export const getStaticProps: GetStaticProps<BlogPostPageProps> = async ({ params
 				name,
 				slug,
 				bio,
+				url,
+				jobTitle,
 				image {
 					asset-> {
 						url
 					}
-				}
+				},
+				socialLinks
 			},
 			categories[]-> {
 				_id,

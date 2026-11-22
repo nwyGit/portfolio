@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { toAbsoluteUrl } from "@/utils/languageUtils";
 
 export interface BreadcrumbItem {
 	name: string;
@@ -20,7 +21,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className = "", rightC
 		"@type": "ListItem",
 		position: idx + 1,
 		name: item.name,
-		item: item.href ? `${item.href}` : undefined,
+		...(item.href ? { item: toAbsoluteUrl(item.href) } : {}),
 	}));
 
 	// Split items for mobile two-row layout

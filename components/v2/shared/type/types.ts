@@ -85,6 +85,8 @@ export interface BlogAuthor {
 		current: string;
 	};
 	bio?: string;
+	url?: string;
+	jobTitle?: string;
 	image?: {
 		asset: {
 			url: string;

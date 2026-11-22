@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import { PortableTextComponents } from '@portabletext/react';
+import { PortableTextBlockComponent, PortableTextComponents } from '@portabletext/react';
 
 // Simple HTML sanitization function
 const sanitizeHTML = (html: string): string => {
@@ -11,6 +11,20 @@ const sanitizeHTML = (html: string): string => {
 		.replace(/javascript:/gi, ''); // Remove javascript: URLs
 	
 	return sanitized;
+};
+
+// The page already renders the article title as the only H1. Pasted HTML
+// often repeats a different H1, so keep that heading's words and appearance
+// while emitting it as an H2.
+const demoteEmbeddedH1 = (html: string): string => {
+	const withClass = html.replace(/<h1(\s[^>]*)?>/gi, (_match, attrs: string = '') => {
+		const attributes = attrs || '';
+		if (/\bclass\s*=/i.test(attributes)) {
+			return `<h2${attributes.replace(/\bclass\s*=\s*(['"])/i, 'class=$1blog-html-h1 ')}>`;
+		}
+		return `<h2 class="blog-html-h1"${attributes}>`;
+	});
+	return withClass.replace(/<\/h1>/gi, '</h2>');
 };
 
 // Interface for image blocks in PortableText
@@ -91,37 +105,24 @@ const ImageComponent: React.FC<{ value: PortableTextImage }> = ({ value }) => {
 };
 
 // Normal block component that handles HTML content
-const NormalBlock: React.FC<{ children?: React.ReactNode; value: any }> = ({ children, value }) => {
-	const [htmlContent, setHtmlContent] = useState<string>('');
-	const [isClient, setIsClient] = useState(false);
-	
+const NormalBlock: PortableTextBlockComponent = ({ children, value }) => {
 	// Get the raw text content from the block
-	const textContent = value?.children?.map((child: any) => child.text).join('') || '';
+	const textContent = (value.children || [])
+		.map((child) => (
+			child && typeof child === 'object' && 'text' in child && typeof child.text === 'string'
+				? child.text
+				: ''
+		))
+		.join('');
 	
-	useEffect(() => {
-		setIsClient(true);
-		if (textContent.includes('<') && textContent.includes('>')) {
-			const sanitized = sanitizeHTML(textContent);
-			setHtmlContent(sanitized);
-		}
-	}, [textContent]);
-	
-	// Check if content contains HTML tags
+	// Check if content contains HTML tags. Render the same markup on the
+	// server and client so crawlers receive the article body.
 	if (textContent.includes('<') && textContent.includes('>')) {
-		if (!isClient) {
-			// Show placeholder during SSR to prevent hydration mismatch
-			return (
-				<div className="blog-html-content">
-					<p className="mb-4 leading-relaxed text-gray-800">Loading content...</p>
-				</div>
-			);
-		}
-		
-		// Render sanitized HTML on client side only
+		const htmlContent = demoteEmbeddedH1(sanitizeHTML(textContent));
 		return (
-			<div 
+			<div
 				className="blog-html-content"
-				dangerouslySetInnerHTML={{ __html: htmlContent }} 
+				dangerouslySetInnerHTML={{ __html: htmlContent }}
 			/>
 		);
 	}

@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from '@/components/v2/shared/type/constants';
 import { 
 	BlogPost, 
 	BlogPostWithLanguage, 
@@ -7,6 +8,12 @@ import {
 	BlogFAQWithLanguage,
 	Language 
 } from '@/components/v2/shared/type/types';
+
+export function toAbsoluteUrl(pathOrUrl: string): string {
+	if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl;
+	const path = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`;
+	return `${SITE_ORIGIN}${path}`;
+}
 
 /**
  * Localizes a blog post based on the specified language
@@ -106,10 +113,11 @@ export function getLanguagePrefix(language: Language): string {
  * Generates hreflang attributes for SEO
  */
 export function generateHreflangLinks(basePath: string) {
+	const path = basePath.startsWith('/') ? basePath : `/${basePath}`;
 	return [
-		{ hrefLang: 'en', href: `/en${basePath}` },
-		{ hrefLang: 'zh-Hant', href: `/zh${basePath}` },
-		{ hrefLang: 'x-default', href: `/en${basePath}` }, // Default to English
+		{ hrefLang: 'en', href: toAbsoluteUrl(`/en${path}`) },
+		{ hrefLang: 'zh-Hant', href: toAbsoluteUrl(`/zh${path}`) },
+		{ hrefLang: 'x-default', href: toAbsoluteUrl(`/en${path}`) },
 	];
 }
 

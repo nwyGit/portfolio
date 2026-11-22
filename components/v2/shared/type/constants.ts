@@ -4,6 +4,9 @@ export const SOCIAL_LINKS = {
 	email: "mailto:raymond.wyng@gmail.com",
 };
 
+// https://raymond-ng.com permanently redirects to this host.
+export const SITE_ORIGIN = "https://www.raymond-ng.com";
+
 export const NAVIGATION_LINKS = [
 	{
 		name: "PROJECTS",
